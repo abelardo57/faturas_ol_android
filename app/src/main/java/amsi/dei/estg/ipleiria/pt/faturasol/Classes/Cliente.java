@@ -13,9 +13,10 @@ public class Cliente {
     private String password;
     private int telemovel;
     private int nif;
+    private String authkey;
 
 
-    public Cliente(int numero_cartao, String nome, String email, String username, String password, int telemovel, int nif) {
+    public Cliente(int numero_cartao, String nome, String email, String username, String password, int telemovel, int nif, String authkey) {
         this.numero_cartao = numero_cartao;
         this.nome = nome;
         this.email = email;
@@ -23,6 +24,7 @@ public class Cliente {
         this.password = password;
         this.telemovel = telemovel;
         this.nif = nif;
+        this.authkey = authkey;
     }
 
 
@@ -82,6 +84,11 @@ public class Cliente {
         this.nif = nif;
     }
 
+    public String getAuthkey(){return authkey;}
+
+    public void setAuthkey(){this.authkey = authkey;}
+
+
     @Override
     public String toString() {
         return "Cliente{" +
@@ -92,6 +99,7 @@ public class Cliente {
                 ", password='" + password + '\'' +
                 ", telemovel=" + telemovel +
                 ", nif=" + nif +
+                ", authkey="+ authkey +
                 '}';
     }
 }
