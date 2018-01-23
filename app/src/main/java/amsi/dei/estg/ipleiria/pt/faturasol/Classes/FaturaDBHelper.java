@@ -242,6 +242,25 @@ import java.util.Date;
 
         return null;
     }
+
+    public Fatura adiconarFaturaDB(Fatura fatura){
+        ContentValues value = new ContentValues();
+
+        value.put("numero", fatura.getNumero());
+        value.put("data", String.valueOf(fatura.getData()));
+        value.put("numero_cartao", fatura.getNumero_cartao());
+        value.put("id_empresa", fatura.getId_empresa());
+        value.put("is_fav", fatura.getIs_fav());
+        long id = this.database.insert("fatura", null, value);
+        if (id > -1){
+            System.out.println("--> INSERIU BD ID: " + id);
+            fatura.setId(id);
+            return fatura;
+        }
+
+        return null;
+    }
+
     public ArrayList<Cliente> getAllClientesBD(){
 
         ArrayList<Cliente> cliente = new ArrayList<>();
@@ -375,7 +394,6 @@ import java.util.Date;
         return linhafatura;
     }
 
-
     public ArrayList<Fatura_Empresa> getAllFaturasEmpresaBD(){
 
         ArrayList<Fatura_Empresa> faturaempresa = new ArrayList<>();
@@ -408,7 +426,62 @@ import java.util.Date;
         return faturacliente;
     }
 
+    public boolean guardarClienteBD(Cliente cliente){
+        ContentValues value = new ContentValues();
 
+        value.put("numero_cartao", cliente.getNumero_cartao());
+        value.put("nome", cliente.getNome());
+        value.put("email", cliente.getEmail());
+        value.put("username", cliente.getUsername());
+        value.put("password", cliente.getPassword());
+        value.put("telemovel", cliente.getTelemovel());
+        value.put("nif", cliente.getNif());
+        value.put("authkey", cliente.getAuthkey());
+
+        return this.database.update("cliente", value, "id = ?", new String[]{"" + cliente.getNumero_cartao()}) > 0;
+
+    }
+
+    public boolean guardarFaturaBD(Fatura fatura){
+        ContentValues value = new ContentValues();
+
+        value.put("numero", fatura.getNumero());
+        value.put("data", String.valueOf(fatura.getData()));
+        value.put("numero_cartao", fatura.getNumero_cartao());
+        value.put("id_empresa", fatura.getId_empresa());
+        value.put("is_fav", fatura.getIs_fav());
+
+        return this.database.update("fatura", value, "id = ?", new String[]{"" + fatura.getId()}) > 0;
+
+    }
+
+    public boolean removerClienteBD(long NumeroCartaoCliente){
+        return (this.database.delete("cliente","id = ?", new String[]{"" + NumeroCartaoCliente}) > 0);
+    }
+
+    public boolean removerFaturaBD(long idFatura){
+        return (this.database.delete("fatura","id = ?", new String[]{"" + idFatura}) > 0);
+    }
+
+    public void removerAllClientesBD() {
+        this.database.delete("clientes", null,null);
+    }
+
+    public void removerAllFaturasBD() {
+        this.database.delete("fatura", null,null);
+    }
+
+    public void removerAllCostumFaturasBD() {
+        this.database.delete("costumfatura", null,null);
+    }
+
+    public void removerAllEmpresasBD() {
+        this.database.delete("empresa", null,null);
+    }
+
+    public void removerAllLinhasFaturaBD() {
+        this.database.delete("linhafatura", null,null);
+    }
 }
 
 
