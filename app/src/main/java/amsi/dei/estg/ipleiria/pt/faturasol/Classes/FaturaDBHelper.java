@@ -261,6 +261,24 @@ import java.util.Date;
         return null;
     }
 
+    public Custom_Fatura adicionarCustomFaturaDB(Custom_Fatura custom_fatura){
+        ContentValues value = new ContentValues();
+
+        value.put("numero", custom_fatura.getNumero());
+        value.put("data", String.valueOf(custom_fatura.getData()));
+        value.put("nome_empresa", custom_fatura.getNome_empresa());
+        value.put("nif_empresa", custom_fatura.getNif_empresa());
+        value.put("morada_empresa", custom_fatura.getMorada_empresa());
+        long id = this.database.insert("customfatura", null, value);
+        if (id > -1){
+            System.out.println("--> INSERIU BD ID: " + id);
+            custom_fatura.setId(id);
+            return custom_fatura;
+        }
+
+        return null;
+    }
+
     public ArrayList<Cliente> getAllClientesBD(){
 
         ArrayList<Cliente> cliente = new ArrayList<>();
@@ -317,7 +335,6 @@ import java.util.Date;
 
     }
 
-
     public ArrayList<Custom_Fatura_Cliente> getAllCustomFaturasClientesBD(){
 
         ArrayList<Custom_Fatura_Cliente> customfaturacliente = new ArrayList<>();
@@ -336,7 +353,6 @@ import java.util.Date;
         return customfaturacliente;
 
     }
-
 
     public ArrayList<Empresa> getAllEmpresasBD(){
         ArrayList<Empresa> empresa = new ArrayList<>();
@@ -455,6 +471,18 @@ import java.util.Date;
 
     }
 
+    public boolean guardarCustomFaturaBD(Custom_Fatura custom_fatura){
+        ContentValues values = new ContentValues();
+
+        values.put("numero", custom_fatura.getNumero());
+        values.put("data", String.valueOf(custom_fatura.getData()));
+        values.put("nome_empresa", custom_fatura.getNome_empresa());
+        values.put("nif_empresa", custom_fatura.getNif_empresa());
+        values.put("morada_empresa", custom_fatura.getMorada_empresa());
+
+        return  this.database.update("customfatura", values, "id= ?", new String[]{""+custom_fatura.getId()}) > 0;
+    }
+
     public boolean removerClienteBD(long NumeroCartaoCliente){
         return (this.database.delete("cliente","id = ?", new String[]{"" + NumeroCartaoCliente}) > 0);
     }
@@ -463,16 +491,20 @@ import java.util.Date;
         return (this.database.delete("fatura","id = ?", new String[]{"" + idFatura}) > 0);
     }
 
+    public boolean removerCustomFaturaBD(long idCustomFatura){
+        return (this.database.delete("customfatura","id= ?", new String[]{"" + idCustomFatura}) > 0);
+    }
+
     public void removerAllClientesBD() {
-        this.database.delete("clientes", null,null);
+        this.database.delete("cliente", null,null);
     }
 
     public void removerAllFaturasBD() {
         this.database.delete("fatura", null,null);
     }
 
-    public void removerAllCostumFaturasBD() {
-        this.database.delete("costumfatura", null,null);
+    public void removerAllCustomFaturasBD() {
+        this.database.delete("customfatura", null,null);
     }
 
     public void removerAllEmpresasBD() {

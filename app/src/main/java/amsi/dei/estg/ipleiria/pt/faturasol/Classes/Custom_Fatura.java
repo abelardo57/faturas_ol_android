@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class Custom_Fatura {
 
-    private int id;
+    private long id;
     private int numero;
     private Date data;
     private int nif_empresa;
@@ -19,7 +19,7 @@ public class Custom_Fatura {
 
 
 
-    public Custom_Fatura(int id, int numero, Date data, int nif_empresa, String nome_empresa, String morada_empresa) {
+    public Custom_Fatura(long id, int numero, Date data, int nif_empresa, String nome_empresa, String morada_empresa) {
         this.id = id;
         this.numero = numero;
         this.data = data;
@@ -29,11 +29,11 @@ public class Custom_Fatura {
     }
 
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

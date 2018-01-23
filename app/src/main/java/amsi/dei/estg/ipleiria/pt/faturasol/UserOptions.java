@@ -21,7 +21,7 @@ public class UserOptions extends AppCompatActivity {
         setContentView(R.layout.activity_user_options);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         TextView txtViewID = (TextView) findViewById(R.id.txtView_Username);
-        txtViewID.setText(SingletonF_OL.getInstance().CurrentUsername);
+        txtViewID.setText(SingletonF_OL.getInstance(getApplicationContext()).CurrentUsername);
 
     }
     @Override
@@ -41,7 +41,7 @@ public class UserOptions extends AppCompatActivity {
         switch(item.getItemId()){
 
             case R.id.item1:{
-                if(SingletonF_OL.getInstance().SaveChecker == 0)
+                if(SingletonF_OL.getInstance(getApplicationContext()).SaveChecker == 0)
                 {
                     menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_action_save));
 
@@ -51,7 +51,7 @@ public class UserOptions extends AppCompatActivity {
                     txtPass.setEnabled(true);
                     txtPassConf.setEnabled(true);
 
-                    SingletonF_OL.getInstance().SaveChecker = 1;
+                    SingletonF_OL.getInstance(getApplicationContext()).SaveChecker = 1;
                 }
                 else
                 {
@@ -60,7 +60,7 @@ public class UserOptions extends AppCompatActivity {
                     txtTelemovel.setEnabled(false);
                     txtPass.setEnabled(false);
                     txtPassConf.setEnabled(false);
-                    SingletonF_OL.getInstance().SaveChecker = 0;
+                    SingletonF_OL.getInstance(getApplicationContext()).SaveChecker = 0;
                 }
 
                 return true;
