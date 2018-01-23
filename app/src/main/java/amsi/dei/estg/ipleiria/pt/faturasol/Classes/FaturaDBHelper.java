@@ -1,23 +1,33 @@
 package amsi.dei.estg.ipleiria.pt.faturasol.Classes;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static java.time.format.FormatStyle.MEDIUM;
+//import static java.time.format.FormatStyle.MEDIUM;
 
 /**
  * Created by Abel_ on 09/01/2018.
  */
 
-public class FaturaDBHelper extends SQLiteOpenHelper {
+ public class FaturaDBHelper extends SQLiteOpenHelper {
 
     private  final SQLiteDatabase database;
+
+    //CLIENTE
+
+    /*private static final String NUMERO_CARTAO ="numero_cartao";
+    private static final String NUMERO_CARTAO ="numero_cartao";
+    private static final String NUMERO_CARTAO ="numero_cartao";
+    private static final String NUMERO_CARTAO ="numero_cartao";
+    private static final String NUMERO_CARTAO ="numero_cartao";*/
+
+
 
     public FaturaDBHelper(Context context, SQLiteDatabase database)
     {
@@ -211,7 +221,27 @@ public class FaturaDBHelper extends SQLiteOpenHelper {
     }
 
 
+    public Cliente adicionarClienteBD(Cliente cliente){
 
+        ContentValues value = new ContentValues();
+
+        value.put("numero_cartao", cliente.getNumero_cartao());
+        value.put("nome", cliente.getNome());
+        value.put("email", cliente.getEmail());
+        value.put("username", cliente.getUsername());
+        value.put("password", cliente.getPassword());
+        value.put("telemovel", cliente.getTelemovel());
+        value.put("nif", cliente.getNif());
+        value.put("authkey", cliente.getAuthkey());
+        long id = this.database.insert("cliente", null, value);
+        if (id > -1){
+            System.out.println("--> INSERIU BD ID: " + id);
+            cliente.setNumero_cartao(id);
+            return cliente;
+        }
+
+        return null;
+    }
     public ArrayList<Cliente> getAllClientesBD(){
 
         ArrayList<Cliente> cliente = new ArrayList<>();
@@ -229,6 +259,13 @@ public class FaturaDBHelper extends SQLiteOpenHelper {
                         cursor.getString(7));
 
                 auxCliente.setNumero_cartao(cursor.getInt(0));
+                /*auxCliente.setNome(cursor.getString(1));
+                auxCliente.setEmail(cursor.getString(2));
+                auxCliente.setUsername(cursor.getString(3));
+                auxCliente.setPassword(cursor.getString(4));
+                auxCliente.setTelemovel(cursor.getInt(5));
+                auxCliente.setNif(cursor.getInt(6));
+                auxCliente.setAuthkey(cursor.getString(7));*/
                 cliente.add(auxCliente);
             }while(cursor.moveToNext());
         }
@@ -238,14 +275,6 @@ public class FaturaDBHelper extends SQLiteOpenHelper {
 
     public ArrayList<Custom_Fatura> getAllCustomFaturasBD(){
 
-
-        Date date = new Date(); //or new Date(long millis);
-        Long millis = date.getTime();
-        date.setTime(millis); //for now, use: System.currentTimeMillis()
-
-
-
-
         ArrayList<Custom_Fatura> customfatura = new ArrayList<>();
         String sql = "SELECT * FROM customfatura";
         Cursor cursor = this.database.rawQuery(sql, null);
@@ -253,13 +282,16 @@ public class FaturaDBHelper extends SQLiteOpenHelper {
             do{
                 Custom_Fatura auxCustomFatura = new Custom_Fatura(cursor.getInt(0),
                         cursor.getInt(1),
-                        date = new Date(cursor.getLong(2)*1000),
+                        new Date(cursor.getLong(2)*1000),
                         cursor.getInt(3),
                         cursor.getString(4),
                         cursor.getString(5));
 
+
                 auxCustomFatura.setId(cursor.getInt(0));
-                customfatura.add(auxCustomFatura);
+                /*auxCustomFatura.setNumero(cursor.getInt(1));
+                auxCustomFatura.setData(2);
+                customfatura.add(auxCustomFatura);*/
             }while(cursor.moveToNext());
         }
         return customfatura;
@@ -267,24 +299,115 @@ public class FaturaDBHelper extends SQLiteOpenHelper {
     }
 
 
-    public ArrayList<Custom_Fatura_Cliente> getAllClientesBD(){
+    public ArrayList<Custom_Fatura_Cliente> getAllCustomFaturasClientesBD(){
 
         ArrayList<Custom_Fatura_Cliente> customfaturacliente = new ArrayList<>();
-        String sql = "SELECT * FROM id_custom_fatura";
+        String sql = "SELECT * FROM custom_fatura_cliente";
         Cursor cursor = this.database.rawQuery(sql, null);
         if(cursor.moveToFirst()){
             do{
-                Cliente auxCliente = new Cliente(cursor.getInt(0),
-                        cursor.getString(1),
+                Custom_Fatura_Cliente auxCustomFaturaCliente = new Custom_Fatura_Cliente(cursor.getInt(0),
+                        cursor.getInt(1));
 
-
-                auxCustomFaturaCliente.setNumero_cartao(cursor.getInt(0));
-                cliente.add(auxCliente);
+                auxCustomFaturaCliente.setId_custom_faturas(cursor.getInt(0));
+                auxCustomFaturaCliente.setNumero_cartao_cliente(cursor.getInt(1));
+                customfaturacliente.add(auxCustomFaturaCliente);
             }while(cursor.moveToNext());
         }
-        return cliente;
+        return customfaturacliente;
 
     }
+
+
+    public ArrayList<Empresa> getAllEmpresasBD(){
+        ArrayList<Empresa> empresa = new ArrayList<>();
+        String sql = "SELECT * FROM empresa";
+        Cursor cursor = this.database.rawQuery(sql, null);
+        if(cursor.moveToFirst()){
+            do{
+                Empresa auxEmpresa = new Empresa(cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getInt(2),
+                        cursor.getString(3));
+                auxEmpresa.setId(cursor.getInt(0));
+                empresa.add(auxEmpresa);
+            }while(cursor.moveToNext());
+        }
+        return empresa;
+    }
+
+    public ArrayList<Fatura> getAllFaturasBD(){
+        ArrayList<Fatura> fatura = new ArrayList<>();
+        String sql = "SELECT * FROM fatura";
+        Cursor cursor = this.database.rawQuery(sql,null);
+        if(cursor.moveToFirst()){
+            do{
+                Fatura auxFatura = new Fatura(cursor.getInt(0),
+                        cursor.getInt(1),
+                        new Date(cursor.getLong(2)*1000),
+                        cursor.getInt(3),
+                        cursor.getInt(4),
+                        cursor.getInt(5));
+                auxFatura.setId(cursor.getInt(0));
+                fatura.add(auxFatura);
+            }while(cursor.moveToNext());
+        }
+        return fatura;
+    }
+
+    public ArrayList<Linha_Fatura> getAllLinhaFaturasBD(){
+        ArrayList<Linha_Fatura> linhafatura = new ArrayList<>();
+        String sql = "SELECT * FROM fatura";
+        Cursor cursor = this.database.rawQuery(sql,null);
+        if(cursor.moveToFirst()){
+            do{
+                Linha_Fatura auxLinhaFatura = new Linha_Fatura(cursor.getInt(0),
+                        cursor.getFloat(1),
+                        cursor.getString(2),
+                        cursor.getString( 3),
+                        cursor.getInt(4),
+                        cursor.getInt(5),
+                        cursor.getFloat(6));
+                auxLinhaFatura.setId(cursor.getInt(0));
+                linhafatura.add(auxLinhaFatura);
+            }while(cursor.moveToNext());
+        }
+        return linhafatura;
+    }
+
+
+    public ArrayList<Fatura_Empresa> getAllFaturasEmpresaBD(){
+
+        ArrayList<Fatura_Empresa> faturaempresa = new ArrayList<>();
+        String sql = "SELECT * FROM fatura";
+        Cursor cursor = this.database.rawQuery(sql,null);
+        if(cursor.moveToFirst()){
+            do{
+                Fatura_Empresa auxFaturaEmpresa = new Fatura_Empresa(cursor.getInt(0),
+                        cursor.getInt(1));
+                auxFaturaEmpresa.setId_fatura(cursor.getInt(0));
+                faturaempresa.add(auxFaturaEmpresa);
+
+            }while(cursor.moveToNext());
+        }
+        return faturaempresa;
+    }
+
+    public ArrayList<Fatura_Cliente> getAllFaturasClientesBD(){
+        ArrayList<Fatura_Cliente> faturacliente = new ArrayList<>();
+        String sql = "SELECT * FROM fatura_cliente";
+        Cursor cursor = this.database.rawQuery(sql,null);
+        if(cursor.moveToFirst()){
+            do{
+                Fatura_Cliente auxFaturaCliente = new Fatura_Cliente(cursor.getInt(0),
+                        cursor.getInt(1));
+                auxFaturaCliente.setId_fatura(cursor.getInt(0));
+                faturacliente.add((auxFaturaCliente));
+            }while(cursor.moveToNext());
+        }
+        return faturacliente;
+    }
+
 
 }
 

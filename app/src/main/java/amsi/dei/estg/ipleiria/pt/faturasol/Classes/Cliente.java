@@ -86,7 +86,7 @@ public class Cliente {
 
     public String getAuthkey(){return authkey;}
 
-    public void setAuthkey(){this.authkey = authkey;}
+    public void setAuthkey(String authkey){this.authkey = authkey;}
 
 
     @Override

@@ -20,7 +20,7 @@ public class SingletonF_OL {
     private static SingletonF_OL ourInstance = null;
 
 
-
+    private FaturaDBHelper faturaDBHelper = null;
     public ArrayList<Cliente> cliente = new ArrayList<Cliente>();
     public ArrayList<Empresa> empresa = new ArrayList<Empresa>();
     public ArrayList<Fatura> fatura = new ArrayList<Fatura>();
@@ -49,13 +49,13 @@ public class SingletonF_OL {
 
 
     public void GerarClientes(){
-        cliente.add(new Cliente ( 10000000, "Rodrigo Paião", "RodriP@gmail.com", "RodriP22", "123456", 39219383, 293857261)  );
-        cliente.add(new Cliente ( 10000001, "Catarina Sales", "CataSal@gmail.com", "CataS", "123456", 39219383, 293857261)  );
-        cliente.add(new Cliente ( 10000002, "Miguel Faria", "FariaM@gmail.com", "RodriP22", "123456", 39219383, 293857261)  );
-        cliente.add(new Cliente ( 10000003, "João Oliveira", "Joliveira@gmail.com", "RodriP22", "123456", 39219383, 293857261)  );
-        cliente.add(new Cliente ( 10000004, "Luís Tiago", "LiagoTuis@gmail.com", "RodriP22", "123456", 39219383, 293857261)  );
-        cliente.add(new Cliente ( 10000005, "Joana Mateus", "JoanaM@gmail.com", "RodriP22", "123456", 39219383, 293857261)  );
-        cliente.add(new Cliente ( 10000006, "Rodrigo Araujo", "AraujoRRDigo@gmail .com", "RodriP22", "123456", 39219383, 293857261)  );
+        cliente.add(new Cliente ( 10000000, "Rodrigo Paião", "RodriP@gmail.com", "RodriP22", "123456", 39219383, 293857261,"autkey")  );
+        cliente.add(new Cliente ( 10000001, "Catarina Sales", "CataSal@gmail.com", "CataS", "123456", 39219383, 293857261, "authkey")  );
+        cliente.add(new Cliente ( 10000002, "Miguel Faria", "FariaM@gmail.com", "RodriP22", "123456", 39219383, 293857261, "authkey")  );
+        cliente.add(new Cliente ( 10000003, "João Oliveira", "Joliveira@gmail.com", "RodriP22", "123456", 39219383, 293857261, "authkey")  );
+        cliente.add(new Cliente ( 10000004, "Luís Tiago", "LiagoTuis@gmail.com", "RodriP22", "123456", 39219383, 293857261, "authkey")  );
+        cliente.add(new Cliente ( 10000005, "Joana Mateus", "JoanaM@gmail.com", "RodriP22", "123456", 39219383, 293857261, "authkey")  );
+        cliente.add(new Cliente ( 10000006, "Rodrigo Araujo", "AraujoRRDigo@gmail .com", "RodriP22", "123456", 39219383, 293857261, "authkey")  );
     }
     public void GerarEmpresa (){
 
