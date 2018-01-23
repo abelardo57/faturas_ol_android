@@ -201,7 +201,7 @@ public class SingletonF_OL {
             if(Email.equals(email) && Password.equals(password))
             {
                 check = true;
-                CurrentUser = cliente.get(i).getNumero_cartao();
+                CurrentUser = (int) cliente.get(i).getNumero_cartao();
                 CurrentUsername = cliente.get(i).getUsername();
                 i = cliente.size();
             }
@@ -219,7 +219,7 @@ public class SingletonF_OL {
     {
         int i = 0;
         do{
-            if(cliente.get(i).getUsername() == username);
+            if(cliente.get(i).getUsername().equals(username));
             {
                 cliente.get(i).setEmail(email);
                 cliente.get(i).setTelemovel(telemovel);

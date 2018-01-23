@@ -12,7 +12,7 @@ public class Fatura {
 
 
 
-    private int id;
+    private long id;
     private int numero;
     private Date data;
     //private String imagem_path;
@@ -32,11 +32,11 @@ public class Fatura {
 
 
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
