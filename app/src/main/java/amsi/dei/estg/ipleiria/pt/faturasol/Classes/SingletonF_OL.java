@@ -36,16 +36,16 @@ public class SingletonF_OL {
     public int SaveChecker = 0;
 
 
-    public static synchronized SingletonF_OL getInstance() {
+    public static synchronized SingletonF_OL getInstance(Context context) {
         if (ourInstance == null)
         {
-            ourInstance = new SingletonF_OL();
+            ourInstance = new SingletonF_OL(context);
         }
         return ourInstance;
     }
 
 
-    private SingletonF_OL( ) { GerarClientes(); GerarEmpresa();}
+    private SingletonF_OL(Context context) { GerarClientes(); GerarEmpresa();}
 
 
     public void GerarClientes(){
@@ -284,8 +284,9 @@ public class SingletonF_OL {
         return 0;
     }
 
-
-
+    public void adicionarCustomFaturaDB(Custom_Fatura custom_fatura){
+        faturaDBHelper.adicionarCustomFaturaDB(custom_fatura);
+    }
 
 
 }

@@ -28,16 +28,16 @@ public class LojaTaloesMenu extends AppCompatActivity {
 
         //setTitle(SingletonF_OL.getInstance().CurrentUserEmail);
 
-        SingletonF_OL.getInstance().FiltrarTaloesLoja();
+        SingletonF_OL.getInstance(getApplicationContext()).FiltrarTaloesLoja();
 
         //lojaView = (TextView) findViewById(R.id.lojaView);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        setTitle(SingletonF_OL.getInstance().empresa.get(Integer.parseInt(SingletonF_OL.getInstance().LojaSelecionada)).getNome());
+        setTitle(SingletonF_OL.getInstance(getApplicationContext()).empresa.get(Integer.parseInt(SingletonF_OL.getInstance(getApplicationContext()).LojaSelecionada)).getNome());
         listViewLojaTaloes = (ListView) findViewById(R.id.listLojaTaloes);
 
-        listViewLojaTaloes.setAdapter(new ListLojaTaloesAdapter(this, SingletonF_OL.getInstance().arrayListLojaTaloes));
+        listViewLojaTaloes.setAdapter(new ListLojaTaloesAdapter(this, SingletonF_OL.getInstance(getApplicationContext()).arrayListLojaTaloes));
 
         listViewLojaTaloes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -46,14 +46,14 @@ public class LojaTaloesMenu extends AppCompatActivity {
 
                 TextView txtTalao = (TextView) view.findViewById(R.id.txtLoja);
                 String texto = txtTalao.getText().toString();
-                SingletonF_OL.getInstance().TalaoSelecionado = texto;
+                SingletonF_OL.getInstance(getApplicationContext()).TalaoSelecionado = texto;
 
                 startActivity(talaoselecionado);
 
                 ListLojaTaloesAdapter adapt = (ListLojaTaloesAdapter)listViewLojaTaloes.getAdapter();
                 adapt.clearData();
                 adapt.notifyDataSetChanged();
-                setTitle(SingletonF_OL.getInstance().CurrentUserEmail);
+                setTitle(SingletonF_OL.getInstance(getApplicationContext()).CurrentUserEmail);
 
 
             }

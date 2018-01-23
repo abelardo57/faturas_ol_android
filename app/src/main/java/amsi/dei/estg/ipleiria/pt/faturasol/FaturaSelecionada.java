@@ -24,15 +24,15 @@ public class FaturaSelecionada extends AppCompatActivity {
         setContentView(R.layout.activity_fatura_selecionada);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.setTitle(SingletonF_OL.getInstance().empresa.get(Integer.parseInt(SingletonF_OL.getInstance().LojaSelecionada)).getNome());
+        this.setTitle(SingletonF_OL.getInstance(getApplicationContext()).empresa.get(Integer.parseInt(SingletonF_OL.getInstance(getApplicationContext()).LojaSelecionada)).getNome());
         TextView txtFatura = (TextView) findViewById(R.id.txtFatura);
         TextView txtTextoFatura = (TextView)findViewById(R.id.txtTextoFatura);
 
 
 
-        txtFatura.setText(SingletonF_OL.getInstance().TalaoSelecionado);
+        txtFatura.setText(SingletonF_OL.getInstance(getApplicationContext()).TalaoSelecionado);
         txtTextoFatura.setText("Buscar texto da fatura a DB");
-        check = SingletonF_OL.getInstance().CheckFav(txtFatura.getText().toString());
+        check = SingletonF_OL.getInstance(getApplicationContext()).CheckFav(txtFatura.getText().toString());
 
 
     }
@@ -55,22 +55,22 @@ public class FaturaSelecionada extends AppCompatActivity {
                 TextView txtfatura = (TextView) findViewById(R.id.txtFatura);
                 if(check == 0)
                 {
-                    SingletonF_OL.getInstance().IsFav(txtfatura.getText().toString());
+                    SingletonF_OL.getInstance(getApplicationContext()).IsFav(txtfatura.getText().toString());
                     menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_action_isfav));
                 }
                 else if(check == 1)
                 {
-                    SingletonF_OL.getInstance().NoFav(txtfatura.getText().toString());
+                    SingletonF_OL.getInstance(getApplicationContext()).NoFav(txtfatura.getText().toString());
                     menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_action_notfav));
                 }
 
-                check = SingletonF_OL.getInstance().CheckFav(txtfatura.getText().toString());
+                check = SingletonF_OL.getInstance(getApplicationContext()).CheckFav(txtfatura.getText().toString());
 
                 return true;
             }
             case R.id.item2:
                 TextView txtfatura = (TextView) findViewById(R.id.txtFatura);
-                SingletonF_OL.getInstance().DelFatura(txtfatura.getText().toString());
+                SingletonF_OL.getInstance(getApplicationContext()).DelFatura(txtfatura.getText().toString());
                 Intent removido = new Intent(getApplicationContext(), LojaTaloesMenu.class);
                 startActivity(removido);
 

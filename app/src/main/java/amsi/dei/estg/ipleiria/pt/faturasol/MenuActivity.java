@@ -37,13 +37,13 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        SingletonF_OL.getInstance().CurrentUserEmail = getIntent().getStringExtra(Login.DADOS_EMAIL);
-        setTitle(SingletonF_OL.getInstance().CurrentUserEmail);
-        SingletonF_OL.getInstance().CurrentUserEmail = getIntent().getStringExtra(Login.DADOS_EMAIL);
-        SingletonF_OL.getInstance().FiltrarLojasUser();
+        SingletonF_OL.getInstance(getApplicationContext()).CurrentUserEmail = getIntent().getStringExtra(Login.DADOS_EMAIL);
+        setTitle(SingletonF_OL.getInstance(getApplicationContext()).CurrentUserEmail);
+        SingletonF_OL.getInstance(getApplicationContext()).CurrentUserEmail = getIntent().getStringExtra(Login.DADOS_EMAIL);
+        SingletonF_OL.getInstance(getApplicationContext()).FiltrarLojasUser();
         listViewLojas = (ListView) findViewById(R.id.listLojass);
 
-        listViewLojas.setAdapter(new ListLojasAdapter(this, SingletonF_OL.getInstance().ArrayListaLojas));
+        listViewLojas.setAdapter(new ListLojasAdapter(this, SingletonF_OL.getInstance(getApplicationContext()).ArrayListaLojas));
 
         listViewLojas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -62,7 +62,7 @@ public class MenuActivity extends AppCompatActivity {
                 } FILTRO DE ESPAÇOS E NUMEROS
                 */
 
-                SingletonF_OL.getInstance().LojaSelecionada = txtLoja.getHint().toString();
+                SingletonF_OL.getInstance(getApplicationContext()).LojaSelecionada = txtLoja.getHint().toString();
 
                 startActivity(lojaselecionada);
             }
@@ -90,6 +90,7 @@ public class MenuActivity extends AppCompatActivity {
                 }
             case R.id.novafatura: {
                 intent = new Intent(getApplicationContext(), AdicionarFatura.class);
+                intent.putExtra("ADICIONAR_CUSTOM_FATURA", -1);
                 startActivity(intent);
                 return true;
             }
