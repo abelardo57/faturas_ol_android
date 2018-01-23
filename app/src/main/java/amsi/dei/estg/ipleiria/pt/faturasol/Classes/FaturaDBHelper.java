@@ -59,6 +59,7 @@ import java.util.Date;
                 ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n" +
                 "\n" +
                 "CREATE TABLE `custom_fatura_cliente` (\n" +
+                "  `id` int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,\n"+
                 "  `id_custom_faturas` int(10) NOT NULL,\n" +
                 "  `numero_cartao_cliente` int(10) NOT NULL\n" +
                 ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n" +
@@ -80,11 +81,13 @@ import java.util.Date;
                 ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n" +
                 "\n" +
                 "CREATE TABLE `fatura_cliente` (\n" +
+                "  `id` int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,\n"+
                 "  `id_fatura` int(10) NOT NULL,\n" +
                 "  `numero_cartao_cliente` int(10) NOT NULL\n" +
                 ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n" +
                 "\n" +
                 "CREATE TABLE `fatura_empresa` (\n" +
+                "  `id` int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,\n"+
                 "  `id_fatura` int(10) NOT NULL,\n" +
                 "  `id_empresa` int(10) NOT NULL\n" +
                 ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n" +
@@ -190,27 +193,16 @@ import java.util.Date;
                 "  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;\n" +
                 "\n" +
                 "\n" +
-                "ALTER TABLE `custom_fatura_cliente`\n" +
-                "  ADD CONSTRAINT `custom_fatura_cliente_ibfk_1` FOREIGN KEY (`id_custom_faturas`) REFERENCES `customfatura` (`id`),\n" +
-                "  ADD CONSTRAINT `custom_fatura_cliente_ibfk_2` FOREIGN KEY (`numero_cartao_cliente`) REFERENCES `cliente` (`numero_cartao`);\n" +
-                "\n" +
-                "\n" +
-                "\n" +
-                "ALTER TABLE `fatura_cliente`\n" +
-                "  ADD CONSTRAINT `fatura_cliente_ibfk_1` FOREIGN KEY (`id_fatura`) REFERENCES `fatura` (`id`),\n" +
-                "  ADD CONSTRAINT `fatura_cliente_ibfk_2` FOREIGN KEY (`numero_cartao_cliente`) REFERENCES `cliente` (`numero_cartao`);\n" +
-                "\n" +
-                "\n" +
                 "ALTER TABLE `fatura_empresa`\n" +
                 "  ADD CONSTRAINT `fatura_empresa_ibfk_1` FOREIGN KEY (`id_fatura`) REFERENCES `fatura` (`id`),\n" +
                 "  ADD CONSTRAINT `fatura_empresa_ibfk_2` FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`);\n" +
                 "\n" +
                 "\n" +
-                "\n" +
                 "ALTER TABLE `linha_fatura`\n" +
                 "  ADD CONSTRAINT `linha_fatura_ibfk_1` FOREIGN KEY (`id_fatura`) REFERENCES `fatura` (`id`),\n" +
                 "  ADD CONSTRAINT `linha_fatura_ibfk_2` FOREIGN KEY (`id_custom_fatura`) REFERENCES `customfatura` (`id`);\n";
-                db.execSQL(createFaturaTables);
+
+        db.execSQL(createFaturaTables);
     }
 
     @Override
