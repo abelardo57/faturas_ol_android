@@ -8,7 +8,9 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import amsi.dei.estg.ipleiria.pt.faturasol.AdicionarFatura;
 
@@ -194,7 +196,7 @@ public class SingletonF_OL {
         boolean check = false;
         String email;
         String password;
-        int i = 0;
+        long i = 0;
         do{
             email = cliente.get(i).getEmail().toString();
             password =  cliente.get(i).getPassword().toString();
@@ -283,6 +285,39 @@ public class SingletonF_OL {
         }
         return 0;
     }
+
+    /*public void removerClienteApi(final Cliente cliente, final Context context){
+        StringRequest request = new StringRequest(Request.Method.DELETE, mURLAPILivros, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                System.out.println("-->Resposta Delete Post: " + response);
+
+                if (livrosListener != null){
+                    livrosListener.onUpdateListaLivros(LivroJsonParser.parserJsonLivro(response, context),3);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("Error  " + error.getMessage());
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams(){
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("token", tokenAPI);
+                params.put("titulo", cliente.getTitulo());
+                params.put("serie", cliente.getSerie());
+                params.put("autor", cliente.getAutor());
+                params.put("ano", cliente.getAno());
+                params.put("capa", cliente.getCapa().toString());
+                return params;
+            }
+        };
+
+        volleyQueue.add(request);
+    }*/
 
 
 

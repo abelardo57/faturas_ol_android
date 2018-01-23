@@ -77,4 +77,8 @@ public class ListLojaTaloesAdapter extends BaseAdapter{
         // clear the data
         listLojaTaloes.clear();
     }
+    public void refresh(ArrayList<ListLojaTaloes> listLojaTaloes){
+        this.listLojaTaloes = listLojaTaloes;
+        notifyDataSetChanged();
+    }
 }
