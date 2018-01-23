@@ -242,6 +242,8 @@ import java.util.Date;
 
         return null;
     }
+
+
     public ArrayList<Cliente> getAllClientesBD(){
 
         ArrayList<Cliente> cliente = new ArrayList<>();
@@ -258,7 +260,7 @@ import java.util.Date;
                         cursor.getInt(6),
                         cursor.getString(7));
 
-                auxCliente.setNumero_cartao(cursor.getInt(0));
+                //auxCliente.setNumero_cartao(cursor.getInt(0));
                 /*auxCliente.setNome(cursor.getString(1));
                 auxCliente.setEmail(cursor.getString(2));
                 auxCliente.setUsername(cursor.getString(3));
@@ -266,7 +268,9 @@ import java.util.Date;
                 auxCliente.setTelemovel(cursor.getInt(5));
                 auxCliente.setNif(cursor.getInt(6));
                 auxCliente.setAuthkey(cursor.getString(7));*/
+
                 cliente.add(auxCliente);
+
             }while(cursor.moveToNext());
         }
         return cliente;

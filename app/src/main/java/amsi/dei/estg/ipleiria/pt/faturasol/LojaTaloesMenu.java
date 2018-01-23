@@ -66,6 +66,7 @@ public class LojaTaloesMenu extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), FaturaSelecionada.class);
         startActivity(intent);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
@@ -94,7 +95,6 @@ public class LojaTaloesMenu extends AppCompatActivity {
                 return true;
             }
         }
-
 
         return super.onOptionsItemSelected(item);
     }
