@@ -27,7 +27,7 @@ public class SingletonF_OL {
     public Date currentTime = Calendar.getInstance().getTime();
     public ArrayList<ListLojas>  ArrayListaLojas = new ArrayList<ListLojas>();
     public ArrayList<ListLojaTaloes> arrayListLojaTaloes = new ArrayList<ListLojaTaloes>();
-    public int CurrentUser;
+    public long CurrentUser;
     public String CurrentUsername;
     public String CurrentUserEmail;
     public String LojaSelecionada;
