@@ -6,7 +6,7 @@ package amsi.dei.estg.ipleiria.pt.faturasol.Classes;
 
 public class Cliente {
 
-    private int numero_cartao;
+    private long numero_cartao;
     private String nome;
     private String email;
     private String username;
@@ -28,11 +28,11 @@ public class Cliente {
     }
 
 
-    public int getNumero_cartao() {
+    public long getNumero_cartao() {
         return numero_cartao;
     }
 
-    public void setNumero_cartao(int numero_cartao) {
+    public void setNumero_cartao(long numero_cartao) {
         this.numero_cartao = numero_cartao;
     }
 
