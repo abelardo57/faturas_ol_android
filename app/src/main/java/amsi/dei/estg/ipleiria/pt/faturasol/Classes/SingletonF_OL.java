@@ -24,6 +24,7 @@ public class SingletonF_OL {
     public ArrayList<Cliente> cliente = new ArrayList<Cliente>();
     public ArrayList<Empresa> empresa = new ArrayList<Empresa>();
     public ArrayList<Fatura> fatura = new ArrayList<Fatura>();
+    private ArrayList<Custom_Fatura> custom_faturas;
     public Date currentTime = Calendar.getInstance().getTime();
     public ArrayList<ListLojas>  ArrayListaLojas = new ArrayList<ListLojas>();
     public ArrayList<ListLojaTaloes> arrayListLojaTaloes = new ArrayList<ListLojaTaloes>();
@@ -288,6 +289,23 @@ public class SingletonF_OL {
     public void adicionarCustomFaturaDB(Custom_Fatura custom_fatura){
         faturaDBHelper.adicionarCustomFaturaDB(custom_fatura);
     }
+    public void removerCustomFaturaBD(int value) {
 
+        if (custom_faturas.get(value) != null){
+            if (faturaDBHelper.removerCustomFaturaBD(custom_faturas.get(value).getId())){
+                custom_faturas.remove(value);
+            }
+        }
 
+    }
+    public void editarCustomFaturaBD(int value, Custom_Fatura custom_fatura){
+
+        if (custom_faturas.get(value) != null){
+            if (faturaDBHelper.guardarCustomFaturaBD(custom_fatura)){
+                custom_fatura.setId(value);
+                custom_faturas.add(value, custom_fatura);
+            }
+        }
+
+    }
 }
