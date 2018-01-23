@@ -55,8 +55,7 @@ public class AdicionarFatura extends AppCompatActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-
-
+                finish();
 
         }
     }

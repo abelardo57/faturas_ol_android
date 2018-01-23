@@ -123,6 +123,6 @@
         android:layout_margin="16dp"
         android:onClick="onClickAdicionarCustomFatura"
         android:clickable="true"
-        app:srcCompat="@drawable/ic_action_save" />
+        app:srcCompat="@drawable/ic_action_new" />
 
 </LinearLayout>

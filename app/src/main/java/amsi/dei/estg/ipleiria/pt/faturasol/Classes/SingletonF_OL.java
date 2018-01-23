@@ -129,6 +129,7 @@ public class SingletonF_OL {
 
 
     }
+
     public int GetNumeroFaturasPorLojaCurrentUser(int IdEmpresa){
         int total = 0;
         int i = 0;

@@ -28,4 +28,5 @@
     <string name="title_activity_user_settings">UserSettings</string>
     <string name="menu_faturas_user">As Suas Faturas</string>
     <string name="menu_sair">Sair</string>
+    <string name="item_lista_lojas">item lista lojas</string>
 </resources>
