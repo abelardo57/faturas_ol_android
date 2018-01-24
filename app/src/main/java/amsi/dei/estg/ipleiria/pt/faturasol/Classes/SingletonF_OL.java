@@ -20,7 +20,7 @@ import amsi.dei.estg.ipleiria.pt.faturasol.AdicionarFatura;
 public class SingletonF_OL {
 
     /*
-    String mUrlAPI= "";
+    String mUrlAPI= "localhost:8888/numseique/api";
     String mUrlAPILogin= "";
     String tokenAPI= "";
     */

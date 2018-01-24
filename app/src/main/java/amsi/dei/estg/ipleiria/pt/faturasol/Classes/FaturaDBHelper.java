@@ -311,7 +311,7 @@ import java.util.Date;
             do{
                 Custom_Fatura auxCustomFatura = new Custom_Fatura(cursor.getInt(0),
                         cursor.getInt(1),
-                        new Date(cursor.getLong(2)*1000),
+                        new Date(cursor.getLong(2)),
                         cursor.getInt(3),
                         cursor.getString(4),
                         cursor.getString(5));
