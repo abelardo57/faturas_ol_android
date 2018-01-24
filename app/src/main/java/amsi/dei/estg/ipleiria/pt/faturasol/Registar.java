@@ -1,9 +1,15 @@
 package amsi.dei.estg.ipleiria.pt.faturasol;
 
+import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Cliente;
+import amsi.dei.estg.ipleiria.pt.faturasol.Classes.SingletonF_OL;
 
 public class Registar extends AppCompatActivity {
 
@@ -40,7 +46,25 @@ public class Registar extends AppCompatActivity {
 
     }
 
+    public void onClickRegistar(View view) {
+
+        if (vNome.getText().toString().equals("")||vNIF.getText().toString().equals("")||vUsername.getText().toString().equals("")||vEmail.getText().toString().equals("")||vPassword.getText().toString().equals(""))
+        {
+            Toast.makeText(this, "Campos Vazios", Toast.LENGTH_SHORT).show();
+        }
+        else if (vconfPass.getText().toString().equals(vPassword.getText().toString())){
+            SingletonF_OL.getInstance(getApplicationContext()).registarClienteBD(new Cliente(0,vNome.getText().toString(),vEmail.getText().toString(),vUsername.getText().toString(),vPassword.getText().toString(), vTelemovel.getText().toString(),vNIF.getText().toString(),""));
+
+            finish();
+        }
+        else{
+            Toast.makeText(this, "Password diferente da inserida", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
     public void onClickVoltar(View view) {
         finish();
     }
+
 }

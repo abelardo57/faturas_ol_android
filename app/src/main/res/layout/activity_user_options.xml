@@ -17,7 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="center" />
+        android:gravity="center"
+        android:text="user" />
 
     <Space
         android:layout_width="match_parent"
@@ -31,7 +32,8 @@
         android:layout_weight="1"
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
-        android:text="E-mail:" />
+        android:text="E-mail:"
+        android:textColor="@android:color/black" />
 
     <EditText
         android:id="@+id/txtEmail"
@@ -56,7 +58,8 @@
         android:layout_weight="1"
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
-        android:text="Telemóvel:" />
+        android:text="Telemóvel:"
+        android:textColor="@android:color/black" />
 
     <EditText
         android:id="@+id/txtTelemovel"
@@ -80,7 +83,8 @@
         android:layout_weight="1"
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
-        android:text="Password:" />
+        android:text="Password:"
+        android:textColor="@android:color/black" />
 
     <EditText
         android:id="@+id/txtPass"
@@ -91,8 +95,7 @@
         android:ems="10"
         android:enabled="false"
         android:gravity="center"
-        android:inputType="textPassword"
-        android:text="Name" />
+        android:inputType="textPassword" />
 
     <Space
         android:layout_width="match_parent"
@@ -106,7 +109,8 @@
         android:layout_weight="1"
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
-        android:text="Confirmar Password:" />
+        android:text="Confirmar Password:"
+        android:textColor="@android:color/black" />
 
     <EditText
         android:id="@+id/txtPassConf"
@@ -117,8 +121,7 @@
         android:ems="10"
         android:enabled="false"
         android:gravity="center"
-        android:inputType="textPassword"
-        android:text="Name" />
+        android:inputType="textPassword" />
 
     <Space
         android:layout_width="match_parent"
@@ -141,7 +144,7 @@
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:background="@color/colorPrimary"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:onClick="alterarUser"
             android:text="@string/btn_guardarInfo" />
     </LinearLayout>

@@ -1,5 +1,6 @@
 package amsi.dei.estg.ipleiria.pt.faturasol.Classes;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.text.method.DateTimeKeyListener;
 import android.widget.Toast;
@@ -17,14 +18,23 @@ import amsi.dei.estg.ipleiria.pt.faturasol.AdicionarFatura;
  */
 
 public class SingletonF_OL {
-    private static SingletonF_OL ourInstance = null;
 
+    /*
+    String mUrlAPI= "";
+    String mUrlAPILogin= "";
+    String tokenAPI= "";
+    */
 
+    //private static RequestQueue volleyQueue = null;
+    private static SingletonF_OL INSTANCE = null;
     private FaturaDBHelper faturaDBHelper = null;
-    public ArrayList<Cliente> cliente = new ArrayList<Cliente>();
+
+
+    public ArrayList<Cliente> clientes = new ArrayList<Cliente>();
     public ArrayList<Empresa> empresa = new ArrayList<Empresa>();
     public ArrayList<Fatura> fatura = new ArrayList<Fatura>();
     private ArrayList<Custom_Fatura> custom_faturas;
+
     public Date currentTime = Calendar.getInstance().getTime();
     public ArrayList<ListLojas>  ArrayListaLojas = new ArrayList<ListLojas>();
     public ArrayList<ListLojaTaloes> arrayListLojaTaloes = new ArrayList<ListLojaTaloes>();
@@ -38,25 +48,32 @@ public class SingletonF_OL {
 
 
     public static synchronized SingletonF_OL getInstance(Context context) {
-        if (ourInstance == null)
+        if (INSTANCE == null)
         {
-            ourInstance = new SingletonF_OL(context);
+            INSTANCE = new SingletonF_OL(context);
+            //volleyQueue = Volley.newRequestQueue(context);
         }
-        return ourInstance;
+        return INSTANCE;
     }
 
 
-    private SingletonF_OL(Context context) { GerarClientes(); GerarEmpresa();}
+    private SingletonF_OL(Context context) {
+        clientes=new ArrayList<>();
+        faturaDBHelper = new FaturaDBHelper(context);
+
+        //GerarClientes();
+        //GerarEmpresa();
+    }
 
 
     public void GerarClientes(){
-        cliente.add(new Cliente ( 10000000, "Rodrigo Paião", "RodriP@gmail.com", "RodriP22", "123456", 39219383, 293857261,"autkey")  );
-        cliente.add(new Cliente ( 10000001, "Catarina Sales", "CataSal@gmail.com", "CataS", "123456", 39219383, 293857261, "authkey")  );
-        cliente.add(new Cliente ( 10000002, "Miguel Faria", "FariaM@gmail.com", "RodriP22", "123456", 39219383, 293857261, "authkey")  );
-        cliente.add(new Cliente ( 10000003, "João Oliveira", "Joliveira@gmail.com", "RodriP22", "123456", 39219383, 293857261, "authkey")  );
-        cliente.add(new Cliente ( 10000004, "Luís Tiago", "LiagoTuis@gmail.com", "RodriP22", "123456", 39219383, 293857261, "authkey")  );
-        cliente.add(new Cliente ( 10000005, "Joana Mateus", "JoanaM@gmail.com", "RodriP22", "123456", 39219383, 293857261, "authkey")  );
-        cliente.add(new Cliente ( 10000006, "Rodrigo Araujo", "AraujoRRDigo@gmail .com", "RodriP22", "123456", 39219383, 293857261, "authkey")  );
+        clientes.add(new Cliente ( 10000000, "Rodrigo Paião", "RodriP@gmail.com", "RodriP22", "123456", "39219383", "293857261","autkey")  );
+        clientes.add(new Cliente ( 10000001, "Catarina Sales", "CataSal@gmail.com", "CataS", "123456", "39219383", "293857261", "authkey")  );
+        clientes.add(new Cliente ( 10000002, "Miguel Faria", "FariaM@gmail.com", "RodriP22", "123456", "39219383", "293857261", "authkey")  );
+        clientes.add(new Cliente ( 10000003, "João Oliveira", "Joliveira@gmail.com", "RodriP22", "123456", "39219383", "293857261", "authkey")  );
+        clientes.add(new Cliente ( 10000004, "Luís Tiago", "LiagoTuis@gmail.com", "RodriP22", "123456", "39219383", "293857261", "authkey")  );
+        clientes.add(new Cliente ( 10000005, "Joana Mateus", "JoanaM@gmail.com", "RodriP22", "123456", "39219383", "293857261", "authkey")  );
+        clientes.add(new Cliente ( 10000006, "Rodrigo Araujo", "AraujoRRDigo@gmail .com", "RodriP22", "123456", "39219383", "293857261", "authkey")  );
     }
     public void GerarEmpresa (){
 
@@ -80,6 +97,13 @@ public class SingletonF_OL {
         fatura.add(new Fatura (10, 10011, currentTime,10000000,2,0));
         fatura.add(new Fatura (11, 10012, currentTime,10000000,0,0));
     }
+
+
+    public void registarClienteBD(Cliente cliente){
+        faturaDBHelper.adicionarClienteBD(cliente);
+    }
+
+
     public int getTotalFaturas()
     {
         ArrayList<Fatura> fatura = getFatura();
@@ -145,7 +169,7 @@ public class SingletonF_OL {
     }
 
     public ArrayList getClientes(){
-        return cliente;
+        return clientes;
     }
     public ArrayList getEmpresa(){
         return empresa;
@@ -198,36 +222,36 @@ public class SingletonF_OL {
         String password;
         int i = 0;
         do{
-            email = cliente.get(i).getEmail().toString();
-            password =  cliente.get(i).getPassword().toString();
+            email = clientes.get(i).getEmail().toString();
+            password =  clientes.get(i).getPassword().toString();
             if(Email.equals(email) && Password.equals(password))
             {
                 check = true;
-                CurrentUser = (int) cliente.get(i).getNumero_cartao();
-                CurrentUsername = cliente.get(i).getUsername();
-                i = cliente.size();
+                CurrentUser = (int) clientes.get(i).getNumero_cartao();
+                CurrentUsername = clientes.get(i).getUsername();
+                i = clientes.size();
             }
             else{
                 i++;
             }
 
         }
-        while(i != cliente.size());
+        while(i != clientes.size());
         
         return check;
     }
 
-    public void AlterarUser(String username, String email, int telemovel, String password)
+    public void AlterarUser(String username, String email, String telemovel, String password)
     {
         int i = 0;
         do{
-            if(cliente.get(i).getUsername().equals(username));
+            if(clientes.get(i).getUsername().equals(username));
             {
-                cliente.get(i).setEmail(email);
-                cliente.get(i).setTelemovel(telemovel);
-                cliente.get(i).setPassword(email);
+                clientes.get(i).setEmail(email);
+                clientes.get(i).setTelemovel(telemovel);
+                clientes.get(i).setPassword(email);
             }
-        }while(i<cliente.size());
+        }while(i<clientes.size());
     }
 
     public void FiltrarLojasUser(){
@@ -277,9 +301,9 @@ public class SingletonF_OL {
     }
     public int getClientePosition(){
         int i = 0;
-        while(i<cliente.size())
+        while(i<clientes.size())
         {
-            if(i==cliente.get(i).getNumero_cartao()) {
+            if(i==clientes.get(i).getNumero_cartao()) {
                 return i;
             }
         }

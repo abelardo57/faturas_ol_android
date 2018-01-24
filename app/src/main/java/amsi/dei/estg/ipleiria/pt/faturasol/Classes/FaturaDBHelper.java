@@ -29,7 +29,7 @@ import java.util.Date;
 
 
 
-    public FaturaDBHelper(Context context, SQLiteDatabase database)
+    public FaturaDBHelper(Context context)
     {
         super(context, "faturasol", null, 1);
         this.database = this.getWritableDatabase();
@@ -39,16 +39,16 @@ import java.util.Date;
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createFaturaTables = "CREATE TABLE `cliente` (\n" +
-                "  `numero_cartao` int(10) NOT NULL,\n" +
-                "  `nome` varchar(500) NOT NULL,\n" +
-                "  `email` varchar(100) NOT NULL,\n" +
-                "  `username` varchar(100) NOT NULL,\n" +
-                "  `password_hash` varchar(255) NOT NULL,\n" +
-                "  `telemovel` varchar(9) DEFAULT NULL,\n" +
-                "  `nif` varchar(9) NOT NULL,\n" +
-                "  `auth_key` varchar(32) NOT NULL\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n" +
-                "\n" +
+                "  numero_cartao INTEGER PRYMARY KEY,"+
+                "  nome TEXT NOT NULL," +
+                "  email TEXT NOT NULL," +
+                "  username TEXT NOT NULL," +
+                "  password_hash TEXT NOT NULL," +
+                "  telemovel TEXT DEFAULT NULL," +
+                "  nif TEXT NOT NULL," +
+                "  auth_key TEXT NOT NULL" +
+                ");" +
+                "" +
                 "CREATE TABLE `customfatura` (\n" +
                 "  `id` int(10) NOT NULL,\n" +
                 "  `numero` varchar(10) NOT NULL,\n" +
@@ -207,7 +207,7 @@ import java.util.Date;
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        String sql = "";
+        String sql = "DROP DATABASE faturasol";
         db.execSQL(sql);
         this.onCreate(db);
     }
@@ -283,8 +283,8 @@ import java.util.Date;
                         cursor.getString(2),
                         cursor.getString(3),
                         cursor.getString(4),
-                        cursor.getInt(5),
-                        cursor.getInt(6),
+                        cursor.getString(5),
+                        cursor.getString(6),
                         cursor.getString(7));
 
                 auxCliente.setNumero_cartao(cursor.getInt(0));
