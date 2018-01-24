@@ -98,11 +98,19 @@ public class SingletonF_OL {
         fatura.add(new Fatura (11, 10012, currentTime,10000000,0,0));
     }
 
-
     public void registarClienteBD(Cliente cliente){
         faturaDBHelper.adicionarClienteBD(cliente);
     }
 
+    public ArrayList<Cliente> getClientes(){
+        return faturaDBHelper.getAllClientesBD();
+    }
+    public ArrayList getEmpresa(){
+        return empresa;
+    }
+    public ArrayList getFatura() {
+        return fatura;
+    }
 
     public int getTotalFaturas()
     {
@@ -151,8 +159,6 @@ public class SingletonF_OL {
         }
 
 
-
-
     }
 
     public int GetNumeroFaturasPorLojaCurrentUser(int IdEmpresa){
@@ -168,13 +174,7 @@ public class SingletonF_OL {
         return total;
     }
 
-    public ArrayList getClientes(){
-        return clientes;
-    }
-    public ArrayList getEmpresa(){
-        return empresa;
-    }
-    public ArrayList getFatura() { return fatura; }
+
 
     public int CheckFav(String numero_fatura){
         int i = 0;

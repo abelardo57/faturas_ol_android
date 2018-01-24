@@ -16,7 +16,7 @@
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
-            android:layout_height="55dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:gravity="bottom"
             android:text="Registar"
@@ -36,15 +36,23 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
-        <EditText
-            android:id="@+id/txtNome"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Nome"
-            android:inputType="textPersonName"
-            android:textAlignment="center" />
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <EditText
+                android:id="@+id/txtNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nome"
+                android:imeActionId="@+id/login"
+                android:imeActionLabel="@string/action_sign_in_short"
+                android:imeOptions="actionUnspecified"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+        </android.support.design.widget.TextInputLayout>
 
         <Space
             android:layout_width="wrap_content"
@@ -62,15 +70,23 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
-        <EditText
-            android:id="@+id/txtNIF"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="NIF"
-            android:inputType="textPersonName"
-            android:textAlignment="center" />
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <EditText
+                android:id="@+id/txtNIF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="NIF"
+                android:imeActionId="@+id/login"
+                android:imeActionLabel="@string/action_sign_in_short"
+                android:imeOptions="actionUnspecified"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+        </android.support.design.widget.TextInputLayout>
 
         <Space
             android:layout_width="wrap_content"
@@ -88,15 +104,23 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
-        <EditText
-            android:id="@+id/txtTele"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Telemóvel (Opcional)"
-            android:inputType="text"
-            android:textAlignment="center" />
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <EditText
+                android:id="@+id/txtTele"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Telemóvel"
+                android:imeActionId="@+id/login"
+                android:imeActionLabel="@string/action_sign_in_short"
+                android:imeOptions="actionUnspecified"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+        </android.support.design.widget.TextInputLayout>
 
         <Space
             android:layout_width="wrap_content"
@@ -114,15 +138,23 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
-        <EditText
-            android:id="@+id/txtUsername"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Username"
-            android:inputType="text"
-            android:textAlignment="center" />
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <EditText
+                android:id="@+id/txtUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Username"
+                android:imeActionId="@+id/login"
+                android:imeActionLabel="@string/action_sign_in_short"
+                android:imeOptions="actionUnspecified"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+        </android.support.design.widget.TextInputLayout>
 
         <Space
             android:layout_width="wrap_content"
@@ -140,15 +172,24 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
-        <EditText
-            android:id="@+id/txtPassword"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:textAlignment="center" />
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <EditText
+                android:id="@+id/txtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:imeActionId="@+id/login"
+                android:imeActionLabel="@string/action_sign_in_short"
+                android:imeOptions="actionUnspecified"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+        </android.support.design.widget.TextInputLayout>
 
         <Space
             android:layout_width="wrap_content"
@@ -166,15 +207,24 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
-        <EditText
-            android:id="@+id/txtCPassword"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Confirmar Password"
-            android:inputType="textPassword"
-            android:textAlignment="center" />
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <EditText
+                android:id="@+id/txtCPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Confirmar Password"
+                android:imeActionId="@+id/login"
+                android:imeActionLabel="@string/action_sign_in_short"
+                android:imeOptions="actionUnspecified"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+        </android.support.design.widget.TextInputLayout>
 
         <Space
             android:layout_width="wrap_content"
@@ -193,15 +243,23 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
-        <EditText
-            android:id="@+id/txtEmail"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:textAlignment="center" />
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <EditText
+                android:id="@+id/txtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="E-mail"
+                android:imeActionId="@+id/login"
+                android:imeActionLabel="@string/action_sign_in_short"
+                android:imeOptions="actionUnspecified"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+        </android.support.design.widget.TextInputLayout>
 
         <Space
             android:layout_width="wrap_content"

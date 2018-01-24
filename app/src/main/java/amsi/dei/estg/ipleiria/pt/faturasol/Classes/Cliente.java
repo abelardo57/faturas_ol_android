@@ -13,10 +13,10 @@ public class Cliente {
     private String password;
     private String telemovel;
     private String nif;
-    private String authkey;
+    private String auth_key;
 
 
-    public Cliente(long numero_cartao, String nome, String email, String username, String password, String telemovel, String nif, String authkey) {
+    public Cliente(long numero_cartao, String nome, String email, String username, String password, String telemovel, String nif, String auth_key) {
         this.numero_cartao = numero_cartao;
         this.nome = nome;
         this.email = email;
@@ -24,7 +24,7 @@ public class Cliente {
         this.password = password;
         this.telemovel = telemovel;
         this.nif = nif;
-        this.authkey = authkey;
+        this.auth_key = auth_key;
     }
 
 
@@ -84,9 +84,9 @@ public class Cliente {
         this.nif = nif;
     }
 
-    public String getAuthkey(){return authkey;}
+    public String getAuthkey(){return auth_key;}
 
-    public void setAuthkey(String authkey){this.authkey = authkey;}
+    public void setAuthkey(String auth_key){this.auth_key = auth_key;}
 
 
     @Override
@@ -99,7 +99,7 @@ public class Cliente {
                 ", password='" + password + '\'' +
                 ", telemovel=" + telemovel + '\'' +
                 ", nif=" + nif + '\'' +
-                ", authkey="+ authkey +
+                ", auth_key="+ auth_key +
                 '}';
     }
 }
