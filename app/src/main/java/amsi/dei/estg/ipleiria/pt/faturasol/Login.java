@@ -77,9 +77,9 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
         setContentView(R.layout.activity_login);
         // Set up the login form.
 
-        SingletonF_OL.getInstance().GerarClientes();
-        SingletonF_OL.getInstance().GerarEmpresa();
-        SingletonF_OL.getInstance().GerarFaturas();
+        SingletonF_OL.getInstance(getApplicationContext()).GerarClientes();
+        SingletonF_OL.getInstance(getApplicationContext()).GerarEmpresa();
+        SingletonF_OL.getInstance(getApplicationContext()).GerarFaturas();
 
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -100,7 +100,7 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(SingletonF_OL.getInstance().CheckUser(mEmailView.getText().toString(),mPasswordView.getText().toString()) == true)
+                if(SingletonF_OL.getInstance(getApplicationContext()).CheckUser(mEmailView.getText().toString(),mPasswordView.getText().toString()) == true)
                 {
                     attemptLogin();
                 }

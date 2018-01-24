@@ -8,9 +8,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import amsi.dei.estg.ipleiria.pt.faturasol.AdicionarFatura;
 
@@ -26,10 +24,11 @@ public class SingletonF_OL {
     public ArrayList<Cliente> cliente = new ArrayList<Cliente>();
     public ArrayList<Empresa> empresa = new ArrayList<Empresa>();
     public ArrayList<Fatura> fatura = new ArrayList<Fatura>();
+    private ArrayList<Custom_Fatura> custom_faturas;
     public Date currentTime = Calendar.getInstance().getTime();
     public ArrayList<ListLojas>  ArrayListaLojas = new ArrayList<ListLojas>();
     public ArrayList<ListLojaTaloes> arrayListLojaTaloes = new ArrayList<ListLojaTaloes>();
-    public int CurrentUser;
+    public long CurrentUser;
     public String CurrentUsername;
     public String CurrentUserEmail;
     public String LojaSelecionada;
@@ -38,16 +37,16 @@ public class SingletonF_OL {
     public int SaveChecker = 0;
 
 
-    public static synchronized SingletonF_OL getInstance() {
+    public static synchronized SingletonF_OL getInstance(Context context) {
         if (ourInstance == null)
         {
-            ourInstance = new SingletonF_OL();
+            ourInstance = new SingletonF_OL(context);
         }
         return ourInstance;
     }
 
 
-    private SingletonF_OL( ) { GerarClientes(); GerarEmpresa();}
+    private SingletonF_OL(Context context) { GerarClientes(); GerarEmpresa();}
 
 
     public void GerarClientes(){
@@ -131,6 +130,7 @@ public class SingletonF_OL {
 
 
     }
+
     public int GetNumeroFaturasPorLojaCurrentUser(int IdEmpresa){
         int total = 0;
         int i = 0;
@@ -196,14 +196,14 @@ public class SingletonF_OL {
         boolean check = false;
         String email;
         String password;
-        long i = 0;
+        int i = 0;
         do{
             email = cliente.get(i).getEmail().toString();
             password =  cliente.get(i).getPassword().toString();
             if(Email.equals(email) && Password.equals(password))
             {
                 check = true;
-                CurrentUser = cliente.get(i).getNumero_cartao();
+                CurrentUser = (int) cliente.get(i).getNumero_cartao();
                 CurrentUsername = cliente.get(i).getUsername();
                 i = cliente.size();
             }
@@ -221,7 +221,7 @@ public class SingletonF_OL {
     {
         int i = 0;
         do{
-            if(cliente.get(i).getUsername() == username);
+            if(cliente.get(i).getUsername().equals(username));
             {
                 cliente.get(i).setEmail(email);
                 cliente.get(i).setTelemovel(telemovel);
@@ -286,41 +286,26 @@ public class SingletonF_OL {
         return 0;
     }
 
-    /*public void removerClienteApi(final Cliente cliente, final Context context){
-        StringRequest request = new StringRequest(Request.Method.DELETE, mURLAPILivros, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                System.out.println("-->Resposta Delete Post: " + response);
+    public void adicionarCustomFaturaDB(Custom_Fatura custom_fatura){
+        faturaDBHelper.adicionarCustomFaturaDB(custom_fatura);
+    }
+    public void removerCustomFaturaBD(int value) {
 
-                if (livrosListener != null){
-                    livrosListener.onUpdateListaLivros(LivroJsonParser.parserJsonLivro(response, context),3);
-                }
+        if (custom_faturas.get(value) != null){
+            if (faturaDBHelper.removerCustomFaturaBD(custom_faturas.get(value).getId())){
+                custom_faturas.remove(value);
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println("Error  " + error.getMessage());
+        }
+
+    }
+    public void editarCustomFaturaBD(int value, Custom_Fatura custom_fatura){
+
+        if (custom_faturas.get(value) != null){
+            if (faturaDBHelper.guardarCustomFaturaBD(custom_fatura)){
+                custom_fatura.setId(value);
+                custom_faturas.add(value, custom_fatura);
             }
-        })
-        {
-            @Override
-            protected Map<String, String> getParams(){
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("token", tokenAPI);
-                params.put("titulo", cliente.getTitulo());
-                params.put("serie", cliente.getSerie());
-                params.put("autor", cliente.getAutor());
-                params.put("ano", cliente.getAno());
-                params.put("capa", cliente.getCapa().toString());
-                return params;
-            }
-        };
+        }
 
-        volleyQueue.add(request);
-    }*/
-
-
-
-
-
+    }
 }

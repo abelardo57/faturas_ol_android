@@ -59,6 +59,7 @@ import java.util.Date;
                 ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n" +
                 "\n" +
                 "CREATE TABLE `custom_fatura_cliente` (\n" +
+                "  `id` int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,\n"+
                 "  `id_custom_faturas` int(10) NOT NULL,\n" +
                 "  `numero_cartao_cliente` int(10) NOT NULL\n" +
                 ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n" +
@@ -80,11 +81,13 @@ import java.util.Date;
                 ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n" +
                 "\n" +
                 "CREATE TABLE `fatura_cliente` (\n" +
+                "  `id` int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,\n"+
                 "  `id_fatura` int(10) NOT NULL,\n" +
                 "  `numero_cartao_cliente` int(10) NOT NULL\n" +
                 ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n" +
                 "\n" +
                 "CREATE TABLE `fatura_empresa` (\n" +
+                "  `id` int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,\n"+
                 "  `id_fatura` int(10) NOT NULL,\n" +
                 "  `id_empresa` int(10) NOT NULL\n" +
                 ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n" +
@@ -190,27 +193,16 @@ import java.util.Date;
                 "  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;\n" +
                 "\n" +
                 "\n" +
-                "ALTER TABLE `custom_fatura_cliente`\n" +
-                "  ADD CONSTRAINT `custom_fatura_cliente_ibfk_1` FOREIGN KEY (`id_custom_faturas`) REFERENCES `customfatura` (`id`),\n" +
-                "  ADD CONSTRAINT `custom_fatura_cliente_ibfk_2` FOREIGN KEY (`numero_cartao_cliente`) REFERENCES `cliente` (`numero_cartao`);\n" +
-                "\n" +
-                "\n" +
-                "\n" +
-                "ALTER TABLE `fatura_cliente`\n" +
-                "  ADD CONSTRAINT `fatura_cliente_ibfk_1` FOREIGN KEY (`id_fatura`) REFERENCES `fatura` (`id`),\n" +
-                "  ADD CONSTRAINT `fatura_cliente_ibfk_2` FOREIGN KEY (`numero_cartao_cliente`) REFERENCES `cliente` (`numero_cartao`);\n" +
-                "\n" +
-                "\n" +
                 "ALTER TABLE `fatura_empresa`\n" +
                 "  ADD CONSTRAINT `fatura_empresa_ibfk_1` FOREIGN KEY (`id_fatura`) REFERENCES `fatura` (`id`),\n" +
                 "  ADD CONSTRAINT `fatura_empresa_ibfk_2` FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`);\n" +
                 "\n" +
                 "\n" +
-                "\n" +
                 "ALTER TABLE `linha_fatura`\n" +
                 "  ADD CONSTRAINT `linha_fatura_ibfk_1` FOREIGN KEY (`id_fatura`) REFERENCES `fatura` (`id`),\n" +
                 "  ADD CONSTRAINT `linha_fatura_ibfk_2` FOREIGN KEY (`id_custom_fatura`) REFERENCES `customfatura` (`id`);\n";
-                db.execSQL(createFaturaTables);
+
+        db.execSQL(createFaturaTables);
     }
 
     @Override
@@ -242,6 +234,43 @@ import java.util.Date;
 
         return null;
     }
+
+    public Fatura adiconarFaturaDB(Fatura fatura){
+        ContentValues value = new ContentValues();
+
+        value.put("numero", fatura.getNumero());
+        value.put("data", String.valueOf(fatura.getData()));
+        value.put("numero_cartao", fatura.getNumero_cartao());
+        value.put("id_empresa", fatura.getId_empresa());
+        value.put("is_fav", fatura.getIs_fav());
+        long id = this.database.insert("fatura", null, value);
+        if (id > -1){
+            System.out.println("--> INSERIU BD ID: " + id);
+            fatura.setId(id);
+            return fatura;
+        }
+
+        return null;
+    }
+
+    public Custom_Fatura adicionarCustomFaturaDB(Custom_Fatura custom_fatura){
+        ContentValues value = new ContentValues();
+
+        value.put("numero", custom_fatura.getNumero());
+        value.put("data", String.valueOf(custom_fatura.getData()));
+        value.put("nome_empresa", custom_fatura.getNome_empresa());
+        value.put("nif_empresa", custom_fatura.getNif_empresa());
+        value.put("morada_empresa", custom_fatura.getMorada_empresa());
+        long id = this.database.insert("customfatura", null, value);
+        if (id > -1){
+            System.out.println("--> INSERIU BD ID: " + id);
+            custom_fatura.setId(id);
+            return custom_fatura;
+        }
+
+        return null;
+    }
+
     public ArrayList<Cliente> getAllClientesBD(){
 
         ArrayList<Cliente> cliente = new ArrayList<>();
@@ -298,7 +327,6 @@ import java.util.Date;
 
     }
 
-
     public ArrayList<Custom_Fatura_Cliente> getAllCustomFaturasClientesBD(){
 
         ArrayList<Custom_Fatura_Cliente> customfaturacliente = new ArrayList<>();
@@ -317,7 +345,6 @@ import java.util.Date;
         return customfaturacliente;
 
     }
-
 
     public ArrayList<Empresa> getAllEmpresasBD(){
         ArrayList<Empresa> empresa = new ArrayList<>();
@@ -375,7 +402,6 @@ import java.util.Date;
         return linhafatura;
     }
 
-
     public ArrayList<Fatura_Empresa> getAllFaturasEmpresaBD(){
 
         ArrayList<Fatura_Empresa> faturaempresa = new ArrayList<>();
@@ -408,7 +434,78 @@ import java.util.Date;
         return faturacliente;
     }
 
+    public boolean guardarClienteBD(Cliente cliente){
+        ContentValues value = new ContentValues();
 
+        value.put("numero_cartao", cliente.getNumero_cartao());
+        value.put("nome", cliente.getNome());
+        value.put("email", cliente.getEmail());
+        value.put("username", cliente.getUsername());
+        value.put("password", cliente.getPassword());
+        value.put("telemovel", cliente.getTelemovel());
+        value.put("nif", cliente.getNif());
+        value.put("authkey", cliente.getAuthkey());
+
+        return this.database.update("cliente", value, "id = ?", new String[]{"" + cliente.getNumero_cartao()}) > 0;
+
+    }
+
+    public boolean guardarFaturaBD(Fatura fatura){
+        ContentValues value = new ContentValues();
+
+        value.put("numero", fatura.getNumero());
+        value.put("data", String.valueOf(fatura.getData()));
+        value.put("numero_cartao", fatura.getNumero_cartao());
+        value.put("id_empresa", fatura.getId_empresa());
+        value.put("is_fav", fatura.getIs_fav());
+
+        return this.database.update("fatura", value, "id = ?", new String[]{"" + fatura.getId()}) > 0;
+
+    }
+
+    public boolean guardarCustomFaturaBD(Custom_Fatura custom_fatura){
+        ContentValues values = new ContentValues();
+
+        values.put("numero", custom_fatura.getNumero());
+        values.put("data", String.valueOf(custom_fatura.getData()));
+        values.put("nome_empresa", custom_fatura.getNome_empresa());
+        values.put("nif_empresa", custom_fatura.getNif_empresa());
+        values.put("morada_empresa", custom_fatura.getMorada_empresa());
+
+        return  this.database.update("customfatura", values, "id= ?", new String[]{""+custom_fatura.getId()}) > 0;
+    }
+
+    public boolean removerClienteBD(long NumeroCartaoCliente){
+        return (this.database.delete("cliente","id = ?", new String[]{"" + NumeroCartaoCliente}) > 0);
+    }
+
+    public boolean removerFaturaBD(long idFatura){
+        return (this.database.delete("fatura","id = ?", new String[]{"" + idFatura}) > 0);
+    }
+
+    public boolean removerCustomFaturaBD(long idCustomFatura){
+        return (this.database.delete("customfatura","id= ?", new String[]{"" + idCustomFatura}) > 0);
+    }
+
+    public void removerAllClientesBD() {
+        this.database.delete("cliente", null,null);
+    }
+
+    public void removerAllFaturasBD() {
+        this.database.delete("fatura", null,null);
+    }
+
+    public void removerAllCustomFaturasBD() {
+        this.database.delete("customfatura", null,null);
+    }
+
+    public void removerAllEmpresasBD() {
+        this.database.delete("empresa", null,null);
+    }
+
+    public void removerAllLinhasFaturaBD() {
+        this.database.delete("linhafatura", null,null);
+    }
 }
 
 
