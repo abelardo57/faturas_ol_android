@@ -11,12 +11,12 @@ public class Cliente {
     private String email;
     private String username;
     private String password;
-    private int telemovel;
-    private int nif;
+    private String telemovel;
+    private String nif;
     private String authkey;
 
 
-    public Cliente(int numero_cartao, String nome, String email, String username, String password, int telemovel, int nif, String authkey) {
+    public Cliente(long numero_cartao, String nome, String email, String username, String password, String telemovel, String nif, String authkey) {
         this.numero_cartao = numero_cartao;
         this.nome = nome;
         this.email = email;
@@ -68,19 +68,19 @@ public class Cliente {
         this.password = password;
     }
 
-    public int getTelemovel() {
+    public String getTelemovel() {
         return telemovel;
     }
 
-    public void setTelemovel(int telemovel) {
+    public void setTelemovel(String telemovel) {
         this.telemovel = telemovel;
     }
 
-    public int getNif() {
+    public String getNif() {
         return nif;
     }
 
-    public void setNif(int nif) {
+    public void setNif(String nif) {
         this.nif = nif;
     }
 
@@ -97,8 +97,8 @@ public class Cliente {
                 ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", telemovel=" + telemovel +
-                ", nif=" + nif +
+                ", telemovel=" + telemovel + '\'' +
+                ", nif=" + nif + '\'' +
                 ", authkey="+ authkey +
                 '}';
     }

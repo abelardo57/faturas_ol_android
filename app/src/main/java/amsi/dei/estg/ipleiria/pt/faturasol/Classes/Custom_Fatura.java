@@ -80,12 +80,12 @@ public class Custom_Fatura {
     @Override
     public String toString() {
         return "Custom_Fatura{" +
-                "id=" + id +
-                ", numero=" + numero +
-                ", data=" + data +
-                ", nif_empresa=" + nif_empresa +
+                "id=" + id + '\'' +
+                ", numero=" + numero + '\'' +
+                ", data=" + data + '\'' +
+                ", nif_empresa=" + nif_empresa + '\'' +
                 ", nome_empresa='" + nome_empresa + '\'' +
-                ", morada_empresa='" + morada_empresa + '\'' +
+                ", morada_empresa='" + morada_empresa +
                 '}';
     }
 

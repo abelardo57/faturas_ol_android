@@ -239,6 +239,7 @@
                 android:layout_gravity="bottom"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorPrimaryDark"
+                android:onClick="onClickRegistar"
                 android:text="@string/action_register" />
 
             <Button
