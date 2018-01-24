@@ -32,9 +32,10 @@ public class FaturasUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faturas_user);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        SingletonF_OL.getInstance(getApplicationContext()).getAllCustomFaturasDB();
+        listacustomfaturas = SingletonF_OL.getInstance(getApplicationContext()).getAllCustomFaturasDB();
 
         listaCustomFaturas=(ListView) findViewById(R.id.ListViewFaturasUser);
+        listaCustomFaturas.setAdapter(new ListaCustomFaturasAdapter( this, listacustomfaturas));
 
         listaCustomFaturas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
