@@ -78,4 +78,8 @@ public class ListLojasAdapter extends BaseAdapter{
 
 
     }
+    public void refresh(ArrayList<ListLojas> lojas){
+        this.listLojas = lojas;
+        notifyDataSetChanged();
+    }
 }
