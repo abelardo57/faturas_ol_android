@@ -6,7 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Cliente;
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.SingletonF_OL;
@@ -23,6 +26,9 @@ public class Registar extends AppCompatActivity {
     private EditText vPassword;
     private EditText vconfPass;
     private EditText vEmail;
+    
+    //test
+    private ArrayList<Cliente> clientes = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +50,14 @@ public class Registar extends AppCompatActivity {
         vEmail.setText(_email);
         vPassword.setText(_password);
 
+        //test
+        clientes = SingletonF_OL.getInstance(getApplicationContext()).getClientes();
+
+        for (Cliente cliente: clientes) {
+            System.out.println("-->"+cliente);
+        }
+        //end of test
+        
     }
 
     public void onClickRegistar(View view) {
@@ -53,7 +67,7 @@ public class Registar extends AppCompatActivity {
             Toast.makeText(this, "Campos Vazios", Toast.LENGTH_SHORT).show();
         }
         else if (vconfPass.getText().toString().equals(vPassword.getText().toString())){
-            SingletonF_OL.getInstance(getApplicationContext()).registarClienteBD(new Cliente(0,vNome.getText().toString(),vEmail.getText().toString(),vUsername.getText().toString(),vPassword.getText().toString(), vTelemovel.getText().toString(),vNIF.getText().toString(),""));
+            SingletonF_OL.getInstance(getApplicationContext()).registarClienteBD(new Cliente(0,vNome.getText().toString(),vEmail.getText().toString(),vUsername.getText().toString(),vPassword.getText().toString(), vTelemovel.getText().toString(),vNIF.getText().toString(),"nemInteressaSequeresSaber"));
 
             finish();
         }

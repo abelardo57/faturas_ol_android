@@ -38,7 +38,7 @@ import java.util.Date;
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createFaturaTables = "CREATE TABLE `cliente` (\n" +
+        String createFaturaTables = "CREATE TABLE cliente (\n" +
                 "  numero_cartao INTEGER PRYMARY KEY,"+
                 "  nome TEXT NOT NULL," +
                 "  email TEXT NOT NULL," +
@@ -221,10 +221,10 @@ import java.util.Date;
         value.put("nome", cliente.getNome());
         value.put("email", cliente.getEmail());
         value.put("username", cliente.getUsername());
-        value.put("password", cliente.getPassword());
+        value.put("password_hash", cliente.getPassword());
         value.put("telemovel", cliente.getTelemovel());
         value.put("nif", cliente.getNif());
-        value.put("authkey", cliente.getAuthkey());
+        value.put("auth_key", cliente.getAuthkey());
         long id = this.database.insert("cliente", null, value);
         if (id > -1){
             System.out.println("--> INSERIU BD ID: " + id);
@@ -275,10 +275,10 @@ import java.util.Date;
 
         ArrayList<Cliente> cliente = new ArrayList<>();
         String sql = "SELECT * FROM cliente";
-        Cursor cursor = this.database.rawQuery(sql, null);
+        Cursor cursor = this.database.rawQuery("SELECT * FROM cliente", null);
         if(cursor.moveToFirst()){
             do{
-                Cliente auxCliente = new Cliente(cursor.getInt(0),
+                Cliente auxCliente = new Cliente(cursor.getLong(0),
                         cursor.getString(1),
                         cursor.getString(2),
                         cursor.getString(3),
@@ -287,7 +287,7 @@ import java.util.Date;
                         cursor.getString(6),
                         cursor.getString(7));
 
-                auxCliente.setNumero_cartao(cursor.getInt(0));
+                auxCliente.setNumero_cartao(cursor.getLong(0));
                 /*auxCliente.setNome(cursor.getString(1));
                 auxCliente.setEmail(cursor.getString(2));
                 auxCliente.setUsername(cursor.getString(3));
@@ -444,7 +444,7 @@ import java.util.Date;
         value.put("password", cliente.getPassword());
         value.put("telemovel", cliente.getTelemovel());
         value.put("nif", cliente.getNif());
-        value.put("authkey", cliente.getAuthkey());
+        value.put("auth_key", cliente.getAuthkey());
 
         return this.database.update("cliente", value, "id = ?", new String[]{"" + cliente.getNumero_cartao()}) > 0;
 
