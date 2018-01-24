@@ -21,7 +21,7 @@ public class FaturasUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faturas_user);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        SingletonF_OL.getInstance(getApplicationContext()).getAllCustomFaturasBD();
+        //SingletonF_OL.getInstance(getApplicationContext()).getAllCustomFaturasBD();
     }
 
     public void clickteste(View view) {
