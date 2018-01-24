@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import amsi.dei.estg.ipleiria.pt.faturasol.Classes.SingletonF_OL;
+
 public class FaturasUser extends AppCompatActivity {
 
 
@@ -19,6 +21,7 @@ public class FaturasUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faturas_user);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        SingletonF_OL.getInstance(getApplicationContext()).getAllCustomFaturasBD();
     }
 
     public void clickteste(View view) {

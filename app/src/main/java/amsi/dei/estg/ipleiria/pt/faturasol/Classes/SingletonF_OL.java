@@ -80,8 +80,7 @@ public class SingletonF_OL {
         fatura.add(new Fatura (10, 10011, currentTime,10000000,2,0));
         fatura.add(new Fatura (11, 10012, currentTime,10000000,0,0));
     }
-    public int getTotalFaturas()
-    {
+    public int getTotalFaturas() {
         ArrayList<Fatura> fatura = getFatura();
         return fatura.size();
     }
@@ -230,7 +229,7 @@ public class SingletonF_OL {
         }while(i<cliente.size());
     }
 
-    public void FiltrarLojasUser(){
+   public void FiltrarLojasUser(){
         int i= 0;
         int ii=0;
         boolean check = false;
@@ -307,5 +306,10 @@ public class SingletonF_OL {
             }
         }
 
+    }
+    public ArrayList<Custom_Fatura> getAllCustomFaturasBD(){
+        custom_faturas = faturaDBHelper.getAllCustomFaturasBD();
+
+        return custom_faturas;
     }
 }
