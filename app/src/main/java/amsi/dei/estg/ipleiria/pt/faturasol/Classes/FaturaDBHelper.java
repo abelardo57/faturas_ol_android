@@ -50,14 +50,14 @@ import java.util.Date;
                 ");" +
                 "" +
                 "CREATE TABLE `customfatura` (\n" +
-                "  `id` int(10) NOT NULL,\n" +
-                "  `numero` varchar(10) NOT NULL,\n" +
-                "  `data` date NOT NULL,\n" +
-                "  `nif_empresa` varchar(9) NOT NULL,\n" +
-                "  `nome_empresa` varchar(100) NOT NULL,\n" +
-                "  `morada_empresa` varchar(100) NOT NULL\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n" +
-                "\n" +
+                "  id INTEGER PRYMARY KEY," +
+                "  numero TEXT NOT NULL," +
+                "  data date NOT NULL," +
+                "  nif_empresa TEXT NOT NULL," +
+                "  nome_empresa TEXT NOT NULL," +
+                "  morada_empresa TEXT NOT NULL" +
+                ");" +
+                "" +
                 "CREATE TABLE `custom_fatura_cliente` (\n" +
                 "  `id` int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,\n"+
                 "  `id_custom_faturas` int(10) NOT NULL,\n" +

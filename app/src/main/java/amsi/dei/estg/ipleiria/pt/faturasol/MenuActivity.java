@@ -95,6 +95,11 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             }
+            case R.id.faturasuser:{
+                intent = new Intent(getApplicationContext(), FaturasUser.class);
+                startActivity(intent);
+                return true;
+            }
             case R.id.sair: {
                 this.finishAffinity();
                 return true;

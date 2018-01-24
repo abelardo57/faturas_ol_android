@@ -332,4 +332,10 @@ public class SingletonF_OL {
         }
 
     }
+
+    public ArrayList getAllCustomFaturasDB(){
+        custom_faturas = faturaDBHelper.getAllCustomFaturasBD();
+
+        return custom_faturas;
+    }
 }
