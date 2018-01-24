@@ -34,5 +34,6 @@
     <string name="item_lista_lojas">item lista lojas</string>
     <string name="btn_voltar">Voltar</string>
     <string name="btn_guardarInfo">Guardar</string>
+    <string name="item_fatura_user">item fatura user</string>
 
 </resources>
