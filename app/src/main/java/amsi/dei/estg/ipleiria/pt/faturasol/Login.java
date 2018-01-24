@@ -107,10 +107,27 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
                 else{
 
                     Context context = getApplicationContext();
-                    //Toast toast = Toast.makeText(context , "Falha na Autenticação.", Toast.LENGTH_SHORT);
+                    Toast.makeText(context, "Enixistente", Toast.LENGTH_SHORT).show();
                     //toast.show();
                 }
 
+
+            }
+        });
+
+        Button registar = findViewById(R.id.button_registar);
+        registar.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String _EMAIL = mEmailView.getText().toString();
+                //String _PASSWORD = mPasswordView.getText().toString();
+
+                Intent registo = new Intent(getApplicationContext(),Registar.class);
+
+                registo.putExtra("_EMAIL",_EMAIL);
+                //registo.putExtra("_PASSWORD",_PASSWORD);
+                startActivity(registo);
 
             }
         });

@@ -17,8 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="center"
-        android:text="NAN" />
+        android:gravity="center" />
 
     <Space
         android:layout_width="match_parent"
@@ -32,7 +31,7 @@
         android:layout_weight="1"
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
-        android:text="E-mial:" />
+        android:text="E-mail:" />
 
     <EditText
         android:id="@+id/txtEmail"
@@ -126,13 +125,25 @@
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@color/colorPrimary"
-        android:onClick="alterarUser"
-        android:text="Button" />
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:onClick="alterarUser"
+            android:text="@string/btn_guardarInfo" />
+    </LinearLayout>
 
 </LinearLayout>
