@@ -50,13 +50,13 @@ public class Registar extends AppCompatActivity {
         vEmail.setText(_email);
         vPassword.setText(_password);
 
-        //test
+        /** test - mostrar clientes na base de dados (consola) */
         clientes = SingletonF_OL.getInstance(getApplicationContext()).getClientes();
 
         for (Cliente cliente: clientes) {
             System.out.println("-->"+cliente);
         }
-        //end of test
+        /**end of test */
         
     }
 
@@ -67,6 +67,8 @@ public class Registar extends AppCompatActivity {
             Toast.makeText(this, "Campos Vazios", Toast.LENGTH_SHORT).show();
         }
         else if (vconfPass.getText().toString().equals(vPassword.getText().toString())){
+            //TODO Fazer hash da password
+
             SingletonF_OL.getInstance(getApplicationContext()).registarClienteBD(new Cliente(0,vNome.getText().toString(),vEmail.getText().toString(),vUsername.getText().toString(),vPassword.getText().toString(), vTelemovel.getText().toString(),vNIF.getText().toString(),"nemInteressaSequeresSaber"));
 
             finish();
