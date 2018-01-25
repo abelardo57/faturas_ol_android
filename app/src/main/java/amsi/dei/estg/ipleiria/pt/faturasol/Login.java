@@ -115,7 +115,7 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
             }
         });
 
-        Button registar = findViewById(R.id.button_registar);
+        Button registar = findViewById(R.id.btnRegistar);
         registar.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -318,6 +318,12 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
         mEmailView.setAdapter(adapter);
+    }
+
+    public void btnRegistarOnclick(View view) {
+
+        Intent intent = new Intent(getApplicationContext(), Registar.class);
+        startActivity(intent);
     }
 
 

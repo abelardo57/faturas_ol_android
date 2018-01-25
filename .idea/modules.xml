@@ -4,8 +4,9 @@
     <modules>
       <module fileurl="file://C:\Users\Abel_\Desktop\Proejct\faturas_ol_android\Faturas.ol.iml" filepath="C:\Users\Abel_\Desktop\Proejct\faturas_ol_android\Faturas.ol.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/faturas_ol_androi.iml" filepath="$PROJECT_DIR$/faturas_ol_androi.iml" />
+      <module fileurl="file://C:\Users\Abel_\Desktop\Geral\Uni1718\Outros Documentos por Organizar\Proejct\faturas_ol_android\faturas_ol_androi.iml" filepath="C:\Users\Abel_\Desktop\Geral\Uni1718\Outros Documentos por Organizar\Proejct\faturas_ol_android\faturas_ol_androi.iml" />
       <module fileurl="file://C:\Users\User\Desktop\UNI\2_Ano\1_Semestre\AMSI\faturas_ol_android\faturas_ol_androi.iml" filepath="C:\Users\User\Desktop\UNI\2_Ano\1_Semestre\AMSI\faturas_ol_android\faturas_ol_androi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/faturas_ol_android.iml" filepath="$PROJECT_DIR$/faturas_ol_android.iml" />
       <module fileurl="file://E:\STORAGE\AndroidProjects\faturas_ol_androi\faturas_ol_android.iml" filepath="E:\STORAGE\AndroidProjects\faturas_ol_androi\faturas_ol_android.iml" />
     </modules>
   </component>

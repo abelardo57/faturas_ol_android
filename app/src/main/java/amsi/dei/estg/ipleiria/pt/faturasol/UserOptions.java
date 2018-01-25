@@ -55,12 +55,32 @@ public class UserOptions extends AppCompatActivity {
                 }
                 else
                 {
-                    menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_action_edit));
-                    txtEmail.setEnabled(false);
-                    txtTelemovel.setEnabled(false);
-                    txtPass.setEnabled(false);
-                    txtPassConf.setEnabled(false);
-                    SingletonF_OL.getInstance(getApplicationContext()).SaveChecker = 0;
+                    boolean checkemail = SingletonF_OL.getInstance(getApplicationContext()).isEmailValid(txtEmail.getText().toString());
+                    boolean checktelemovel = false;
+                    boolean checkpasswords = false;
+
+                    if(txtTelemovel.length() != 0)
+                        checktelemovel = true;
+
+                    if(txtPass.getText() == txtPassConf.getText())
+                        checkpasswords = true;
+
+                    if(checkemail == true && checktelemovel == true && checkpasswords) {
+                        menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_action_edit));
+                        txtEmail.setEnabled(false);
+                        txtTelemovel.setEnabled(false);
+                        txtPass.setEnabled(false);
+                        txtPassConf.setEnabled(false);
+                        SingletonF_OL.getInstance(getApplicationContext()).SaveChecker = 0;
+                    }
+                    else{
+                        if(checkemail == false)
+                            Toast.makeText(this, "Formato de Email Errado.", Toast.LENGTH_SHORT).show();
+                        if(checkpasswords == false)
+                            Toast.makeText(this, "Passowrds não coincidem ou caracteres insuficientes.", Toast.LENGTH_SHORT).show();
+                        if(checktelemovel == false)
+                            Toast.makeText(this, "Caracteres insuficientes em Telemóvel.", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
                 return true;
