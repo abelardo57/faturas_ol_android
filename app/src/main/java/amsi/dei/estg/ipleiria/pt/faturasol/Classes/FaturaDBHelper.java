@@ -29,7 +29,7 @@ import java.util.Date;
 
 
 
-    public FaturaDBHelper(Context context, SQLiteDatabase database)
+    public FaturaDBHelper(Context context)
     {
         super(context, "faturasol", null, 1);
         this.database = this.getWritableDatabase();
@@ -38,26 +38,26 @@ import java.util.Date;
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createFaturaTables = "CREATE TABLE `cliente` (\n" +
-                "  `numero_cartao` int(10) NOT NULL,\n" +
-                "  `nome` varchar(500) NOT NULL,\n" +
-                "  `email` varchar(100) NOT NULL,\n" +
-                "  `username` varchar(100) NOT NULL,\n" +
-                "  `password_hash` varchar(255) NOT NULL,\n" +
-                "  `telemovel` varchar(9) DEFAULT NULL,\n" +
-                "  `nif` varchar(9) NOT NULL,\n" +
-                "  `auth_key` varchar(32) NOT NULL\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n" +
-                "\n" +
+        String createFaturaTables = "CREATE TABLE cliente (\n" +
+                "  numero_cartao INTEGER PRYMARY KEY,"+
+                "  nome TEXT NOT NULL," +
+                "  email TEXT NOT NULL," +
+                "  username TEXT NOT NULL," +
+                "  password_hash TEXT NOT NULL," +
+                "  telemovel TEXT DEFAULT NULL," +
+                "  nif TEXT NOT NULL," +
+                "  auth_key TEXT NOT NULL" +
+                ");" +
+                "" +
                 "CREATE TABLE `customfatura` (\n" +
-                "  `id` int(10) NOT NULL,\n" +
-                "  `numero` varchar(10) NOT NULL,\n" +
-                "  `data` date NOT NULL,\n" +
-                "  `nif_empresa` varchar(9) NOT NULL,\n" +
-                "  `nome_empresa` varchar(100) NOT NULL,\n" +
-                "  `morada_empresa` varchar(100) NOT NULL\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n" +
-                "\n" +
+                "  id INTEGER PRYMARY KEY," +
+                "  numero TEXT NOT NULL," +
+                "  data date NOT NULL," +
+                "  nif_empresa TEXT NOT NULL," +
+                "  nome_empresa TEXT NOT NULL," +
+                "  morada_empresa TEXT NOT NULL" +
+                ");" +
+                "" +
                 "CREATE TABLE `custom_fatura_cliente` (\n" +
                 "  `id` int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,\n"+
                 "  `id_custom_faturas` int(10) NOT NULL,\n" +
@@ -207,7 +207,7 @@ import java.util.Date;
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        String sql = "";
+        String sql = "DROP DATABASE faturasol";
         db.execSQL(sql);
         this.onCreate(db);
     }
@@ -221,10 +221,10 @@ import java.util.Date;
         value.put("nome", cliente.getNome());
         value.put("email", cliente.getEmail());
         value.put("username", cliente.getUsername());
-        value.put("password", cliente.getPassword());
+        value.put("password_hash", cliente.getPassword());
         value.put("telemovel", cliente.getTelemovel());
         value.put("nif", cliente.getNif());
-        value.put("authkey", cliente.getAuthkey());
+        value.put("auth_key", cliente.getAuthkey());
         long id = this.database.insert("cliente", null, value);
         if (id > -1){
             System.out.println("--> INSERIU BD ID: " + id);
@@ -275,19 +275,19 @@ import java.util.Date;
 
         ArrayList<Cliente> cliente = new ArrayList<>();
         String sql = "SELECT * FROM cliente";
-        Cursor cursor = this.database.rawQuery(sql, null);
+        Cursor cursor = this.database.rawQuery("SELECT * FROM cliente", null);
         if(cursor.moveToFirst()){
             do{
-                Cliente auxCliente = new Cliente(cursor.getInt(0),
+                Cliente auxCliente = new Cliente(cursor.getLong(0),
                         cursor.getString(1),
                         cursor.getString(2),
                         cursor.getString(3),
                         cursor.getString(4),
-                        cursor.getInt(5),
-                        cursor.getInt(6),
+                        cursor.getString(5),
+                        cursor.getString(6),
                         cursor.getString(7));
 
-                auxCliente.setNumero_cartao(cursor.getInt(0));
+                auxCliente.setNumero_cartao(cursor.getLong(0));
                 /*auxCliente.setNome(cursor.getString(1));
                 auxCliente.setEmail(cursor.getString(2));
                 auxCliente.setUsername(cursor.getString(3));
@@ -311,7 +311,7 @@ import java.util.Date;
             do{
                 Custom_Fatura auxCustomFatura = new Custom_Fatura(cursor.getInt(0),
                         cursor.getInt(1),
-                        new Date(cursor.getLong(2)*1000),
+                        new Date(cursor.getLong(2)),
                         cursor.getInt(3),
                         cursor.getString(4),
                         cursor.getString(5));
@@ -444,7 +444,7 @@ import java.util.Date;
         value.put("password", cliente.getPassword());
         value.put("telemovel", cliente.getTelemovel());
         value.put("nif", cliente.getNif());
-        value.put("authkey", cliente.getAuthkey());
+        value.put("auth_key", cliente.getAuthkey());
 
         return this.database.update("cliente", value, "id = ?", new String[]{"" + cliente.getNumero_cartao()}) > 0;
 

@@ -35,7 +35,7 @@ public class AdicionarFatura extends AppCompatActivity {
         value = getIntent().getIntExtra("ADICIONAR_FATURA", -1);
 
         txtNFatura = (EditText) findViewById(R.id.txtNFatura);
-        txtNIFEmpresa = (EditText) findViewById(R.id.txtNifFatura);
+        txtNIFEmpresa = (EditText) findViewById(R.id.txtNifEmpresa);
         txtNomeEmpresa = (EditText) findViewById(R.id.txtNomeEmpresa);
         txtMoradaEmpresa = (EditText) findViewById(R.id.txtMoradaEmpresa);
         txtNifCliente = (EditText) findViewById(R.id.txtNifCliente);
@@ -52,9 +52,11 @@ public class AdicionarFatura extends AppCompatActivity {
             //nova fatura
             try {
                     SingletonF_OL.getInstance(getApplicationContext()).adicionarCustomFaturaDB(new Custom_Fatura(0,Integer.parseInt(txtNFatura.getText().toString()), format.parse(txtData.getText().toString()), Integer.parseInt(txtNIFEmpresa.getText().toString()), txtNomeEmpresa.getText().toString(), txtMoradaEmpresa.getText().toString()));
+
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                System.out.println("--> Teste custom_fatura:" + txtNomeEmpresa.getText().toString());
                 finish();
 
         }

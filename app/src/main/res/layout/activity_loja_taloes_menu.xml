@@ -10,36 +10,27 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_weight="0.04" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="14dp"
         android:layout_weight="0.04" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_gravity="left"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_weight="0.04"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
         <SearchView
             android:id="@+id/searchbarFaturas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.04"
-            android:background="@color/colorPrimary"
+            android:layout_weight="0"
+            android:background="?attr/actionModeSplitBackground"
             android:textAlignment="center" />
     </LinearLayout>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.06" />
 
     <ListView
         android:id="@+id/listLojaTaloes"

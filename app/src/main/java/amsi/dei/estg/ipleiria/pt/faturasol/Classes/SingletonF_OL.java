@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import amsi.dei.estg.ipleiria.pt.faturasol.AdicionarFatura;
 
@@ -315,5 +313,11 @@ public class SingletonF_OL {
         Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
+    }
+
+    public ArrayList getAllCustomFaturasDB(){
+        custom_faturas = faturaDBHelper.getAllCustomFaturasBD();
+
+        return custom_faturas;
     }
 }

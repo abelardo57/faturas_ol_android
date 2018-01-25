@@ -11,12 +11,12 @@ public class Cliente {
     private String email;
     private String username;
     private String password;
-    private int telemovel;
-    private int nif;
-    private String authkey;
+    private String telemovel;
+    private String nif;
+    private String auth_key;
 
 
-    public Cliente(int numero_cartao, String nome, String email, String username, String password, int telemovel, int nif, String authkey) {
+    public Cliente(long numero_cartao, String nome, String email, String username, String password, String telemovel, String nif, String auth_key) {
         this.numero_cartao = numero_cartao;
         this.nome = nome;
         this.email = email;
@@ -24,7 +24,7 @@ public class Cliente {
         this.password = password;
         this.telemovel = telemovel;
         this.nif = nif;
-        this.authkey = authkey;
+        this.auth_key = auth_key;
     }
 
 
@@ -68,25 +68,25 @@ public class Cliente {
         this.password = password;
     }
 
-    public int getTelemovel() {
+    public String getTelemovel() {
         return telemovel;
     }
 
-    public void setTelemovel(int telemovel) {
+    public void setTelemovel(String telemovel) {
         this.telemovel = telemovel;
     }
 
-    public int getNif() {
+    public String getNif() {
         return nif;
     }
 
-    public void setNif(int nif) {
+    public void setNif(String nif) {
         this.nif = nif;
     }
 
-    public String getAuthkey(){return authkey;}
+    public String getAuthkey(){return auth_key;}
 
-    public void setAuthkey(String authkey){this.authkey = authkey;}
+    public void setAuthkey(String auth_key){this.auth_key = auth_key;}
 
 
     @Override
@@ -97,9 +97,9 @@ public class Cliente {
                 ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", telemovel=" + telemovel +
-                ", nif=" + nif +
-                ", authkey="+ authkey +
+                ", telemovel=" + telemovel + '\'' +
+                ", nif=" + nif + '\'' +
+                ", auth_key="+ auth_key +
                 '}';
     }
 }

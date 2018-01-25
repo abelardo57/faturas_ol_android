@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/itemPesquisar"
+        android:icon="@drawable/ic_action_pesquisar"
+        android:title="Pesquisar Lista"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="always"></item>
+
     <item android:id="@+id/item1"
         android:title="item1"
         app:showAsAction="always"
@@ -9,4 +16,5 @@
         android:title="item2"
         android:icon="@drawable/ic_action_delete"
         app:showAsAction="always"/>
+
 </menu>

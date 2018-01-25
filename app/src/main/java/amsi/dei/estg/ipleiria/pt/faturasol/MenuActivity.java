@@ -41,6 +41,7 @@ public class MenuActivity extends AppCompatActivity {
         setTitle(SingletonF_OL.getInstance(getApplicationContext()).CurrentUserEmail);
         SingletonF_OL.getInstance(getApplicationContext()).CurrentUserEmail = getIntent().getStringExtra(Login.DADOS_EMAIL);
         SingletonF_OL.getInstance(getApplicationContext()).FiltrarLojasUser();
+        //SingletonF_OL.getInstance(getApplicationContext()).getAllCustomFaturasBD();
         listViewLojas = (ListView) findViewById(R.id.listLojass);
 
         listViewLojas.setAdapter(new ListLojasAdapter(this, SingletonF_OL.getInstance(getApplicationContext()).ArrayListaLojas));
@@ -91,6 +92,11 @@ public class MenuActivity extends AppCompatActivity {
             case R.id.novafatura: {
                 intent = new Intent(getApplicationContext(), AdicionarFatura.class);
                 intent.putExtra("ADICIONAR_CUSTOM_FATURA", -1);
+                startActivity(intent);
+                return true;
+            }
+            case R.id.faturasuser:{
+                intent = new Intent(getApplicationContext(), FaturasUser.class);
                 startActivity(intent);
                 return true;
             }
