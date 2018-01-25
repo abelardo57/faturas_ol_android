@@ -99,7 +99,10 @@ public class SingletonF_OL {
     }
 
     public void registarClienteBD(Cliente cliente){
-        faturaDBHelper.removerAllClientesBD();
+        //TODO nao esqecer de tirar o remover depois
+/*TODO */faturaDBHelper.removerAllClientesBD(); //TODO
+        //TODO TIRA ISTO DEPOIS CACETE
+
         faturaDBHelper.adicionarClienteBD(cliente);
     }
 
