@@ -225,10 +225,10 @@ import java.util.Date;
         value.put("telemovel", cliente.getTelemovel());
         value.put("nif", cliente.getNif());
         value.put("auth_key", cliente.getAuthkey());
-        long id = this.database.insert("cliente", null, value);
-        if (id > -1){
-            System.out.println("--> INSERIU BD ID: " + id);
-            cliente.setNumero_cartao(id);
+        long numero_cartao = this.database.insert("cliente", null, value);
+        if (numero_cartao > -1){
+            System.out.println("--> INSERIU BD ID: " + numero_cartao);
+            cliente.setNumero_cartao(numero_cartao);
             return cliente;
         }
 

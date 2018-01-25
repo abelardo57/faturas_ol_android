@@ -66,7 +66,7 @@ public class SingletonF_OL {
     }
 
 
-    public void GerarClientes(){
+    /*public void GerarClientes(){
         clientes.add(new Cliente ( 10000000, "Rodrigo Paião", "RodriP@gmail.com", "RodriP22", "123456", "39219383", "293857261","autkey")  );
         clientes.add(new Cliente ( 10000001, "Catarina Sales", "CataSal@gmail.com", "CataS", "123456", "39219383", "293857261", "authkey")  );
         clientes.add(new Cliente ( 10000002, "Miguel Faria", "FariaM@gmail.com", "RodriP22", "123456", "39219383", "293857261", "authkey")  );
@@ -74,7 +74,7 @@ public class SingletonF_OL {
         clientes.add(new Cliente ( 10000004, "Luís Tiago", "LiagoTuis@gmail.com", "RodriP22", "123456", "39219383", "293857261", "authkey")  );
         clientes.add(new Cliente ( 10000005, "Joana Mateus", "JoanaM@gmail.com", "RodriP22", "123456", "39219383", "293857261", "authkey")  );
         clientes.add(new Cliente ( 10000006, "Rodrigo Araujo", "AraujoRRDigo@gmail .com", "RodriP22", "123456", "39219383", "293857261", "authkey")  );
-    }
+    }*/
     public void GerarEmpresa (){
 
         empresa.add(new Empresa( 0, "Faturas User", 339293823, "Avenida do Brazil"));
@@ -99,6 +99,7 @@ public class SingletonF_OL {
     }
 
     public void registarClienteBD(Cliente cliente){
+        faturaDBHelper.removerAllClientesBD();
         faturaDBHelper.adicionarClienteBD(cliente);
     }
 
@@ -216,15 +217,16 @@ public class SingletonF_OL {
         }while(i<fatura.size());
     }
 
-    public boolean CheckUser(String Email, String Password) {
+    public boolean CheckUser(String Username, String Password) {
         boolean check = false;
-        String email;
+        String username;
         String password;
         int i = 0;
+        clientes = getClientes();
         do{
-            email = clientes.get(i).getEmail().toString();
+            username = clientes.get(i).getUsername().toString();
             password =  clientes.get(i).getPassword().toString();
-            if(Email.equals(email) && Password.equals(password))
+            if(Username.equals(username) && Password.equals(password))
             {
                 check = true;
                 CurrentUser = (int) clientes.get(i).getNumero_cartao();
