@@ -32,32 +32,25 @@ public class FaturasUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faturas_user);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        listacustomfaturas = SingletonF_OL.getInstance(getApplicationContext()).getAllCustomFaturasDB();
+        //listacustomfaturas = SingletonF_OL.getInstance(getApplicationContext()).getAllCustomFaturasDB();
 
         listaCustomFaturas=(ListView) findViewById(R.id.ListViewFaturasUser);
-        listaCustomFaturas.setAdapter(new ListaCustomFaturasAdapter( this, listacustomfaturas));
+        if (listacustomfaturas != null) {
+            listaCustomFaturas.setAdapter(new ListaCustomFaturasAdapter(this, listacustomfaturas));
 
-        listaCustomFaturas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            listaCustomFaturas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Custom_Fatura tempCustomFatura = (Custom_Fatura) adapterView.getItemAtPosition(i);
-
-                //Toast.makeText(ListaLivros.this, " " + tempLivro, Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(getApplicationContext(),FaturaSelecionada.class);
-                intent.putExtra("FATURA_SELECIONADA",i);
-                startActivity(intent);
+                    Intent intent = new Intent(getApplicationContext(), FaturaSelecionada.class);
+                    intent.putExtra("FATURA_SELECIONADA", i);
+                    startActivity(intent);
 
 
+                }
+            });
+        }
 
-            }
-        });
-    }
-
-    public void clickteste(View view) {
-        Intent intent = new Intent(getApplicationContext(), FaturaSelecionada.class);
-        startActivity(intent);
     }
 
     public void onClickAdicionarFatura(View view) {
@@ -65,12 +58,19 @@ public class FaturasUser extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /*public void clickteste(View view) {
+        Intent intent = new Intent(getApplicationContext(), FaturaSelecionada.class);
+        startActivity(intent);
+    }*/
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_activity_menu, menu);
+        inflater.inflate(R.menu.faturas_user, menu);
 
-        /*MenuItem itemPesquisa = menu.findItem(R.id.itemPesquisa);
+        MenuItem itemPesquisa = menu.findItem(R.id.itemPesquisar);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(itemPesquisa);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -104,12 +104,12 @@ public class FaturasUser extends AppCompatActivity {
 
                 return true;
             }
-        });*/
+        });
 
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
+   @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item1:
