@@ -67,21 +67,11 @@ public class Registar extends AppCompatActivity {
 
         tentaRegisto();
 
-        if (vNome.getText().toString().equals("")||vNIF.getText().toString().equals("")||vUsername.getText().toString().equals("")||vEmail.getText().toString().equals("")||vPassword.getText().toString().equals(""))
+        if (tentaRegisto()==true)
         {
-            Toast.makeText(this, "Campos Vazios", Toast.LENGTH_SHORT).show();
-        }
-
-        else if (vconfPass.getText().toString().equals(vPassword.getText().toString())){
-            //TODO hash da password
-
-
             SingletonF_OL.getInstance(getApplicationContext()).registarClienteBD(new Cliente(0,vNome.getText().toString(),vEmail.getText().toString(),vUsername.getText().toString(),vPassword.getText().toString(), vTelemovel.getText().toString(),vNIF.getText().toString(),"nemInteressaSequeresSaber"));
 
             finish();
-        }
-        else{
-            Toast.makeText(this, "Password diferente da inserida", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -96,7 +86,7 @@ public class Registar extends AppCompatActivity {
 
     private boolean isPasswordValid(String password) {
 
-        return password.length() > 6;
+        return password.length() >= 6;
     }
 
     private boolean isUsernameValid(String username) {
@@ -111,7 +101,7 @@ public class Registar extends AppCompatActivity {
         return telemovel.length() == 9;
     }
 
-    private void tentaRegisto() {
+    private boolean tentaRegisto() {
 
         // Reset errors.
         vNome.setError(null);
@@ -194,7 +184,11 @@ public class Registar extends AppCompatActivity {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
+            return false;
         }
+
+        return true;
+
     }
 
 }
