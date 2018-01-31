@@ -39,7 +39,7 @@ import java.util.Date;
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createFaturaTables = "CREATE TABLE cliente (" +
-                "  numero_cartao INTEGER NOT NULL PRYMARY KEY AUTOINCREMENT,"+
+                "  numero_cartao INTEGER PRYMARY KEY AUTOINCREMENT,"+
                 "  nome TEXT NOT NULL," +
                 "  email TEXT NOT NULL," +
                 "  username TEXT NOT NULL," +

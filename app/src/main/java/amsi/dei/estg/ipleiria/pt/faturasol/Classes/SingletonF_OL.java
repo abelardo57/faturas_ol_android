@@ -12,12 +12,13 @@ import java.util.Date;
 import java.util.List;
 
 import amsi.dei.estg.ipleiria.pt.faturasol.AdicionarFatura;
+import amsi.dei.estg.ipleiria.pt.faturasol.listeners.FaturasolListener;
 
 /**
  * Created by Abel_ on 17/11/2017.
  */
 
-public class SingletonF_OL {
+public class SingletonF_OL implements FaturasolListener{
 
     /*
     String mUrlAPI= "localhost:8888/numseique/api";
@@ -342,5 +343,15 @@ public class SingletonF_OL {
         custom_faturas = faturaDBHelper.getAllCustomFaturasBD();
 
         return custom_faturas;
+    }
+
+    @Override
+    public void onRefreshFaturas(ArrayList<Fatura> listaFaturas) {
+
+    }
+
+    @Override
+    public void onUpdateFaturas(Fatura fatura, int operação) {
+
     }
 }
