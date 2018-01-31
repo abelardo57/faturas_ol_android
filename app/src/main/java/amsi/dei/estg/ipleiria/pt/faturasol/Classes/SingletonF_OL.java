@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import amsi.dei.estg.ipleiria.pt.faturasol.AdicionarFatura;
 
@@ -50,13 +52,13 @@ public class SingletonF_OL {
 
 
     public void GerarClientes(){
-        cliente.add(new Cliente ( 10000000, "Rodrigo Paião", "RodriP@gmail.com", "RodriP22", "123456", 39219383, 293857261,"autkey")  );
-        cliente.add(new Cliente ( 10000001, "Catarina Sales", "CataSal@gmail.com", "CataS", "123456", 39219383, 293857261, "authkey")  );
-        cliente.add(new Cliente ( 10000002, "Miguel Faria", "FariaM@gmail.com", "RodriP22", "123456", 39219383, 293857261, "authkey")  );
-        cliente.add(new Cliente ( 10000003, "João Oliveira", "Joliveira@gmail.com", "RodriP22", "123456", 39219383, 293857261, "authkey")  );
-        cliente.add(new Cliente ( 10000004, "Luís Tiago", "LiagoTuis@gmail.com", "RodriP22", "123456", 39219383, 293857261, "authkey")  );
-        cliente.add(new Cliente ( 10000005, "Joana Mateus", "JoanaM@gmail.com", "RodriP22", "123456", 39219383, 293857261, "authkey")  );
-        cliente.add(new Cliente ( 10000006, "Rodrigo Araujo", "AraujoRRDigo@gmail .com", "RodriP22", "123456", 39219383, 293857261, "authkey")  );
+        cliente.add(new Cliente ( 10000000, "Rodrigo Paião", "RodriP@gmail.com", "RodriP22", "123456", "39219383", "293857261","autkey")  );
+        cliente.add(new Cliente ( 10000001, "Catarina Sales", "CataSal@gmail.com", "CataS", "123456", "39219383", "293857261", "authkey")  );
+        cliente.add(new Cliente ( 10000002, "Miguel Faria", "FariaM@gmail.com", "RodriP22", "123456", "39219383", "293857261", "authkey")  );
+        cliente.add(new Cliente ( 10000003, "João Oliveira", "Joliveira@gmail.com", "RodriP22", "123456", "39219383", "293857261", "authkey")  );
+        cliente.add(new Cliente ( 10000004, "Luís Tiago", "LiagoTuis@gmail.com", "RodriP22", "123456", "39219383", "293857261", "authkey")  );
+        cliente.add(new Cliente ( 10000005, "Joana Mateus", "JoanaM@gmail.com", "RodriP22", "123456", "39219383", "293857261", "authkey")  );
+        cliente.add(new Cliente ( 10000006, "Rodrigo Araujo", "AraujoRRDigo@gmail .com", "RodriP22", "123456", "39219383", "293857261", "authkey")  );
     }
     public void GerarEmpresa (){
 
@@ -217,7 +219,7 @@ public class SingletonF_OL {
         return check;
     }
 
-    public void AlterarUser(String username, String email, int telemovel, String password)
+    public void AlterarUser(String username, String email, String telemovel, String password)
     {
         int i = 0;
         do{

@@ -69,7 +69,7 @@ public class Registar extends AppCompatActivity {
         else if (vconfPass.getText().toString().equals(vPassword.getText().toString())){
             //TODO Fazer hash da password
 
-            SingletonF_OL.getInstance(getApplicationContext()).registarClienteBD(new Cliente(0,vNome.getText().toString(),vEmail.getText().toString(),vUsername.getText().toString(),vPassword.getText().toString(), vTelemovel.getText().toString(),vNIF.getText().toString(),"nemInteressaSequeresSaber"));
+            //SingletonF_OL.getInstance(getApplicationContext()).registarClienteBD(new Cliente(0,vNome.getText().toString(),vEmail.getText().toString(),vUsername.getText().toString(),vPassword.getText().toString(), vTelemovel.getText().toString(),vNIF.getText().toString(),"nemInteressaSequeresSaber"));
 
             finish();
         }
