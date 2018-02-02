@@ -3,6 +3,8 @@ package amsi.dei.estg.ipleiria.pt.faturasol;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -89,7 +91,4 @@ public class UserOptions extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void alterarUser(View view) {
-
-    }
 }

@@ -2,8 +2,18 @@ package amsi.dei.estg.ipleiria.pt.faturasol.Classes;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.text.TextUtils;
 import android.text.method.DateTimeKeyListener;
+import android.util.Patterns;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+
+import org.json.JSONArray;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -12,18 +22,20 @@ import java.util.Date;
 import java.util.List;
 
 import amsi.dei.estg.ipleiria.pt.faturasol.AdicionarFatura;
+import amsi.dei.estg.ipleiria.pt.faturasol.listeners.FaturasolListener;
+import amsi.dei.estg.ipleiria.pt.faturasol.utils.JsonParser;
 
 /**
  * Created by Abel_ on 17/11/2017.
  */
 
-public class SingletonF_OL {
+public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listeners.FaturasolListener{
 
-    /*
+
     String mUrlAPI= "localhost:8888/numseique/api";
     String mUrlAPILogin= "";
     String tokenAPI= "";
-    */
+
 
     //private static RequestQueue volleyQueue = null;
     private static SingletonF_OL INSTANCE = null;
@@ -45,6 +57,9 @@ public class SingletonF_OL {
     public String TalaoSelecionado;
     public int CurrentFatura;
     public int SaveChecker = 0;
+
+    private FaturasolListener listener;
+    private static RequestQueue volleyQueue = null;
 
 
     public static synchronized SingletonF_OL getInstance(Context context) {
@@ -337,5 +352,80 @@ public class SingletonF_OL {
         custom_faturas = faturaDBHelper.getAllCustomFaturasBD();
 
         return custom_faturas;
+    }
+
+    public void adicionarClienteBD(Cliente cliente){
+        faturaDBHelper.adicionarClienteBD(cliente);
+    }
+
+    public void adicionarClientesBD(ArrayList<Cliente> clientes)
+    {
+        for(Cliente cliente: clientes){
+            adicionarClienteBD(cliente);
+        }
+    }
+
+    public void getAllClientesAPI(final Context context, boolean isConnected){
+        JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                clientes = JsonParser.parserJsonClientes(response, context);
+                System.out.println("--> Resposta" + response);
+
+                adicionarClientesBD(clientes);
+
+                if(listener != null){
+                    listener.onRefreshCliente(clientes);
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("Error Getalllivros " + error.getMessage());
+            }
+        });
+        volleyQueue.add(req);
+
+
+    }
+
+
+    public final static boolean isEmailValid(CharSequence target) {
+        return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
+    }
+
+    public void setClientesListener(FaturasolListener listener){
+        this.listener = listener;
+    }
+
+    @Override
+    public void onRefreshFaturas(ArrayList<Fatura> listaFaturas) {
+
+    }
+
+    @Override
+    public void onUpdateFaturas(Fatura fatura, int operação) {
+
+    }
+
+    @Override
+    public void onRefreshCliente(ArrayList<Cliente> listaClientes) {
+
+    }
+
+    @Override
+    public void onUpdateCliente(Cliente cliente, int operação) {
+
+    }
+
+    @Override
+    public void onRefreshEmpresas(ArrayList<Empresa> listaEmpresas) {
+
+    }
+
+    @Override
+    public void onUpdateEmpresas(Empresa empresa, int operação) {
+
     }
 }

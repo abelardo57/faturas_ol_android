@@ -32,7 +32,7 @@
         android:layout_weight="1"
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
-        android:text="E-mial:" />
+        android:text="@string/options_email" />
 
     <EditText
         android:id="@+id/txtEmail"
@@ -57,7 +57,7 @@
         android:layout_weight="1"
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
-        android:text="Telemóvel:" />
+        android:text="@string/options_telemovel" />
 
     <EditText
         android:id="@+id/txtTelemovel"
@@ -81,7 +81,7 @@
         android:layout_weight="1"
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
-        android:text="Password:" />
+        android:text="@string/options_password" />
 
     <EditText
         android:id="@+id/txtPass"
@@ -107,7 +107,7 @@
         android:layout_weight="1"
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
-        android:text="Confirmar Password:" />
+        android:text="@string/options_conf_password" />
 
     <EditText
         android:id="@+id/txtPassConf"

@@ -55,7 +55,7 @@
                         android:id="@+id/txtNome"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Nome"
+                        android:hint="@string/registar_nome"
                         android:imeOptions="actionUnspecified"
                         android:maxLines="1"
                         android:singleLine="true" />
@@ -87,7 +87,7 @@
                         android:id="@+id/txtUsername"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Username"
+                        android:hint="@string/registar_username"
                         android:imeOptions="actionUnspecified"
                         android:maxLines="1"
                         android:singleLine="true" />
@@ -119,7 +119,7 @@
                         android:id="@+id/txtEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="E-mail"
+                        android:hint="@string/registar_email"
                         android:imeOptions="actionUnspecified"
                         android:maxLines="1"
                         android:singleLine="true" />
@@ -152,7 +152,7 @@
                         android:id="@+id/txtPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Password"
+                        android:hint="@string/registar_password"
                         android:imeOptions="actionUnspecified"
                         android:inputType="textPassword"
                         android:maxLines="1"
@@ -185,7 +185,7 @@
                         android:id="@+id/txtCPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Confirmar Password"
+                        android:hint="@string/registar_conf_password"
                         android:imeOptions="actionUnspecified"
                         android:inputType="textPassword"
                         android:maxLines="1"
@@ -219,7 +219,7 @@
                         android:id="@+id/txtNIF"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="NIF"
+                        android:hint="@string/registar_nif"
                         android:imeOptions="actionUnspecified"
                         android:maxLines="1"
                         android:singleLine="true" />
@@ -251,7 +251,7 @@
                         android:id="@+id/txtTele"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Telemóvel (opcional)"
+                        android:hint="@string/registar_telemovel"
                         android:imeOptions="actionUnspecified"
                         android:maxLines="1"
                         android:singleLine="true" />

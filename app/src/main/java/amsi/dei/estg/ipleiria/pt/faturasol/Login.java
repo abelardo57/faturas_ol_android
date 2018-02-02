@@ -36,14 +36,18 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Cliente;
+import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Empresa;
+import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Fatura;
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.SingletonF_OL;
+import amsi.dei.estg.ipleiria.pt.faturasol.listeners.FaturasolListener;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
  */
-public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor>, FaturasolListener {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -77,9 +81,12 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
         setContentView(R.layout.activity_login);
         // Set up the login form.
 
+        SingletonF_OL.getInstance(getApplicationContext()).setClientesListener(this);
+
+
         //SingletonF_OL.getInstance(getApplicationContext()).GerarClientes();
-        SingletonF_OL.getInstance(getApplicationContext()).GerarEmpresa();
-        SingletonF_OL.getInstance(getApplicationContext()).GerarFaturas();
+        //SingletonF_OL.getInstance(getApplicationContext()).GerarEmpresa();
+        //SingletonF_OL.getInstance(getApplicationContext()).GerarFaturas();
 
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -324,6 +331,36 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
 
         Intent intent = new Intent(getApplicationContext(), Registar.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onRefreshFaturas(ArrayList<Fatura> listaFaturas) {
+
+    }
+
+    @Override
+    public void onUpdateFaturas(Fatura fatura, int operação) {
+
+    }
+
+    @Override
+    public void onRefreshCliente(ArrayList<Cliente> listaClientes) {
+
+    }
+
+    @Override
+    public void onUpdateCliente(Cliente cliente, int operação) {
+
+    }
+
+    @Override
+    public void onRefreshEmpresas(ArrayList<Empresa> listaEmpresas) {
+
+    }
+
+    @Override
+    public void onUpdateEmpresas(Empresa empresa, int operação) {
+
     }
 
 
