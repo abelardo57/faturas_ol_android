@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="user" />
+        android:text="NAN" />
 
     <Space
         android:layout_width="match_parent"
@@ -32,8 +32,7 @@
         android:layout_weight="1"
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
-        android:text="E-mail:"
-        android:textColor="@android:color/black" />
+        android:text="@string/options_email" />
 
     <EditText
         android:id="@+id/txtEmail"
@@ -58,8 +57,7 @@
         android:layout_weight="1"
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
-        android:text="Telemóvel:"
-        android:textColor="@android:color/black" />
+        android:text="@string/options_telemovel" />
 
     <EditText
         android:id="@+id/txtTelemovel"
@@ -83,8 +81,7 @@
         android:layout_weight="1"
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
-        android:text="Password:"
-        android:textColor="@android:color/black" />
+        android:text="@string/options_password" />
 
     <EditText
         android:id="@+id/txtPass"
@@ -95,7 +92,8 @@
         android:ems="10"
         android:enabled="false"
         android:gravity="center"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:text="Name" />
 
     <Space
         android:layout_width="match_parent"
@@ -109,8 +107,7 @@
         android:layout_weight="1"
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
-        android:text="Confirmar Password:"
-        android:textColor="@android:color/black" />
+        android:text="@string/options_conf_password" />
 
     <EditText
         android:id="@+id/txtPassConf"
@@ -121,32 +118,12 @@
         android:ems="10"
         android:enabled="false"
         android:gravity="center"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:text="Name" />
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <Space
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:onClick="alterarUser"
-            android:text="@string/btn_guardarInfo" />
-    </LinearLayout>
 
 </LinearLayout>

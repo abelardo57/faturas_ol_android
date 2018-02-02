@@ -38,12 +38,24 @@
     <string name="btn_voltar">Voltar</string>
     <string name="btn_guardarInfo">Guardar</string>
     <string name="item_fatura_user">item fatura user</string>
-    <string name="title_add_fatura_custom">Fatura Customizada</string>
-    <string name="hint_n_fatura_custom">N. Fatura</string>
+    <string name="hint_num_fatura">Nº Fatura</string>
     <string name="hint_nif_empresa">NIF Empresa</string>
-    <string name="hint_nome_empresa">Nome da Empresa</string>
+    <string name="hint_nome_empresa">Nome Empresa</string>
     <string name="hint_morada_empresa">Morada da Empresa</string>
-    <string name="hint_nif_cliente">NIF</string>
-    <string name="hint_data">Data (dd/mm/aa)</string>
+    <string name="hint_nif_cliente">NIF Cliente</string>
+    <string name="hint_data_format">dd/MM/YY</string>
+    <string name="text_fatura">NaN</string>
+    <string name="text_text_fatura">NaN</string>
+    <string name="registar_nome">Nome</string>
+    <string name="registar_username">Username</string>
+    <string name="registar_email">E-mail</string>
+    <string name="registar_password">Password</string>
+    <string name="registar_conf_password">Confirmar Password</string>
+    <string name="registar_nif">NIF</string>
+    <string name="registar_telemovel">Telemóvel (Opcional)</string>
+    <string name="options_email">E-mail:</string>
+    <string name="options_telemovel">Telemóvel:</string>
+    <string name="options_password">Password:</string>
+    <string name="options_conf_password">Confirmar Password:</string>
 
 </resources>

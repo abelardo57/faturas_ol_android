@@ -6,19 +6,19 @@ package amsi.dei.estg.ipleiria.pt.faturasol.Classes;
 
 public class Empresa {
 
-    private int id;
+    private long id;
     private String nome;
     private int nif;
     private String morada;
 
-    public Empresa(int id, String nome, int nif, String morada) {
+    public Empresa(long id, String nome, int nif, String morada) {
         this.id = id;
         this.nome = nome;
         this.nif = nif;
         this.morada = morada;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

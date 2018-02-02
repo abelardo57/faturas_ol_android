@@ -2,8 +2,18 @@ package amsi.dei.estg.ipleiria.pt.faturasol.Classes;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.text.TextUtils;
 import android.text.method.DateTimeKeyListener;
+import android.util.Patterns;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+
+import org.json.JSONArray;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -13,18 +23,19 @@ import java.util.List;
 
 import amsi.dei.estg.ipleiria.pt.faturasol.AdicionarFatura;
 import amsi.dei.estg.ipleiria.pt.faturasol.listeners.FaturasolListener;
+import amsi.dei.estg.ipleiria.pt.faturasol.utils.JsonParser;
 
 /**
  * Created by Abel_ on 17/11/2017.
  */
 
-public class SingletonF_OL implements FaturasolListener{
+public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listeners.FaturasolListener{
 
-    /*
+
     String mUrlAPI= "localhost:8888/numseique/api";
     String mUrlAPILogin= "";
     String tokenAPI= "";
-    */
+
 
     //private static RequestQueue volleyQueue = null;
     private static SingletonF_OL INSTANCE = null;
@@ -47,6 +58,9 @@ public class SingletonF_OL implements FaturasolListener{
     public int CurrentFatura;
     public int SaveChecker = 0;
 
+    private FaturasolListener listener;
+    private static RequestQueue volleyQueue = null;
+
 
     public static synchronized SingletonF_OL getInstance(Context context) {
         if (INSTANCE == null)
@@ -67,7 +81,7 @@ public class SingletonF_OL implements FaturasolListener{
     }
 
 
-    /*public void GerarClientes(){
+    public void GerarClientes(){
         clientes.add(new Cliente ( 10000000, "Rodrigo Paião", "RodriP@gmail.com", "RodriP22", "123456", "39219383", "293857261","autkey")  );
         clientes.add(new Cliente ( 10000001, "Catarina Sales", "CataSal@gmail.com", "CataS", "123456", "39219383", "293857261", "authkey")  );
         clientes.add(new Cliente ( 10000002, "Miguel Faria", "FariaM@gmail.com", "RodriP22", "123456", "39219383", "293857261", "authkey")  );
@@ -75,7 +89,7 @@ public class SingletonF_OL implements FaturasolListener{
         clientes.add(new Cliente ( 10000004, "Luís Tiago", "LiagoTuis@gmail.com", "RodriP22", "123456", "39219383", "293857261", "authkey")  );
         clientes.add(new Cliente ( 10000005, "Joana Mateus", "JoanaM@gmail.com", "RodriP22", "123456", "39219383", "293857261", "authkey")  );
         clientes.add(new Cliente ( 10000006, "Rodrigo Araujo", "AraujoRRDigo@gmail .com", "RodriP22", "123456", "39219383", "293857261", "authkey")  );
-    }*/
+    }
     public void GerarEmpresa (){
 
         empresa.add(new Empresa( 0, "Faturas User", 339293823, "Avenida do Brazil"));
@@ -94,10 +108,6 @@ public class SingletonF_OL implements FaturasolListener{
     }*/
 
     public void registarClienteBD(Cliente cliente){
-        //TODO nao esqecer de tirar o remover depois
-/*TODO */faturaDBHelper.removerAllClientesBD(); //TODO
-        //TODO TIRA ISTO DEPOIS CACETE
-
         faturaDBHelper.adicionarClienteBD(cliente);
     }
 
@@ -222,16 +232,15 @@ public class SingletonF_OL implements FaturasolListener{
         }while(i<fatura.size());
     }
 
-    public boolean CheckUser(String Username, String Password) {
+    public boolean CheckUser(String Email, String Password) {
         boolean check = false;
-        String username;
+        String email;
         String password;
         int i = 0;
-        clientes = getClientes();
         do{
-            username = clientes.get(i).getUsername().toString();
+            email = clientes.get(i).getEmail().toString();
             password =  clientes.get(i).getPassword().toString();
-            if(Username.equals(username) && Password.equals(password))
+            if(Email.equals(email) && Password.equals(password))
             {
                 check = true;
                 CurrentUser = (int) clientes.get(i).getNumero_cartao();
@@ -346,6 +355,51 @@ public class SingletonF_OL implements FaturasolListener{
         return custom_faturas;
     }
 
+    public void adicionarClienteBD(Cliente cliente){
+        faturaDBHelper.adicionarClienteBD(cliente);
+    }
+
+    public void adicionarClientesBD(ArrayList<Cliente> clientes)
+    {
+        for(Cliente cliente: clientes){
+            adicionarClienteBD(cliente);
+        }
+    }
+
+    public void getAllClientesAPI(final Context context, boolean isConnected){
+        JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                clientes = JsonParser.parserJsonClientes(response, context);
+                System.out.println("--> Resposta" + response);
+
+                adicionarClientesBD(clientes);
+
+                if(listener != null){
+                    listener.onRefreshCliente(clientes);
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("Error Getalllivros " + error.getMessage());
+            }
+        });
+        volleyQueue.add(req);
+
+
+    }
+
+
+    public final static boolean isEmailValid(CharSequence target) {
+        return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
+    }
+
+    public void setClientesListener(FaturasolListener listener){
+        this.listener = listener;
+    }
+
     @Override
     public void onRefreshFaturas(ArrayList<Fatura> listaFaturas) {
 
@@ -353,6 +407,26 @@ public class SingletonF_OL implements FaturasolListener{
 
     @Override
     public void onUpdateFaturas(Fatura fatura, int operação) {
+
+    }
+
+    @Override
+    public void onRefreshCliente(ArrayList<Cliente> listaClientes) {
+
+    }
+
+    @Override
+    public void onUpdateCliente(Cliente cliente, int operação) {
+
+    }
+
+    @Override
+    public void onRefreshEmpresas(ArrayList<Empresa> listaEmpresas) {
+
+    }
+
+    @Override
+    public void onUpdateEmpresas(Empresa empresa, int operação) {
 
     }
 }

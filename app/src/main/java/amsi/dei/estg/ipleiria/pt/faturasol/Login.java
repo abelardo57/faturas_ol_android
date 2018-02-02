@@ -6,7 +6,6 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.icu.text.IDNA;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -80,7 +79,7 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
 
         //SingletonF_OL.getInstance(getApplicationContext()).GerarClientes();
         SingletonF_OL.getInstance(getApplicationContext()).GerarEmpresa();
-        /**SingletonF_OL.getInstance(getApplicationContext()).GerarFaturas();*/
+        SingletonF_OL.getInstance(getApplicationContext()).GerarFaturas();
 
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -97,7 +96,7 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
             }
         });
 
-        final Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,11 +106,9 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
                 }
                 else{
 
-                    mEmailView.setError("Username inexistente");
-                    mPasswordView.setError("Password errada");
-
-                    //Toast.makeText(Login.this, "Inexistente", Toast.LENGTH_SHORT).show();
-
+                    Context context = getApplicationContext();
+                    Toast.makeText(context, "Enixistente", Toast.LENGTH_SHORT).show();
+                    //toast.show();
                 }
 
 
@@ -205,22 +202,22 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (password.trim().isEmpty() || !isPasswordValid(password)) {
-            mPasswordView.setError("Password Invalida");
+        /*if (password.trim().isEmpty() || !isPasswordValid(password)) {
+            mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
-        }
+        }*/
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
             cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmailView.setError("Username Invalido");
+        } /*else if (!isEmailValid(email)) {
+            mEmailView.setError(getString(R.string.error_invalid_email));
             focusView = mEmailView;
             cancel = true;
-        }
+        }*/
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
@@ -236,12 +233,12 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
     }
 
     private boolean isEmailValid(String email) {
-        return SingletonF_OL.getInstance(getApplicationContext()).CheckUser(mEmailView.getText().toString(),mPasswordView.getText().toString())==true;
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return SingletonF_OL.getInstance(getApplicationContext()).CheckUser(mEmailView.getText().toString(),mPasswordView.getText().toString())==true;
+        return password.length() > 4;
     }
 
     /**
@@ -354,7 +351,7 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
 
             try {
                 // Simulate network access.
-                Thread.sleep(1000);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 return false;
             }
