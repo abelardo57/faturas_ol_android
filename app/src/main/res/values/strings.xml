@@ -38,5 +38,12 @@
     <string name="btn_voltar">Voltar</string>
     <string name="btn_guardarInfo">Guardar</string>
     <string name="item_fatura_user">item fatura user</string>
+    <string name="title_add_fatura_custom">Fatura Customizada</string>
+    <string name="hint_n_fatura_custom">N. Fatura</string>
+    <string name="hint_nif_empresa">NIF Empresa</string>
+    <string name="hint_nome_empresa">Nome da Empresa</string>
+    <string name="hint_morada_empresa">Morada da Empresa</string>
+    <string name="hint_nif_cliente">NIF</string>
+    <string name="hint_data">Data (dd/mm/aa)</string>
 
 </resources>

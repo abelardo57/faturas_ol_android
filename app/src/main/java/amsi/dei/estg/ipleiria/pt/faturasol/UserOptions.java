@@ -20,6 +20,7 @@ public class UserOptions extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_options);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         TextView txtViewID = (TextView) findViewById(R.id.txtView_Username);
         txtViewID.setText(SingletonF_OL.getInstance(getApplicationContext()).CurrentUsername);
 

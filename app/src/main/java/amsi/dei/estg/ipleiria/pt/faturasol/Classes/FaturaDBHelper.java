@@ -228,10 +228,10 @@ import java.util.Date;
     public Fatura adiconarFaturaDB(Fatura fatura){
         ContentValues value = new ContentValues();
 
+        value.put("id", fatura.getId());
         value.put("numero", fatura.getNumero());
         value.put("data", String.valueOf(fatura.getData()));
-        value.put("numero_cartao", fatura.getNumero_cartao());
-        value.put("id_empresa", fatura.getId_empresa());
+        value.put("imagem_path", fatura.getImagem_path());
         value.put("is_fav", fatura.getIs_fav());
         long id = this.database.insert("fatura", null, value);
         if (id > -1){
@@ -242,6 +242,7 @@ import java.util.Date;
 
         return null;
     }
+
 
     public Custom_Fatura adicionarCustomFaturaDB(Custom_Fatura custom_fatura){
         ContentValues value = new ContentValues();
@@ -362,9 +363,8 @@ import java.util.Date;
                 Fatura auxFatura = new Fatura(cursor.getInt(0),
                         cursor.getInt(1),
                         new Date(cursor.getLong(2)*1000),
-                        cursor.getInt(3),
-                        cursor.getInt(4),
-                        cursor.getInt(5));
+                        cursor.getString(3),
+                        cursor.getInt(4));
                 auxFatura.setId(cursor.getInt(0));
                 fatura.add(auxFatura);
             }while(cursor.moveToNext());
@@ -440,7 +440,8 @@ import java.util.Date;
 
     }
 
-    public boolean guardarFaturaBD(Fatura fatura){
+    /** desnecessario */
+    /*public boolean guardarFaturaBD(Fatura fatura){
         ContentValues value = new ContentValues();
 
         value.put("numero", fatura.getNumero());
@@ -451,7 +452,7 @@ import java.util.Date;
 
         return this.database.update("fatura", value, "id = ?", new String[]{"" + fatura.getId()}) > 0;
 
-    }
+    }*/
 
     public boolean guardarCustomFaturaBD(Custom_Fatura custom_fatura){
         ContentValues values = new ContentValues();

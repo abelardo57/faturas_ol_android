@@ -15,22 +15,17 @@ public class Fatura {
     private long id;
     private int numero;
     private Date data;
-    //private String imagem_path;
-    private int numero_cartao;
-    private int id_empresa;
+    private String imagem_path;
     private int is_fav;
 
 
-    public Fatura(int id, int numero, Date data, int numero_cartao, int id_empresa,int is_fav) {
+    public Fatura(int id, int numero, Date data, String imagem_path, int is_fav) {
         this.id = id;
         this.numero = numero;
         this.data = data;
-        this.numero_cartao = numero_cartao;
-        this.id_empresa = id_empresa;
+        this.imagem_path = imagem_path;
         this.is_fav = is_fav;
     }
-
-
 
     public long getId() {
         return id;
@@ -56,20 +51,12 @@ public class Fatura {
         this.data = data;
     }
 
-    public int getNumero_cartao() {
-        return numero_cartao;
+    public String getImagem_path() {
+        return imagem_path;
     }
 
-    public void setNumero_cartao(int numero_cartao) {
-        this.numero_cartao = numero_cartao;
-    }
-
-    public int getId_empresa() {
-        return id_empresa;
-    }
-
-    public void setId_empresa(int id_empresa) {
-        this.id_empresa = id_empresa;
+    public void setImagem_path(String imagem_path) {
+        this.imagem_path = imagem_path;
     }
 
     public int getIs_fav() {
@@ -86,8 +73,7 @@ public class Fatura {
                 "id=" + id +
                 ", numero=" + numero +
                 ", data=" + data +
-                ", numero_cartao=" + numero_cartao +
-                ", id_empresa=" + id_empresa +
+                ", imagem_path=" + imagem_path +
                 ", is_fav=" + is_fav +
                 '}';
     }

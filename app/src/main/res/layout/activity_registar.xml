@@ -121,6 +121,7 @@
                         android:layout_height="wrap_content"
                         android:hint="E-mail"
                         android:imeOptions="actionUnspecified"
+                        android:inputType="textEmailAddress"
                         android:maxLines="1"
                         android:singleLine="true" />
 
@@ -221,6 +222,7 @@
                         android:layout_height="wrap_content"
                         android:hint="NIF"
                         android:imeOptions="actionUnspecified"
+                        android:inputType="number"
                         android:maxLines="1"
                         android:singleLine="true" />
 
@@ -253,6 +255,7 @@
                         android:layout_height="wrap_content"
                         android:hint="Telemóvel (opcional)"
                         android:imeOptions="actionUnspecified"
+                        android:inputType="number"
                         android:maxLines="1"
                         android:singleLine="true" />
 

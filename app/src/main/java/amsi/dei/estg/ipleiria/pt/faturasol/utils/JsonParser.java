@@ -16,8 +16,9 @@ import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Cliente;
  */
 
 public class JsonParser {
-    /*public static ArrayList parserJson(JSONArray response, Context context){
-        System.out.println("--> Parser Lista Livros: " + response.toString());
+
+    public static ArrayList parserJsonClientes(JSONArray response, Context context){
+        System.out.println("--> Parser Lista clientes: " + response.toString());
 
         ArrayList<Cliente> tempListaClientes = new ArrayList<Cliente>();
 
@@ -25,19 +26,23 @@ public class JsonParser {
             for (int i = 0; i<response.length(); i++){
                 JSONObject cliente = (JSONObject) response.get(i);
 
-                int num_cartao = livro.getInt("id");
-                String titulo = livro.getString("titulo");
-                String serie = livro.getString("serie");
-                String autor = livro.getString("autor");
-                String ano = livro.getString("ano");
-                String capa = livro.getString("capa");
+                int num_cartao = cliente.getInt("numero_cartao");
+                String titulo = cliente.getString("titulo");
+                String serie = cliente.getString("serie");
+                String autor = cliente.getString("autor");
+                String ano = cliente.getString("ano");
+                String capa = cliente.getString("capa");
+                String nif = cliente.getString("capa");
+                String auth = cliente.getString("capa");
 
-                Cliente auxCliente = new Cliente(idLivro,titulo,serie,autor,ano,capa);
-                tempListaClientes.add(auxLivro);
+                Cliente auxCliente = new Cliente(num_cartao,titulo,serie,autor,ano,capa,nif,auth);
+                tempListaClientes.add(auxCliente);
             }
         }catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(context, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-    }*/
+
+        return tempListaClientes;
+    }
 }

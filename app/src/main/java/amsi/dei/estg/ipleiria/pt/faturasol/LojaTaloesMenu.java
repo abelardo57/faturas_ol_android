@@ -28,7 +28,7 @@ public class LojaTaloesMenu extends AppCompatActivity {
 
         //setTitle(SingletonF_OL.getInstance().CurrentUserEmail);
 
-        SingletonF_OL.getInstance(getApplicationContext()).FiltrarTaloesLoja();
+        /**SingletonF_OL.getInstance(getApplicationContext()).FiltrarTaloesLoja(); */
 
         //lojaView = (TextView) findViewById(R.id.lojaView);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

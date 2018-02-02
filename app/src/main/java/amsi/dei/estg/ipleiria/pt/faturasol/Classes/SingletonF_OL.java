@@ -84,20 +84,14 @@ public class SingletonF_OL implements FaturasolListener{
         empresa.add(new Empresa( 3, "Radio Popular", 990381290, "Praça D'ouro"));
 
     }
-    public void GerarFaturas() {
-        fatura.add(new Fatura (0, 10001, currentTime,10000000,1,0));
-        fatura.add(new Fatura (1, 10002, currentTime,10000000,1,0));
-        fatura.add(new Fatura (2, 10003, currentTime,10000000,2,0));
-        fatura.add(new Fatura (3, 10004, currentTime,10000000,2,0));
-        fatura.add(new Fatura (4, 10005, currentTime,10000000,3,0));
-        fatura.add(new Fatura (5, 10006, currentTime,10000000,3,0));
-        fatura.add(new Fatura (6, 10007, currentTime,10000000,2,0));
-        fatura.add(new Fatura (7, 10008, currentTime,10000000,2,0));
-        fatura.add(new Fatura (8, 10009, currentTime,10000000,1,0));
-        fatura.add(new Fatura (9, 10010, currentTime,10000000,1,0));
-        fatura.add(new Fatura (10, 10011, currentTime,10000000,2,0));
-        fatura.add(new Fatura (11, 10012, currentTime,10000000,0,0));
-    }
+    /*public void GerarFaturas() {
+        fatura.add(new Fatura (0, 10001, currentTime,"",1));
+        fatura.add(new Fatura (0, 10001, currentTime,"",1));
+        fatura.add(new Fatura (0, 10001, currentTime,"",1));
+        fatura.add(new Fatura (0, 10001, currentTime,"",1));
+        fatura.add(new Fatura (0, 10001, currentTime,"",1));
+        fatura.add(new Fatura (0, 10001, currentTime,"",1));
+    }*/
 
     public void registarClienteBD(Cliente cliente){
         //TODO nao esqecer de tirar o remover depois
@@ -105,6 +99,13 @@ public class SingletonF_OL implements FaturasolListener{
         //TODO TIRA ISTO DEPOIS CACETE
 
         faturaDBHelper.adicionarClienteBD(cliente);
+    }
+
+    public void adicionarFaturasDefinitivasBD(ArrayList<Fatura> faturas){
+
+        for (Fatura fatura: faturas) {
+            faturaDBHelper.adiconarFaturaDB(fatura);
+        }
     }
 
     public ArrayList<Cliente> getClientes(){
@@ -144,7 +145,7 @@ public class SingletonF_OL implements FaturasolListener{
          }
 
      }
-    public void NovaFatura(String numero, String numero_cartao){
+    /*public void NovaFatura(String numero, String numero_cartao){
 
         int i = 0;
         ArrayList<Fatura> fatura = getFatura();
@@ -164,9 +165,9 @@ public class SingletonF_OL implements FaturasolListener{
         }
 
 
-    }
+    }*/
 
-    public int GetNumeroFaturasPorLojaCurrentUser(int IdEmpresa){
+    /**public int GetNumeroFaturasPorLojaCurrentUser(int IdEmpresa){
         int total = 0;
         int i = 0;
         do{
@@ -177,7 +178,7 @@ public class SingletonF_OL implements FaturasolListener{
             i++;
         }while(i < fatura.size());
         return total;
-    }
+    }*/
 
 
 
@@ -260,7 +261,7 @@ public class SingletonF_OL implements FaturasolListener{
         }while(i<clientes.size());
     }
 
-    public void FiltrarLojasUser(){
+    /**public void FiltrarLojasUser(){
         int i= 0;
         int ii=0;
         boolean check = false;
@@ -304,7 +305,7 @@ public class SingletonF_OL implements FaturasolListener{
             i++;
         }while(i<fatura.size());
 
-    }
+    }*/
     public int getClientePosition(){
         int i = 0;
         while(i<clientes.size())

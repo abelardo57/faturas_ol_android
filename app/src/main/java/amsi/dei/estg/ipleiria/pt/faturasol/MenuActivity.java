@@ -40,7 +40,7 @@ public class MenuActivity extends AppCompatActivity {
         SingletonF_OL.getInstance(getApplicationContext()).CurrentUserEmail = getIntent().getStringExtra(Login.DADOS_EMAIL);
         setTitle(SingletonF_OL.getInstance(getApplicationContext()).CurrentUserEmail);
         SingletonF_OL.getInstance(getApplicationContext()).CurrentUserEmail = getIntent().getStringExtra(Login.DADOS_EMAIL);
-        SingletonF_OL.getInstance(getApplicationContext()).FiltrarLojasUser();
+        /**SingletonF_OL.getInstance(getApplicationContext()).FiltrarLojasUser(); */
         //SingletonF_OL.getInstance(getApplicationContext()).getAllCustomFaturasBD();
         listViewLojas = (ListView) findViewById(R.id.listLojass);
 
