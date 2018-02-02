@@ -253,15 +253,16 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
         }while(i<fatura.size());
     }
 
-    public boolean CheckUser(String Email, String Password) {
+    public boolean CheckUser(String Username, String Password) {
         boolean check = false;
-        String email;
+        String username;
         String password;
         int i = 0;
+        clientes = getClientes();
         do{
-            email = clientes.get(i).getEmail().toString();
+            username = clientes.get(i).getUsername().toString();
             password =  clientes.get(i).getPassword().toString();
-            if(Email.equals(email) && Password.equals(password))
+            if(Username.equals(username) && Password.equals(password))
             {
                 check = true;
                 CurrentUser = (int) clientes.get(i).getNumero_cartao();
