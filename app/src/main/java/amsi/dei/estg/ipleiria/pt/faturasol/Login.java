@@ -77,7 +77,7 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
         setContentView(R.layout.activity_login);
         // Set up the login form.
 
-        SingletonF_OL.getInstance(getApplicationContext()).GerarClientes();
+        //SingletonF_OL.getInstance(getApplicationContext()).GerarClientes();
         SingletonF_OL.getInstance(getApplicationContext()).GerarEmpresa();
         SingletonF_OL.getInstance(getApplicationContext()).GerarFaturas();
 
@@ -120,12 +120,12 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
             @Override
             public void onClick(View view) {
 
-                String _EMAIL = mEmailView.getText().toString();
+                String _USERNAME = mEmailView.getText().toString();
                 //String _PASSWORD = mPasswordView.getText().toString();
 
                 Intent registo = new Intent(getApplicationContext(),Registar.class);
 
-                registo.putExtra("_EMAIL",_EMAIL);
+                registo.putExtra("_USERNAME",_USERNAME);
                 //registo.putExtra("_PASSWORD",_PASSWORD);
                 startActivity(registo);
 
@@ -202,22 +202,22 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (password.trim().isEmpty() || !isPasswordValid(password)) {
+        /*if (password.trim().isEmpty() || !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
-        }
+        }*/
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
             cancel = true;
-        } else if (!isEmailValid(email)) {
+        } /*else if (!isEmailValid(email)) {
             mEmailView.setError(getString(R.string.error_invalid_email));
             focusView = mEmailView;
             cancel = true;
-        }
+        }*/
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first

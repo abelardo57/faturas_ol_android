@@ -38,8 +38,8 @@ import java.util.Date;
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createFaturaTables = "CREATE TABLE cliente (\n" +
-                "  numero_cartao INTEGER PRYMARY KEY,"+
+        String createFaturaTables = "CREATE TABLE cliente (" +
+                "  numero_cartao INTEGER PRYMARY KEY AUTOINCREMENT,"+
                 "  nome TEXT NOT NULL," +
                 "  email TEXT NOT NULL," +
                 "  username TEXT NOT NULL," +
@@ -49,8 +49,8 @@ import java.util.Date;
                 "  auth_key TEXT NOT NULL" +
                 ");" +
                 "" +
-                "CREATE TABLE `customfatura` (\n" +
-                "  id INTEGER PRYMARY KEY," +
+                "CREATE TABLE customfatura (" +
+                "  id INTEGER NOT NULL PRYMARY KEY AUTOINCREMENT," +
                 "  numero TEXT NOT NULL," +
                 "  data date NOT NULL," +
                 "  nif_empresa TEXT NOT NULL," +
@@ -58,149 +58,139 @@ import java.util.Date;
                 "  morada_empresa TEXT NOT NULL" +
                 ");" +
                 "" +
-                "CREATE TABLE `custom_fatura_cliente` (\n" +
-                "  `id` int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,\n"+
-                "  `id_custom_faturas` int(10) NOT NULL,\n" +
-                "  `numero_cartao_cliente` int(10) NOT NULL\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n" +
-                "\n" +
-                "\n" +
-                "CREATE TABLE `empresa` (\n" +
-                "  `id` int(10) NOT NULL,\n" +
-                "  `nome` varchar(100) NOT NULL,\n" +
-                "  `nif` int(9) NOT NULL,\n" +
-                "  `morada` varchar(500) NOT NULL\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n" +
-                "\n" +
-                "CREATE TABLE `fatura` (\n" +
-                "  `id` int(10) NOT NULL,\n" +
-                "  `numero` int(100) NOT NULL,\n" +
-                "  `data` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,\n" +
-                "  `imagem_path` varchar(1024) DEFAULT NULL,\n" +
-                "  `favorito` smallint(1) NOT NULL DEFAULT '0'\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n" +
-                "\n" +
-                "CREATE TABLE `fatura_cliente` (\n" +
-                "  `id` int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,\n"+
-                "  `id_fatura` int(10) NOT NULL,\n" +
-                "  `numero_cartao_cliente` int(10) NOT NULL\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n" +
-                "\n" +
-                "CREATE TABLE `fatura_empresa` (\n" +
-                "  `id` int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,\n"+
-                "  `id_fatura` int(10) NOT NULL,\n" +
-                "  `id_empresa` int(10) NOT NULL\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n" +
-                "\n" +
-                "CREATE TABLE `linha_fatura` (\n" +
-                "  `id` int(10) NOT NULL,\n" +
-                "  `valor_unitario` float NOT NULL,\n" +
-                "  `quantidade` int(10) NOT NULL,\n" +
-                "  `nome_produto` varchar(100) NOT NULL,\n" +
-                "  `descricao` varchar(100) NOT NULL,\n" +
-                "  `id_fatura` int(10) DEFAULT NULL,\n" +
-                "  `id_custom_fatura` int(10) DEFAULT NULL,\n" +
-                "  `valor_total` float DEFAULT '0'\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=latin1;\n" +
-                "\n" +
-                "\n" +
-                "CREATE TRIGGER `valor_total_final` BEFORE INSERT ON `linha_fatura` FOR EACH ROW BEGIN\n" +
-                "    SET NEW.valor_total = NEW.valor_unitario*NEW.quantidade;          \n" +
-                "END\n" +
-                "\n" +
-                "\n" +
-                "CREATE TABLE `user` (\n" +
-                "  `id` int(11) NOT NULL,\n" +
-                "  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,\n" +
-                "  `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,\n" +
-                "  `auth_key` varchar(32) COLLATE utf8_unicode_ci NOT NULL,\n" +
-                "  `password_hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL,\n" +
-                "  `password_reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,\n" +
-                "  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,\n" +
-                "  `status` smallint(6) NOT NULL DEFAULT '10',\n" +
-                "  `created_at` int(11) NOT NULL,\n" +
-                "  `updated_at` int(11) NOT NULL\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;\n" +
-                "\n" +
-                "CREATE TABLE `migration` (\n" +
-                "  `version` varchar(180) NOT NULL,\n" +
-                "  `apply_time` int(11) DEFAULT NULL\n" +
-                ") ENGINE=MyISAM DEFAULT CHARSET=latin1;\n" +
-                "\n" +
-                "INSERT INTO `migration` (`version`, `apply_time`) VALUES\n" +
-                "('m000000_000000_base', 1510673971),\n" +
-                "('m130524_201442_init', 1510673978);\n" +
-                "\n" +
-                "ALTER TABLE `cliente`\n" +
-                "  ADD PRIMARY KEY (`numero_cartao`);\n" +
-                "\n" +
-                "ALTER TABLE `customfatura`\n" +
-                "  ADD PRIMARY KEY (`id`);\n" +
-                "\n" +
-                "ALTER TABLE `custom_fatura_cliente`\n" +
-                "  ADD KEY `id_custom_faturas` (`id_custom_faturas`),\n" +
-                "  ADD KEY `numero_cartao_cliente` (`numero_cartao_cliente`);\n" +
-                "\n" +
-                "ALTER TABLE `empresa`\n" +
-                "  ADD PRIMARY KEY (`id`);\n" +
-                "\n" +
-                "ALTER TABLE `fatura`\n" +
-                "  ADD PRIMARY KEY (`id`);\n" +
-                "\n" +
-                "ALTER TABLE `fatura_cliente`\n" +
-                "  ADD KEY `id_fatura` (`id_fatura`),\n" +
-                "  ADD KEY `numero_cartao_cliente` (`numero_cartao_cliente`);\n" +
-                "\n" +
-                "ALTER TABLE `fatura_empresa`\n" +
-                "  ADD KEY `id_fatura` (`id_fatura`),\n" +
-                "  ADD KEY `id_empresa` (`id_empresa`);\n" +
-                "\n" +
-                "ALTER TABLE `linha_fatura`\n" +
-                "  ADD PRIMARY KEY (`id`),\n" +
-                "  ADD KEY `id_fatura` (`id_fatura`),\n" +
-                "  ADD KEY `id_custom_fatura` (`id_custom_fatura`);\n" +
-                "\n" +
-                "ALTER TABLE `migration`\n" +
-                "  ADD PRIMARY KEY (`version`);\n" +
-                "\n" +
-                "ALTER TABLE `user`\n" +
-                "  ADD PRIMARY KEY (`id`),\n" +
-                "  ADD UNIQUE KEY `username` (`username`),\n" +
-                "  ADD UNIQUE KEY `email` (`email`),\n" +
-                "  ADD UNIQUE KEY `password_reset_token` (`password_reset_token`);\n" +
-                "\n" +
-                "ALTER TABLE `cliente`\n" +
-                "  MODIFY `numero_cartao` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;\n" +
-                "\n" +
-                "\n" +
-                "ALTER TABLE `customfatura`\n" +
-                "  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;\n" +
-                "\n" +
-                "\n" +
-                "ALTER TABLE `empresa`\n" +
-                "  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;\n" +
-                "\n" +
-                "\n" +
-                "ALTER TABLE `fatura`\n" +
-                "  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;\n" +
-                "\n" +
-                "\n" +
-                "ALTER TABLE `linha_fatura`\n" +
-                "  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;\n" +
-                "\n" +
-                "\n" +
-                "ALTER TABLE `user`\n" +
-                "  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;\n" +
-                "\n" +
-                "\n" +
-                "ALTER TABLE `fatura_empresa`\n" +
-                "  ADD CONSTRAINT `fatura_empresa_ibfk_1` FOREIGN KEY (`id_fatura`) REFERENCES `fatura` (`id`),\n" +
-                "  ADD CONSTRAINT `fatura_empresa_ibfk_2` FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`);\n" +
-                "\n" +
-                "\n" +
-                "ALTER TABLE `linha_fatura`\n" +
-                "  ADD CONSTRAINT `linha_fatura_ibfk_1` FOREIGN KEY (`id_fatura`) REFERENCES `fatura` (`id`),\n" +
-                "  ADD CONSTRAINT `linha_fatura_ibfk_2` FOREIGN KEY (`id_custom_fatura`) REFERENCES `customfatura` (`id`);\n";
+                "CREATE TABLE custom_fatura_cliente (" +
+                "  id INTEGER AUTOINCREMENT PRIMARY KEY,"+
+                "  id_custom_faturas INTEGER NOT NULL," +
+                "  numero_cartao_cliente INTEGER NOT NULL" +
+                ");" +
+                "" +
+                "CREATE TABLE empresa (" +
+                "  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                "  nome TEXT NOT NULL," +
+                "  nif TEXT NOT NULL," +
+                "  morada TEXT NOT NULL" +
+                ");" +
+                "" +
+                "CREATE TABLE fatura (" +
+                "  id INTEGER NOT NULL," +
+                "  numero TEXT NOT NULL," +
+                "  data DATE NOT NULL," +
+                "  imagem_path TEXT DEFAULT NULL," +
+                "  favorito INTEGER NOT NULL DEFAULT '0'" +
+                ");" +
+                "" +
+                "CREATE TABLE fatura_cliente (" +
+                "  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT ,"+
+                "  id_fatura INTEGER NOT NULL," +
+                "  numero_cartao_cliente INTEGER NOT NULL" +
+                ");" +
+                "" +
+                "CREATE TABLE fatura_empresa (" +
+                "  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+
+                "  id_fatura INTEGER NOT NULL," +
+                "  id_empresa INTEGER NOT NULL" +
+                ");" +
+                "" +
+                "CREATE TABLE linha_fatura (" +
+                "  id INTEGER NOT NULL PRYMARY KEY AUTOINCREMENT," +
+                "  valor_unitario FLOAT NOT NULL," +
+                "  quantidade INTEGER NOT NULL," +
+                "  nome_produto TEXT NOT NULL," +
+                "  descricao TEXT NOT NULL," +
+                "  id_fatura INTEGER DEFAULT NULL," +
+                "  id_custom_fatura INTEGER DEFAULT NULL," +
+                "  valor_total FLOAT DEFAULT '0'" +
+                ");" +
+                "" +
+                "CREATE TRIGGER valor_total_final BEFORE INSERT ON linha_fatura FOR EACH ROW BEGIN" +
+                "    SET NEW.valor_total = NEW.valor_unitario*NEW.quantidade;" +
+                "END" +
+                "" +
+                "CREATE TABLE user (" +
+                "  id INTEGER NOT NULL," +
+                "  name TEXT COLLATE utf8_unicode_ci NOT NULL," +
+                "  username TEXT COLLATE utf8_unicode_ci NOT NULL," +
+                "  auth_key TEXT COLLATE utf8_unicode_ci NOT NULL," +
+                "  password_hash TEXT COLLATE utf8_unicode_ci NOT NULL," +
+                "  password_reset_token TEXT COLLATE utf8_unicode_ci DEFAULT NULL," +
+                "  email TEXT COLLATE utf8_unicode_ci NOT NULL," +
+                "  status INTEGER NOT NULL DEFAULT '10'," +
+                "  created_at INTEGER NOT NULL," +
+                "  updated_at INTEGER NOT NULL" +
+                ");" +
+                "" +
+                "CREATE TABLE `migration` (" +
+                "  `version` varchar(180) NOT NULL," +
+                "  `apply_time` int(11) DEFAULT NULL" +
+                ") ENGINE=MyISAM DEFAULT CHARSET=latin1;" +
+                "" +
+                "INSERT INTO `migration` (`version`, `apply_time`) VALUES" +
+                "('m000000_000000_base', 1510673971)," +
+                "('m130524_201442_init', 1510673978);" +
+                "" +
+                "ALTER TABLE cliente" +
+                "  ADD PRIMARY KEY (numero_cartao);" +
+                "" +
+                "ALTER TABLE `customfatura`" +
+                "  ADD PRIMARY KEY (`id`);" +
+                "" +
+                "ALTER TABLE `custom_fatura_cliente`" +
+                "  ADD KEY `id_custom_faturas` (`id_custom_faturas`)," +
+                "  ADD KEY `numero_cartao_cliente` (`numero_cartao_cliente`);" +
+                "" +
+                "ALTER TABLE `empresa`" +
+                "  ADD PRIMARY KEY (`id`);" +
+                "" +
+                "ALTER TABLE `fatura`" +
+                "  ADD PRIMARY KEY (`id`);" +
+                "" +
+                "ALTER TABLE `fatura_cliente`" +
+                "  ADD KEY `id_fatura` (`id_fatura`)," +
+                "  ADD KEY `numero_cartao_cliente` (`numero_cartao_cliente`);" +
+                "" +
+                "ALTER TABLE `fatura_empresa`" +
+                "  ADD KEY `id_fatura` (`id_fatura`)," +
+                "  ADD KEY `id_empresa` (`id_empresa`);" +
+                "" +
+                "ALTER TABLE `linha_fatura`" +
+                "  ADD PRIMARY KEY (`id`)," +
+                "  ADD KEY `id_fatura` (`id_fatura`)," +
+                "  ADD KEY `id_custom_fatura` (`id_custom_fatura`);" +
+                "" +
+                "ALTER TABLE `migration`" +
+                "  ADD PRIMARY KEY (`version`);" +
+                "" +
+                "ALTER TABLE `user`" +
+                "  ADD PRIMARY KEY (`id`)," +
+                "  ADD UNIQUE KEY `username` (`username`)," +
+                "  ADD UNIQUE KEY `email` (`email`)," +
+                "  ADD UNIQUE KEY `password_reset_token` (`password_reset_token`);" +
+                "" +
+                "ALTER TABLE `cliente`" +
+                "  MODIFY `numero_cartao` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;" +
+                "" +
+                "ALTER TABLE `customfatura`" +
+                "  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;" +
+                "" +
+                "ALTER TABLE `empresa`" +
+                "  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;" +
+                "" +
+                "ALTER TABLE `fatura`" +
+                "  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;" +
+                "" +
+                "ALTER TABLE `linha_fatura`" +
+                "  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;" +
+                "" +
+                "ALTER TABLE `user`" +
+                "  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;" +
+                "" +
+                "ALTER TABLE `fatura_empresa`" +
+                "  ADD CONSTRAINT `fatura_empresa_ibfk_1` FOREIGN KEY (`id_fatura`) REFERENCES `fatura` (`id`)," +
+                "  ADD CONSTRAINT `fatura_empresa_ibfk_2` FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`);" +
+                "" +
+                "ALTER TABLE `linha_fatura`" +
+                "  ADD CONSTRAINT `linha_fatura_ibfk_1` FOREIGN KEY (`id_fatura`) REFERENCES `fatura` (`id`)," +
+                "  ADD CONSTRAINT `linha_fatura_ibfk_2` FOREIGN KEY (`id_custom_fatura`) REFERENCES `customfatura` (`id`);";
 
         db.execSQL(createFaturaTables);
     }
@@ -225,10 +215,10 @@ import java.util.Date;
         value.put("telemovel", cliente.getTelemovel());
         value.put("nif", cliente.getNif());
         value.put("auth_key", cliente.getAuthkey());
-        long id = this.database.insert("cliente", null, value);
-        if (id > -1){
-            System.out.println("--> INSERIU BD ID: " + id);
-            cliente.setNumero_cartao(id);
+        long numero_cartao = this.database.insert("cliente", null, value);
+        if (numero_cartao > -1){
+            System.out.println("--> INSERIU BD ID: " + numero_cartao);
+            cliente.setNumero_cartao(numero_cartao);
             return cliente;
         }
 
