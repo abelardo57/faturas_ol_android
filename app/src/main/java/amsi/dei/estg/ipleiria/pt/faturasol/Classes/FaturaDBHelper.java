@@ -167,7 +167,7 @@ import java.util.Date;
                 "  ADD UNIQUE KEY `password_reset_token` (`password_reset_token`);" +
                 "" +
                 "ALTER TABLE `cliente`" +
-                "  MODIFY `numero_cartao` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;" +
+                "  MODIFY `numero_cartao` Integet NOT NULL AUTOINCREMENT, AUTOINCREMENT=15;" +
                 "" +
                 "ALTER TABLE `customfatura`" +
                 "  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;" +

@@ -2,6 +2,7 @@ package amsi.dei.estg.ipleiria.pt.faturasol.Classes;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.text.method.DateTimeKeyListener;
 import android.util.Patterns;
@@ -108,6 +109,8 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
     }*/
 
     public void registarClienteBD(Cliente cliente){
+        faturaDBHelper.removerAllClientesBD();
+
         faturaDBHelper.adicionarClienteBD(cliente);
     }
 
@@ -129,11 +132,15 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
 
     public void adicionarFaturaClienteBD(Fatura fatura){
         // TODO: 02/02/2018 foreach fatura get id --> set id_fatura = fatura.id e numero_cartao_cliente = cliente.numero_cartao; i++
+
         long id_fatura = fatura.getId();
+
+        faturaDBHelper.adicionarFaturaClienteDB(new Fatura_Cliente(0, (int) id_fatura,(int) CurrentUser));
     }
 
     public void adicionarFaturaEmpresa(Fatura fatura){
         // TODO: 02/02/2018 foreach fatura get id --> set id_fatura = fatura.id e id_empresa = empresa.id; i++
+        long id_fatura = fatura.getId();
     }
 
 
@@ -253,7 +260,7 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
         }while(i<fatura.size());
     }
 
-    public boolean CheckUser(String Username, String Password) {
+    public boolean checkLogin(String Username, String Password) {
         boolean check = false;
         String username;
         String password;
@@ -267,6 +274,7 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
                 check = true;
                 CurrentUser = (int) clientes.get(i).getNumero_cartao();
                 CurrentUsername = clientes.get(i).getUsername();
+                CurrentUserEmail = clientes.get(i).getEmail();
                 i = clientes.size();
             }
             else{
@@ -279,6 +287,83 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
         return check;
     }
 
+
+/** verificação login */
+    public boolean checkUser(String Username) {
+        boolean check = false;
+        String username;
+        int i = 0;
+        clientes = getClientes();
+        do{
+            username = clientes.get(i).getUsername().toString();
+            if(Username.equals(username))
+            {
+                check = true;
+            }
+            else {i++;}
+        }
+        while(check == false);
+
+        return check;
+    }
+
+/** Verificações registo de campos existentes */
+    public boolean chekEmail(String Email) {
+        boolean check = false;
+        String _email;
+        int i = 0;
+        clientes = getClientes();
+        do{
+            _email = clientes.get(i).getEmail().toString();
+            if(Email.equals(_email))
+            {
+                check = true;
+            }
+            else {i++;}
+        }
+        while(check == false);
+
+        return check;
+    }
+
+    public boolean checkNIF(String NIF) {
+        boolean check = false;
+        String _nif;
+        int i = 0;
+        clientes = getClientes();
+        do{
+            _nif = clientes.get(i).getNif().toString();
+            if(NIF.equals(_nif))
+            {
+                check = true;
+            }
+            else {i++;}
+        }
+        while(check == false);
+
+        return check;
+    }
+
+    public boolean checkTele(String Tele) {
+        boolean check = false;
+        String _tele;
+        int i = 0;
+        clientes = getClientes();
+        do{
+            _tele = clientes.get(i).getTelemovel().toString();
+            if(Tele.equals(_tele))
+            {
+                check = true;
+            }
+            else {i++;}
+        }
+        while(check == false);
+
+        return check;
+    }
+
+/** */
+
     public void AlterarUser(String username, String email, String telemovel, String password)
     {
         int i = 0;
@@ -287,7 +372,7 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
             {
                 clientes.get(i).setEmail(email);
                 clientes.get(i).setTelemovel(telemovel);
-                clientes.get(i).setPassword(email);
+                clientes.get(i).setPassword(password);
             }
         }while(i<clientes.size());
     }

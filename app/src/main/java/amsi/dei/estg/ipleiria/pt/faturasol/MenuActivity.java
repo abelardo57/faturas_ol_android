@@ -37,9 +37,9 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        SingletonF_OL.getInstance(getApplicationContext()).CurrentUserEmail = getIntent().getStringExtra(Login.DADOS_EMAIL);
-        setTitle(SingletonF_OL.getInstance(getApplicationContext()).CurrentUserEmail);
-        SingletonF_OL.getInstance(getApplicationContext()).CurrentUserEmail = getIntent().getStringExtra(Login.DADOS_EMAIL);
+        //SingletonF_OL.getInstance(getApplicationContext()).CurrentUsername = getIntent().getStringExtra(Login.DADOS_EMAIL);
+        setTitle(SingletonF_OL.getInstance(getApplicationContext()).CurrentUsername + " | " + SingletonF_OL.getInstance(getApplicationContext()).CurrentUser);
+
         /**SingletonF_OL.getInstance(getApplicationContext()).FiltrarLojasUser(); */
         //SingletonF_OL.getInstance(getApplicationContext()).getAllCustomFaturasBD();
         listViewLojas = (ListView) findViewById(R.id.listLojass);
@@ -56,11 +56,13 @@ public class MenuActivity extends AppCompatActivity {
                 TextView txtLoja = (TextView) view.findViewById(R.id.txtLoja);
                 String nome = txtLoja.getText().toString();
 
-                /*String regx = "(123456790)";
+                /** FILTRO DE ESPAÇOS E NUMEROS
+                 *
+                String regx = "(123456790)";
                 char[] ca = regx.toCharArray();
                 for (char c : ca) {
                     nome = nome.replace(""+c, "");
-                } FILTRO DE ESPAÇOS E NUMEROS
+                }
                 */
 
                 SingletonF_OL.getInstance(getApplicationContext()).LojaSelecionada = txtLoja.getHint().toString();

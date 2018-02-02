@@ -100,7 +100,7 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(SingletonF_OL.getInstance(getApplicationContext()).CheckUser(mEmailView.getText().toString(),mPasswordView.getText().toString()) == true)
+                if(SingletonF_OL.getInstance(getApplicationContext()).checkLogin(mEmailView.getText().toString(),mPasswordView.getText().toString()) == true)
                 {
                     attemptLogin();
                 }
@@ -233,12 +233,12 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
     }
 
     private boolean isEmailValid(String email) {
-        return SingletonF_OL.getInstance(getApplicationContext()).CheckUser(mEmailView.getText().toString(),mPasswordView.getText().toString()) == true;
+        return SingletonF_OL.getInstance(getApplicationContext()).checkLogin(mEmailView.getText().toString(),mPasswordView.getText().toString()) == true;
     }
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return SingletonF_OL.getInstance(getApplicationContext()).CheckUser(mEmailView.getText().toString(),mPasswordView.getText().toString()) == true;
+        return SingletonF_OL.getInstance(getApplicationContext()).checkLogin(mEmailView.getText().toString(),mPasswordView.getText().toString()) == true;
     }
 
     /**
@@ -351,7 +351,7 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
 
             try {
                 // Simulate network access.
-                Thread.sleep(2000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 return false;
             }

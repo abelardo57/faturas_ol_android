@@ -18,11 +18,15 @@
     <string name="action_register">Registar</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">E-Mail invalido</string>
+    <string name="error_invalid_email_exists">E-Mail já em utilização</string>
     <string name="error_invalid_password">Password curta</string>
     <string name="error_incorrect_password">Password incorreta</string>
     <string name="error_invalid_username">Username inválido (Max 16 caracteres)</string>
+    <string name="error_invalid_username_exists">Username já em utilização</string>
     <string name="error_invalid_nif">NIF invalido (9 caracteres)</string>
-    <string name="error_invalid_telemovel">Telemovel invalido invalido (9 caracteres)</string>
+    <string name="error_invalid_nif_exists">NIF já registado</string>
+    <string name="error_invalid_telemovel">Telemovel invalido (9 caracteres)</string>
+    <string name="error_invalid_telemovel_exists">Telemóvel já em utilização</string>
     <string name="error_field_required">Necessario preencher este campo</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
