@@ -6,12 +6,22 @@ package amsi.dei.estg.ipleiria.pt.faturasol.Classes;
 
 public class Fatura_Cliente {
 
+    private long id;
     private int id_fatura;
     private int numero_cartao_cliente;
 
-    public Fatura_Cliente(int id_fatura, int numero_cartao_cliente) {
+    public Fatura_Cliente(long id,int id_fatura, int numero_cartao_cliente) {
+        this.id = id;
         this.id_fatura = id_fatura;
         this.numero_cartao_cliente = numero_cartao_cliente;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public int getId_fatura() {
@@ -33,7 +43,8 @@ public class Fatura_Cliente {
     @Override
     public String toString() {
         return "Fatura_Cliente{" +
-                "id_fatura=" + id_fatura +
+                "id=" + id +
+                ",id_fatura=" + id_fatura +
                 ", numero_cartao_cliente=" + numero_cartao_cliente +
                 '}';
     }

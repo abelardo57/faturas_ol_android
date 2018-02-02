@@ -16,15 +16,15 @@ public class Fatura {
     private int numero;
     private Date data;
     private String imagem_path;
-    private int is_fav;
+    private int favorito;
 
 
-    public Fatura(int id, int numero, Date data, String imagem_path, int is_fav) {
+    public Fatura(int id, int numero, Date data, String imagem_path, int favorito) {
         this.id = id;
         this.numero = numero;
         this.data = data;
         this.imagem_path = imagem_path;
-        this.is_fav = is_fav;
+        this.favorito = favorito;
     }
 
     public long getId() {
@@ -60,11 +60,11 @@ public class Fatura {
     }
 
     public int getIs_fav() {
-        return is_fav;
+        return favorito;
     }
 
     public void setIs_fav(int is_fav) {
-        this.is_fav = is_fav;
+        this.favorito = favorito;
     }
 
     @Override
@@ -74,7 +74,7 @@ public class Fatura {
                 ", numero=" + numero +
                 ", data=" + data +
                 ", imagem_path=" + imagem_path +
-                ", is_fav=" + is_fav +
+                ", is_fav=" + favorito +
                 '}';
     }
 

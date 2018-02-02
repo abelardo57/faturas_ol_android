@@ -79,7 +79,7 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
 
         //SingletonF_OL.getInstance(getApplicationContext()).GerarClientes();
         SingletonF_OL.getInstance(getApplicationContext()).GerarEmpresa();
-        SingletonF_OL.getInstance(getApplicationContext()).GerarFaturas();
+        //SingletonF_OL.getInstance(getApplicationContext()).GerarFaturas();
 
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -115,7 +115,7 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
             }
         });
 
-        Button registar = findViewById(R.id.button_registar);
+        Button registar = findViewById(R.id.btnRegistar);
         registar.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {

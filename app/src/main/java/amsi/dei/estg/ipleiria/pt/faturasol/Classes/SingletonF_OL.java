@@ -114,9 +114,30 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
     public void adicionarFaturasDefinitivasBD(ArrayList<Fatura> faturas){
 
         for (Fatura fatura: faturas) {
-            faturaDBHelper.adiconarFaturaDB(fatura);
+            faturaDBHelper.adicionarFaturaDB(fatura);
+
+            adicionarFaturaClienteBD(fatura);
+
+            adicionarFaturaEmpresa(fatura);
         }
+
+        /** adicionar relação fatura_cliente*/
+
+        /** adicionar relação fatura_empresa*/
+
     }
+
+    public void adicionarFaturaClienteBD(Fatura fatura){
+        // TODO: 02/02/2018 foreach fatura get id --> set id_fatura = fatura.id e numero_cartao_cliente = cliente.numero_cartao; i++
+        long id_fatura = fatura.getId();
+    }
+
+    public void adicionarFaturaEmpresa(Fatura fatura){
+        // TODO: 02/02/2018 foreach fatura get id --> set id_fatura = fatura.id e id_empresa = empresa.id; i++
+    }
+
+
+
 
     public ArrayList<Cliente> getClientes(){
         return faturaDBHelper.getAllClientesBD();

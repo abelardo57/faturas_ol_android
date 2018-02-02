@@ -225,19 +225,36 @@ import java.util.Date;
         return null;
     }
 
-    public Fatura adiconarFaturaDB(Fatura fatura){
+    public Fatura adicionarFaturaDB(Fatura fatura){
         ContentValues value = new ContentValues();
 
         value.put("id", fatura.getId());
         value.put("numero", fatura.getNumero());
         value.put("data", String.valueOf(fatura.getData()));
         value.put("imagem_path", fatura.getImagem_path());
-        value.put("is_fav", fatura.getIs_fav());
+        value.put("favorito", fatura.getIs_fav());
         long id = this.database.insert("fatura", null, value);
         if (id > -1){
             System.out.println("--> INSERIU BD ID: " + id);
             fatura.setId(id);
             return fatura;
+        }
+
+        return null;
+    }
+
+
+    public Fatura_Cliente adicionarFaturaClienteDB(Fatura_Cliente faturaCliente){
+        ContentValues value = new ContentValues();
+
+        value.put("id", faturaCliente.getId());
+        value.put("id_fatura", faturaCliente.getId_fatura());
+        value.put("numero_cartaocliente", faturaCliente.getNumero_cartao_cliente());
+        long id = this.database.insert("fatura_cliente", null, value);
+        if (id > -1){
+            System.out.println("--> INSERIU BD ID: " + id);
+            faturaCliente.setId(id);
+            return faturaCliente;
         }
 
         return null;
@@ -399,8 +416,9 @@ import java.util.Date;
         Cursor cursor = this.database.rawQuery(sql,null);
         if(cursor.moveToFirst()){
             do{
-                Fatura_Empresa auxFaturaEmpresa = new Fatura_Empresa(cursor.getInt(0),
-                        cursor.getInt(1));
+                Fatura_Empresa auxFaturaEmpresa = new Fatura_Empresa(cursor.getLong(0),
+                        cursor.getInt(1),
+                        cursor.getInt(2));
                 auxFaturaEmpresa.setId_fatura(cursor.getInt(0));
                 faturaempresa.add(auxFaturaEmpresa);
 
@@ -415,8 +433,9 @@ import java.util.Date;
         Cursor cursor = this.database.rawQuery(sql,null);
         if(cursor.moveToFirst()){
             do{
-                Fatura_Cliente auxFaturaCliente = new Fatura_Cliente(cursor.getInt(0),
-                        cursor.getInt(1));
+                Fatura_Cliente auxFaturaCliente = new Fatura_Cliente(cursor.getLong(0),
+                        cursor.getInt(1),
+                        cursor.getInt(2));
                 auxFaturaCliente.setId_fatura(cursor.getInt(0));
                 faturacliente.add((auxFaturaCliente));
             }while(cursor.moveToNext());
