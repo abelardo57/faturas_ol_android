@@ -153,20 +153,25 @@ public class MenuActivity extends AppCompatActivity {
 
     public void gerarFaturas(){
         Random random = new Random();
-        int num = random.nextInt(999999999 - 100000000);
+        int num1 = random.nextInt(999999999 - 100000000);
+        int num2 = random.nextInt(999999999 - 100000000);
+        int num3 = random.nextInt(999999999 - 100000000);
+        int num4 = random.nextInt(999999999 - 100000000);
+        int num5 = random.nextInt(999999999 - 100000000);
+        int num6 = random.nextInt(999999999 - 100000000);
 
         faturas = SingletonF_OL.getInstance(getApplicationContext()).getFatura();
-        SingletonF_OL.getInstance(getApplicationContext()).adicionarFaturasDefinitivasBD(new Fatura(faturas.size()+1, num,currentTime,"",1));
+        SingletonF_OL.getInstance(getApplicationContext()).adicionarFaturasDefinitivasBD(new Fatura(faturas.size()+1, random.nextInt(999999999-100000000),currentTime,"",1));
         faturas = SingletonF_OL.getInstance(getApplicationContext()).getFatura();
-        SingletonF_OL.getInstance(getApplicationContext()).adicionarFaturasDefinitivasBD(new Fatura (faturas.size()+1, num, currentTime,"",1));
+        SingletonF_OL.getInstance(getApplicationContext()).adicionarFaturasDefinitivasBD(new Fatura (faturas.size()+1, random.nextInt(999999999-100000000), currentTime,"",1));
         faturas = SingletonF_OL.getInstance(getApplicationContext()).getFatura();
-        SingletonF_OL.getInstance(getApplicationContext()).adicionarFaturasDefinitivasBD(new Fatura (faturas.size()+1, num, currentTime,"",1));
+        SingletonF_OL.getInstance(getApplicationContext()).adicionarFaturasDefinitivasBD(new Fatura (faturas.size()+1, random.nextInt(999999999-100000000), currentTime,"",1));
         faturas = SingletonF_OL.getInstance(getApplicationContext()).getFatura();
-        SingletonF_OL.getInstance(getApplicationContext()).adicionarFaturasDefinitivasBD(new Fatura (faturas.size()+1, num, currentTime,"",1));
+        SingletonF_OL.getInstance(getApplicationContext()).adicionarFaturasDefinitivasBD(new Fatura (faturas.size()+1, random.nextInt(999999999-100000000), currentTime,"",1));
         faturas = SingletonF_OL.getInstance(getApplicationContext()).getFatura();
-        SingletonF_OL.getInstance(getApplicationContext()).adicionarFaturasDefinitivasBD(new Fatura (faturas.size()+1, num, currentTime,"",1));
+        SingletonF_OL.getInstance(getApplicationContext()).adicionarFaturasDefinitivasBD(new Fatura (faturas.size()+1, random.nextInt(999999999-100000000), currentTime,"",1));
         faturas = SingletonF_OL.getInstance(getApplicationContext()).getFatura();
-        SingletonF_OL.getInstance(getApplicationContext()).adicionarFaturasDefinitivasBD(new Fatura (faturas.size()+1, num, currentTime,"",1));
+        SingletonF_OL.getInstance(getApplicationContext()).adicionarFaturasDefinitivasBD(new Fatura (faturas.size()+1, random.nextInt(999999999-100000000), currentTime,"",1));
     }
 
     public void associarFaturaEmpresa(){
@@ -174,11 +179,9 @@ public class MenuActivity extends AppCompatActivity {
         faturas = SingletonF_OL.getInstance(getApplicationContext()).getFatura();
         empresas = SingletonF_OL.getInstance(getApplicationContext()).getEmpresas();
 
-        int randEmpid = random.nextInt(empresas.size());
-
         for (int i = 1; i == faturas.size(); i++) {
             faturaEmpresas = SingletonF_OL.getInstance(getApplicationContext()).getFaturasEmpresa();
-            SingletonF_OL.getInstance(getApplicationContext()).adicionarFaturaEmpresa(faturaEmpresas.size() + 1, i, randEmpid);
+            SingletonF_OL.getInstance(getApplicationContext()).adicionarFaturaEmpresa(faturaEmpresas.size() + 1, i, random.nextInt(empresas.size()));
         }
     }
 
