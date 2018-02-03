@@ -83,7 +83,7 @@ public class JsonParser {
 
                 long id = empresa.getInt("id");
                 String nome = empresa.getString("nome");
-                int nif = empresa.getInt("nif");
+                String nif = empresa.getString("nif");
                 String morada = empresa.getString("morada");
 
                 Empresa auxEmpresa = new Empresa(id,nome,nif,morada);
@@ -106,7 +106,7 @@ public class JsonParser {
 
             long id = empresa.getInt("id");
             String nome = empresa.getString("nome");
-            int nif = empresa.getInt("nif");
+            String nif = empresa.getString("nif");
             String morada = empresa.getString("morada");
 
             auxEmpresa = new Empresa(id,nome,nif,morada);

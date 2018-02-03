@@ -34,8 +34,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
+import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Cliente;
+import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Empresa;
+import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Fatura;
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.SingletonF_OL;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -71,15 +76,31 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
     private View mProgressView;
     private View mLoginFormView;
 
+    private ArrayList<Empresa> empresas = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
 
-        //SingletonF_OL.getInstance(getApplicationContext()).GerarClientes();
-        SingletonF_OL.getInstance(getApplicationContext()).GerarEmpresa();
-        /**SingletonF_OL.getInstance(getApplicationContext()).GerarFaturas();*/
+        /**SingletonF_OL.getInstance(getApplicationContext()).GerarClientes();
+        //SingletonF_OL.getInstance(getApplicationContext()).GerarEmpresa();
+        //SingletonF_OL.getInstance(getApplicationContext()).GerarFaturas();*/
+
+        /** GERAR empresas */
+        //gerarEmpresas();
+
+        /**GERAR FATURAS*/
+        //gerarFaturas()
+
+        /** mostra empresas na base de dados (consola) */
+        empresas = SingletonF_OL.getInstance(getApplicationContext()).getEmpresas();
+
+        for (Empresa empresa: empresas) {
+            System.out.println("-->"+empresa);
+        }
+        /**end of test */
 
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -394,5 +415,19 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
             showProgress(false);
         }
     }
+
+    public void gerarEmpresas(){
+        empresas = SingletonF_OL.getInstance(getApplicationContext()).getEmpresas();
+        //SingletonF_OL.getInstance(getApplicationContext()).adicionarEmpresa(new Empresa( 0, "Faturas User", "504789456", "Avenida do Brazil"));
+        empresas = SingletonF_OL.getInstance(getApplicationContext()).getEmpresas();
+        SingletonF_OL.getInstance(getApplicationContext()).adicionarEmpresa(new Empresa( empresas.size()+1, "Verten", "504786321", "Praça do Mandarim"));
+        empresas = SingletonF_OL.getInstance(getApplicationContext()).getEmpresas();
+        SingletonF_OL.getInstance(getApplicationContext()).adicionarEmpresa(new Empresa( empresas.size()+2, "Pinga Douce", "504853178", "Rua dos Prados Brancos"));
+        empresas = SingletonF_OL.getInstance(getApplicationContext()).getEmpresas();
+        SingletonF_OL.getInstance(getApplicationContext()).adicionarEmpresa(new Empresa( empresas.size()+3, "Zumbo", "504368159", "Praça D'ouro"));
+    }
+
+
+
 }
 

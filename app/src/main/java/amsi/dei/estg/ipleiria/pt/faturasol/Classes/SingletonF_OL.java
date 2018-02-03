@@ -81,8 +81,8 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
         //GerarEmpresa();
     }
 
-
-    public void GerarClientes(){
+/**nao mais necessario //
+    /*public void GerarClientes(){
         clientes.add(new Cliente ( 10000000, "Rodrigo Paião", "RodriP@gmail.com", "RodriP22", "123456", "39219383", "293857261","autkey")  );
         clientes.add(new Cliente ( 10000001, "Catarina Sales", "CataSal@gmail.com", "CataS", "123456", "39219383", "293857261", "authkey")  );
         clientes.add(new Cliente ( 10000002, "Miguel Faria", "FariaM@gmail.com", "RodriP22", "123456", "39219383", "293857261", "authkey")  );
@@ -90,23 +90,23 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
         clientes.add(new Cliente ( 10000004, "Luís Tiago", "LiagoTuis@gmail.com", "RodriP22", "123456", "39219383", "293857261", "authkey")  );
         clientes.add(new Cliente ( 10000005, "Joana Mateus", "JoanaM@gmail.com", "RodriP22", "123456", "39219383", "293857261", "authkey")  );
         clientes.add(new Cliente ( 10000006, "Rodrigo Araujo", "AraujoRRDigo@gmail .com", "RodriP22", "123456", "39219383", "293857261", "authkey")  );
-    }
+    }*/
     public void GerarEmpresa (){
 
-        empresa.add(new Empresa( 0, "Faturas User", 339293823, "Avenida do Brazil"));
-        empresa.add(new Empresa( 1, "Jumbo", 383827183, "Praça do Mandarim"));
-        empresa.add(new Empresa( 2, "Pingo Doce", 458828353, "Rua dos Prados Brancos"));
-        empresa.add(new Empresa( 3, "Radio Popular", 990381290, "Praça D'ouro"));
+        empresa.add(new Empresa( 1, "Faturas User", "504789456", "Avenida do Brazil"));
+        empresa.add(new Empresa( 2, "Verten", "504786321", "Praça do Mandarim"));
+        empresa.add(new Empresa( 3, "Pinga Douce", "504853178", "Rua dos Prados Brancos"));
+        empresa.add(new Empresa( 4, "Zumbo", "504368159", "Praça D'ouro"));
 
     }
-    /*public void GerarFaturas() {
-        fatura.add(new Fatura (0, 10001, currentTime,"",1));
-        fatura.add(new Fatura (0, 10001, currentTime,"",1));
-        fatura.add(new Fatura (0, 10001, currentTime,"",1));
-        fatura.add(new Fatura (0, 10001, currentTime,"",1));
-        fatura.add(new Fatura (0, 10001, currentTime,"",1));
-        fatura.add(new Fatura (0, 10001, currentTime,"",1));
-    }*/
+    public void GerarFaturas() {
+        fatura.add(new Fatura (1, 10001, currentTime,"",1));
+        fatura.add(new Fatura (2, 10001, currentTime,"",1));
+        fatura.add(new Fatura (3, 10001, currentTime,"",1));
+        fatura.add(new Fatura (4, 10001, currentTime,"",1));
+        fatura.add(new Fatura (5, 10001, currentTime,"",1));
+        fatura.add(new Fatura (6, 10001, currentTime,"",1));
+    }
 
     public void registarClienteBD(Cliente cliente){
         /**faturaDBHelper.removerAllClientesBD();
@@ -114,33 +114,33 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
         faturaDBHelper.adicionarClienteBD(cliente);
     }
 
-    public void adicionarFaturasDefinitivasBD(ArrayList<Fatura> faturas){
+    public void adicionarEmpresa(Empresa empresas){
+        faturaDBHelper.adicionarEmpresaDB(empresas);
+    }
 
-        for (Fatura fatura: faturas) {
+    public void adicionarFaturasDefinitivasBD(Fatura fatura){
+
+
             faturaDBHelper.adicionarFaturaDB(fatura);
 
-            adicionarFaturaClienteBD(fatura);
-
-            adicionarFaturaEmpresa(fatura);
-        }
-
         /** adicionar relação fatura_cliente*/
-
-        /** adicionar relação fatura_empresa*/
-
+            adicionarFaturaClienteBD(fatura);
     }
+
 
     public void adicionarFaturaClienteBD(Fatura fatura){
         // TODO: 02/02/2018 foreach fatura get id --> set id_fatura = fatura.id e numero_cartao_cliente = cliente.numero_cartao; i++
-
+        ArrayList<Fatura> faturas = new ArrayList<>();
         long id_fatura = fatura.getId();
 
-        faturaDBHelper.adicionarFaturaClienteDB(new Fatura_Cliente(0, (int) id_fatura,(int) CurrentUser));
+        faturas = getFatura();
+        faturaDBHelper.adicionarFaturaClienteDB(new Fatura_Cliente(faturas.size()+1, (int) id_fatura,(int) CurrentUser));
     }
 
-    public void adicionarFaturaEmpresa(Fatura fatura){
+    public void adicionarFaturaEmpresa(long id, int id_fatura,int id_empresa){
         // TODO: 02/02/2018 foreach fatura get id --> set id_fatura = fatura.id e id_empresa = empresa.id; i++
-        long id_fatura = fatura.getId();
+
+        faturaDBHelper.adicionarFaturaEmpresaDB(new Fatura_Empresa(id,id_fatura,id_empresa));
     }
 
 
@@ -149,11 +149,19 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
     public ArrayList<Cliente> getClientes(){
         return faturaDBHelper.getAllClientesBD();
     }
-    public ArrayList getEmpresa(){
-        return empresa;
+    public ArrayList getEmpresas(){
+        return faturaDBHelper.getAllEmpresasBD();
     }
     public ArrayList getFatura() {
-        return fatura;
+        return faturaDBHelper.getAllFaturasBD();
+    }
+
+    public ArrayList getFaturasEmpresa() {
+        return faturaDBHelper.getAllFaturasEmpresaBD();
+    }
+
+    public ArrayList getFaturaCliente() {
+        return faturaDBHelper.getAllFaturasClientesBD();
     }
 
     public int getTotalFaturas()
@@ -217,7 +225,6 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
         }while(i < fatura.size());
         return total;
     }*/
-
 
 
     public int CheckFav(String numero_fatura){
@@ -296,17 +303,25 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
         String username;
         int i = 0;
         clientes = getClientes();
-        do{
-            username = clientes.get(i).getUsername().toString();
-            if(Username.equals(username))
-            {
-                check = true;
-            }
-            else {i++;}
-        }
-        while(!check && i != clientes.size());
 
-        return check;
+        if (clientes.size()==0){
+            return false;
+        }
+        else {
+
+            do {
+                username = clientes.get(i).getUsername().toString();
+
+                if (Username.equals(username)) {
+                    check = true;
+                } else {
+                    i++;
+                }
+            }
+            while (!check && i != clientes.size());
+
+            return check;
+        }
     }
 
     public boolean chekEmail(String Email) {
@@ -314,17 +329,22 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
         String _email;
         int i = 0;
         clientes = getClientes();
-        do{
-            _email = clientes.get(i).getEmail().toString();
-            if(Email.equals(_email))
-            {
-                check = true;
-            }
-            else {i++;}
-        }
-        while(!check && i != clientes.size());
 
-        return check;
+        if (clientes.size() == 0) {
+            return false;
+        } else {
+            do {
+                _email = clientes.get(i).getEmail().toString();
+                if (Email.equals(_email)) {
+                    check = true;
+                } else {
+                    i++;
+                }
+            }
+            while (!check && i != clientes.size());
+
+            return check;
+        }
     }
 
     public boolean checkNIF(String NIF) {
@@ -332,17 +352,23 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
         String _nif;
         int i = 0;
         clientes = getClientes();
-        do{
-            _nif = clientes.get(i).getNif().toString();
-            if(NIF.equals(_nif))
-            {
-                check = true;
-            }
-            else {i++;}
-        }
-        while(!check && i != clientes.size());
 
-        return check;
+        if (clientes.size()==0){
+            return false;
+        }
+        else {
+            do {
+                _nif = clientes.get(i).getNif().toString();
+                if (NIF.equals(_nif)) {
+                    check = true;
+                } else {
+                    i++;
+                }
+            }
+            while (!check && i != clientes.size());
+
+            return check;
+        }
     }
 
     public boolean checkTele(String Tele) {
@@ -350,23 +376,27 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
         String _tele;
         int i = 0;
         clientes = getClientes();
-        do{
-            _tele = clientes.get(i).getTelemovel().toString();
-            if(Tele.equals(_tele))
-            {
-                check = true;
-            }
-            else {i++;}
+
+        if (clientes.size()==0){
+            return false;
         }
-        while(!check && i != clientes.size());
+        else {
+            do {
+                _tele = clientes.get(i).getTelemovel().toString();
+                if (Tele.equals(_tele)) {
+                    check = true;
+                } else {
+                    i++;
+                }
+            }
+            while (!check && i != clientes.size());
 
-        return check;
+            return check;
+        }
     }
-
 /** */
 
-    public void AlterarUser(String username, String email, String telemovel, String password)
-    {
+    public void AlterarUser(String username, String email, String telemovel, String password) {
         int i = 0;
         do{
             if(clientes.get(i).getUsername().equals(username));
@@ -423,6 +453,7 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
         }while(i<fatura.size());
 
     }*/
+
     public int getClientePosition(){
         int i = 0;
         while(i<clientes.size())
@@ -437,6 +468,7 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
     public void adicionarCustomFaturaDB(Custom_Fatura custom_fatura){
         faturaDBHelper.adicionarCustomFaturaDB(custom_fatura);
     }
+
     public void removerCustomFaturaBD(int value) {
 
         if (custom_faturas.get(value) != null){
@@ -446,6 +478,7 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
         }
 
     }
+
     public void editarCustomFaturaBD(int value, Custom_Fatura custom_fatura){
 
         if (custom_faturas.get(value) != null){
@@ -500,9 +533,11 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
     }
 
 
+/** PORQUE E Q ESTA AQUI UMA CONFIRMAÇÃO !? */
     public final static boolean isEmailValid(CharSequence target) {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
     }
+/** */
 
     public void setClientesListener(FaturasolListener listener){
         this.listener = listener;
