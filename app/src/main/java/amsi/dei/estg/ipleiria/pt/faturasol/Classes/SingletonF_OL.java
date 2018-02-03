@@ -109,8 +109,8 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
     }*/
 
     public void registarClienteBD(Cliente cliente){
-        faturaDBHelper.removerAllClientesBD();
-
+        /**faturaDBHelper.removerAllClientesBD();
+*/
         faturaDBHelper.adicionarClienteBD(cliente);
     }
 
@@ -260,6 +260,8 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
         }while(i<fatura.size());
     }
 
+
+    /** Verificações login */
     public boolean checkLogin(String Username, String Password) {
         boolean check = false;
         String username;
@@ -288,7 +290,7 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
     }
 
 
-/** verificação login */
+    /** Verificações registo de campos existentes */
     public boolean checkUser(String Username) {
         boolean check = false;
         String username;
@@ -302,12 +304,11 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
             }
             else {i++;}
         }
-        while(check == false);
+        while(!check && i != clientes.size());
 
         return check;
     }
 
-/** Verificações registo de campos existentes */
     public boolean chekEmail(String Email) {
         boolean check = false;
         String _email;
@@ -321,7 +322,7 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
             }
             else {i++;}
         }
-        while(check == false);
+        while(!check && i != clientes.size());
 
         return check;
     }
@@ -339,7 +340,7 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
             }
             else {i++;}
         }
-        while(check == false);
+        while(!check && i != clientes.size());
 
         return check;
     }
@@ -357,7 +358,7 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
             }
             else {i++;}
         }
-        while(check == false);
+        while(!check && i != clientes.size());
 
         return check;
     }
