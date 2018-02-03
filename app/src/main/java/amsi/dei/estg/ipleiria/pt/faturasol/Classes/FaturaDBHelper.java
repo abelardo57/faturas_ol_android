@@ -207,7 +207,7 @@ import java.util.Date;
 
         ContentValues value = new ContentValues();
 
-        value.put("numero_cartao", cliente.getNumero_cartao());
+        //value.put("numero_cartao", cliente.getNumero_cartao());
         value.put("nome", cliente.getNome());
         value.put("email", cliente.getEmail());
         value.put("username", cliente.getUsername());
