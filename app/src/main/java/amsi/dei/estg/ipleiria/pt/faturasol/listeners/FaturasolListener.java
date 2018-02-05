@@ -3,6 +3,7 @@ package amsi.dei.estg.ipleiria.pt.faturasol.listeners;
 import java.util.ArrayList;
 
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Cliente;
+import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Custom_Fatura;
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Empresa;
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Fatura;
 
@@ -23,4 +24,8 @@ public interface FaturasolListener {
     void onRefreshEmpresas(ArrayList<Empresa> listaEmpresas);
 
     void onUpdateEmpresas(Empresa empresa, int operação);
+
+    void onRefreshCustomFaturas(ArrayList<Custom_Fatura> listaCustomFaturas);
+
+    void onUpdateCustomFaturas(Custom_Fatura custom_fatura, int operação);
 }

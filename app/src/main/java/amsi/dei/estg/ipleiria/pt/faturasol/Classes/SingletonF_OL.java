@@ -543,6 +543,10 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
         this.listener = listener;
     }
 
+    public void setCustomFaturasListener(FaturasolListener listener){
+        this.listener = listener;
+    }
+
     @Override
     public void onRefreshFaturas(ArrayList<Fatura> listaFaturas) {
 
@@ -570,6 +574,16 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
 
     @Override
     public void onUpdateEmpresas(Empresa empresa, int operação) {
+
+    }
+
+    @Override
+    public void onRefreshCustomFaturas(ArrayList<Custom_Fatura> listaCustomFaturas) {
+
+    }
+
+    @Override
+    public void onUpdateCustomFaturas(Custom_Fatura custom_fatura, int operação) {
 
     }
 }
