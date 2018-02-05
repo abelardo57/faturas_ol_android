@@ -23,4 +23,6 @@ public interface FaturasolListener {
     void onRefreshEmpresas(ArrayList<Empresa> listaEmpresas);
 
     void onUpdateEmpresas(Empresa empresa, int operação);
+
+
 }

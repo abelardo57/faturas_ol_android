@@ -10,15 +10,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Cliente;
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Empresa;
+import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Fatura;
 
 /**
  * Created by Abel_ on 19/01/2018.
  */
 
 public class JsonParser {
+
+
     public static ArrayList parserJsonClientes(JSONArray response, Context context){
         System.out.println("--> Parser Lista Livros: " + response.toString());
 
@@ -120,6 +125,56 @@ public class JsonParser {
     }
 
 
+    public static ArrayList parserJsonFaturas(JSONArray response, Context context){
+        System.out.println("--> Parser Lista Faturas: " + response.toString());
+
+        ArrayList<Fatura> tempListaClientes = new ArrayList<Fatura>();
+        try {
+            for (int i = 0; i<response.length(); i++){
+                JSONObject fatura = (JSONObject) response.get(i);
+
+                long id = fatura.getInt("id");
+                int numero = fatura.getInt("nome");
+                //Date data = fatura.getString("data");
+                Date data = Calendar.getInstance().getTime();
+                String imagem_path = fatura.getString("imagem_path");
+                int favorito = fatura.getInt("favorito");
+
+                Fatura auxFaturas = new Fatura(id,numero,data,imagem_path,favorito);
+
+                tempListaClientes.add(auxFaturas);
+            }
+        }catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        return tempListaClientes;
+    }
+
+    public static Fatura parserJsonFatura(String response, Context context){
+        System.out.println("--> Parser Fatura: " + response.toString());
+
+        Fatura auxFatura = null;
+
+        try {
+            JSONObject fatura = new JSONObject(response);
+
+            long id = fatura.getInt("id");
+            int numero = fatura.getInt("nome");
+            //Date data = fatura.getString("data");
+            Date data = Calendar.getInstance().getTime();
+            String imagem_path = fatura.getString("imagem_path");
+            int favorito = fatura.getInt("favorito");
+
+
+            auxFatura = new Fatura(id,numero,data,imagem_path,favorito);
+
+        }catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        return auxFatura;
+    }
 
     public static Boolean isConnectionInternet(Context context){
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

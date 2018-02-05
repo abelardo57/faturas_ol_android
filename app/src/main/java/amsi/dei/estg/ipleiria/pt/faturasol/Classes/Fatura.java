@@ -19,7 +19,7 @@ public class Fatura {
     private int favorito;
 
 
-    public Fatura(int id, int numero, Date data, String imagem_path, int favorito) {
+    public Fatura(long id, int numero, Date data, String imagem_path, int favorito) {
         this.id = id;
         this.numero = numero;
         this.data = data;
