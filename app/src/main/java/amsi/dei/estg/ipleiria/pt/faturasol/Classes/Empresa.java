@@ -8,10 +8,10 @@ public class Empresa {
 
     private long id;
     private String nome;
-    private int nif;
+    private String nif;
     private String morada;
 
-    public Empresa(long id, String nome, int nif, String morada) {
+    public Empresa(long id, String nome, String nif, String morada) {
         this.id = id;
         this.nome = nome;
         this.nif = nif;
@@ -22,7 +22,7 @@ public class Empresa {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -34,11 +34,11 @@ public class Empresa {
         this.nome = nome;
     }
 
-    public int getNif() {
+    public String getNif() {
         return nif;
     }
 
-    public void setNif(int nif) {
+    public void setNif(String nif) {
         this.nif = nif;
     }
 

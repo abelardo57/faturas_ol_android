@@ -65,15 +65,18 @@ public class Registar extends AppCompatActivity {
 
         //TODO confirmação e-mail(igual,estrutura), username(igual), password, nif e telemovel(comprimento)
 
-        tentaRegisto();
-
         if (tentaRegisto() == true)
         {
             //TODO hash da password
+            long id = clientes.size()+1;
 
-            SingletonF_OL.getInstance(getApplicationContext()).registarClienteBD(new Cliente(0,vNome.getText().toString(),vEmail.getText().toString(),vUsername.getText().toString(),vPassword.getText().toString(), vTelemovel.getText().toString(),vNIF.getText().toString(),"nemInteressaSequeresSaber"));
+            SingletonF_OL.getInstance(getApplicationContext()).registarClienteBD(new Cliente(id,vNome.getText().toString(),vEmail.getText().toString(),vUsername.getText().toString(),vPassword.getText().toString(), vTelemovel.getText().toString(),vNIF.getText().toString(),"nemInteressaSeQueresSaber"));
 
             finish();
+        }
+        else {
+            /** num da*/
+            System.out.println("--> ta certo sqn");
         }
 
     }
@@ -119,7 +122,6 @@ public class Registar extends AppCompatActivity {
         vNIF.setError(null);
         vTelemovel.setError(null);
 
-        // Store values at the time of the login attempt.
         String nome = vNome.getText().toString();
         String email = vEmail.getText().toString();
         String password = vPassword.getText().toString();
@@ -127,6 +129,8 @@ public class Registar extends AppCompatActivity {
         String username = vUsername.getText().toString();
         String nif = vNIF.getText().toString();
         String telemovel = vTelemovel.getText().toString();
+
+
 
         boolean cancel = false;
         View focusView = null;
@@ -185,7 +189,7 @@ public class Registar extends AppCompatActivity {
         }
 
         /** Check for a valid nif.*/
-        if (nif.trim().isEmpty()) {
+        if (TextUtils.isEmpty(nif)) {
             vNIF.setError(getString(R.string.error_field_required));
             focusView = vNIF;
             cancel = true;
@@ -217,7 +221,7 @@ public class Registar extends AppCompatActivity {
             cancel = true;
         }
 
-        if (cancel) {
+        if (cancel == true) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();

@@ -21,25 +21,28 @@ import java.util.Date;
 
     //CLIENTE
 
-    /*private static final String NUMERO_CARTAO ="numero_cartao";
-    private static final String NUMERO_CARTAO ="numero_cartao";
-    private static final String NUMERO_CARTAO ="numero_cartao";
-    private static final String NUMERO_CARTAO ="numero_cartao";
-    private static final String NUMERO_CARTAO ="numero_cartao";*/
+    private static final String T_CLIENTE ="cliente";
+    private static final String T_CUSTOMFATURA ="customfatura";
+    private static final String T_CUSTOMFATURACLIENTE ="custom_fatura_cliente";
+    private static final String T_EMPRESA ="empresa";
+    private static final String T_FATURA ="fatura";
+    private static final String T_FATURACLIENTE ="fatura_cliente";
+    private static final String T_FATURAEMPRESA ="fatura_empresa";
+    private static final String T_LINHAFATURA ="linha_fatura";
 
 
 
     public FaturaDBHelper(Context context)
     {
-        super(context, "faturasol", null, 1);
+        super(context, "faturasol", null, 4);
         this.database = this.getWritableDatabase();
     }
 
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createFaturaTables = "CREATE TABLE cliente (" +
-                "  numero_cartao INTEGER PRYMARY KEY AUTOINCREMENT,"+
+        String cliente = "CREATE TABLE cliente (" +
+                "  numero_cartao INTEGER PRYMARY KEY,"+
                 "  nome TEXT NOT NULL," +
                 "  email TEXT NOT NULL," +
                 "  username TEXT NOT NULL," +
@@ -47,52 +50,54 @@ import java.util.Date;
                 "  telemovel TEXT DEFAULT NULL," +
                 "  nif TEXT NOT NULL," +
                 "  auth_key TEXT NOT NULL" +
-                ");" +
-                "" +
-                "CREATE TABLE customfatura (" +
-                "  id INTEGER NOT NULL PRYMARY KEY AUTOINCREMENT," +
+                ");";
+
+
+        String createCustomFatura = "CREATE TABLE customfatura (" +
+                "  id INTEGER PRYMARY KEY," +
                 "  numero TEXT NOT NULL," +
                 "  data date NOT NULL," +
                 "  nif_empresa TEXT NOT NULL," +
                 "  nome_empresa TEXT NOT NULL," +
                 "  morada_empresa TEXT NOT NULL" +
-                ");" +
-                "" +
-                "CREATE TABLE custom_fatura_cliente (" +
-                "  id INTEGER AUTOINCREMENT PRIMARY KEY,"+
+                ");";
+
+        String customfaturacliente = "CREATE TABLE custom_fatura_cliente (" +
+                "  id INTEGER PRIMARY KEY,"+
                 "  id_custom_faturas INTEGER NOT NULL," +
                 "  numero_cartao_cliente INTEGER NOT NULL" +
-                ");" +
-                "" +
-                "CREATE TABLE empresa (" +
-                "  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                ");";
+
+        String empresa = "CREATE TABLE empresa (" +
+                "  id INTEGER PRIMARY KEY," +
                 "  nome TEXT NOT NULL," +
                 "  nif TEXT NOT NULL," +
                 "  morada TEXT NOT NULL" +
-                ");" +
-                "" +
-                "CREATE TABLE fatura (" +
-                "  id INTEGER NOT NULL," +
+                ");";
+
+        String fatura = "CREATE TABLE fatura (" +
+                "  id INTEGER PRYMARY KEY," +
                 "  numero TEXT NOT NULL," +
                 "  data DATE NOT NULL," +
                 "  imagem_path TEXT DEFAULT NULL," +
                 "  favorito INTEGER NOT NULL DEFAULT '0'" +
-                ");" +
-                "" +
-                "CREATE TABLE fatura_cliente (" +
-                "  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT ,"+
+                ");";
+
+        String faturacliente = "CREATE TABLE fatura_cliente (" +
+                "  id INTEGER PRIMARY KEY,"+
                 "  id_fatura INTEGER NOT NULL," +
                 "  numero_cartao_cliente INTEGER NOT NULL" +
-                ");" +
-                "" +
-                "CREATE TABLE fatura_empresa (" +
-                "  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+
+                ");";
+
+        String faturaempresa = "CREATE TABLE fatura_empresa (" +
+                "  id INTEGER PRIMARY KEY,"+
                 "  id_fatura INTEGER NOT NULL," +
                 "  id_empresa INTEGER NOT NULL" +
-                ");" +
-                "" +
-                "CREATE TABLE linha_fatura (" +
-                "  id INTEGER NOT NULL PRYMARY KEY AUTOINCREMENT," +
+                ");";
+
+
+        String linhafatura = "CREATE TABLE linha_fatura (" +
+                "  id INTEGER PRYMARY KEY," +
                 "  valor_unitario FLOAT NOT NULL," +
                 "  quantidade INTEGER NOT NULL," +
                 "  nome_produto TEXT NOT NULL," +
@@ -100,35 +105,10 @@ import java.util.Date;
                 "  id_fatura INTEGER DEFAULT NULL," +
                 "  id_custom_fatura INTEGER DEFAULT NULL," +
                 "  valor_total FLOAT DEFAULT '0'" +
-                ");" +
-                "" +
-                "CREATE TRIGGER valor_total_final BEFORE INSERT ON linha_fatura FOR EACH ROW BEGIN" +
-                "    SET NEW.valor_total = NEW.valor_unitario*NEW.quantidade;" +
-                "END" +
-                "" +
-                "CREATE TABLE user (" +
-                "  id INTEGER NOT NULL," +
-                "  name TEXT COLLATE utf8_unicode_ci NOT NULL," +
-                "  username TEXT COLLATE utf8_unicode_ci NOT NULL," +
-                "  auth_key TEXT COLLATE utf8_unicode_ci NOT NULL," +
-                "  password_hash TEXT COLLATE utf8_unicode_ci NOT NULL," +
-                "  password_reset_token TEXT COLLATE utf8_unicode_ci DEFAULT NULL," +
-                "  email TEXT COLLATE utf8_unicode_ci NOT NULL," +
-                "  status INTEGER NOT NULL DEFAULT '10'," +
-                "  created_at INTEGER NOT NULL," +
-                "  updated_at INTEGER NOT NULL" +
-                ");" +
-                "" +
-                "CREATE TABLE `migration` (" +
-                "  `version` varchar(180) NOT NULL," +
-                "  `apply_time` int(11) DEFAULT NULL" +
-                ") ENGINE=MyISAM DEFAULT CHARSET=latin1;" +
-                "" +
-                "INSERT INTO `migration` (`version`, `apply_time`) VALUES" +
-                "('m000000_000000_base', 1510673971)," +
-                "('m130524_201442_init', 1510673978);" +
-                "" +
-                "ALTER TABLE cliente" +
+                ");";
+
+
+        String trigger = "ALTER TABLE cliente" +
                 "  ADD PRIMARY KEY (numero_cartao);" +
                 "" +
                 "ALTER TABLE `customfatura`" +
@@ -192,13 +172,29 @@ import java.util.Date;
                 "  ADD CONSTRAINT `linha_fatura_ibfk_1` FOREIGN KEY (`id_fatura`) REFERENCES `fatura` (`id`)," +
                 "  ADD CONSTRAINT `linha_fatura_ibfk_2` FOREIGN KEY (`id_custom_fatura`) REFERENCES `customfatura` (`id`);";
 
-        db.execSQL(createFaturaTables);
+        db.execSQL(cliente);
+        db.execSQL(fatura);
+        db.execSQL(empresa);
+        db.execSQL(faturacliente);
+        db.execSQL(faturaempresa);
+        db.execSQL(createCustomFatura);
+        db.execSQL(customfaturacliente);
+        db.execSQL(linhafatura);
+
+        //db.execSQL(trigger);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        String sql = "DROP DATABASE faturasol";
-        db.execSQL(sql);
+        String sql = "drop table if exists ";
+        db.execSQL(sql + T_CLIENTE);
+        db.execSQL(sql + T_CUSTOMFATURA);
+        db.execSQL(sql + T_CUSTOMFATURACLIENTE);
+        db.execSQL(sql + T_EMPRESA);
+        db.execSQL(sql + T_FATURA);
+        db.execSQL(sql + T_FATURAEMPRESA);
+        db.execSQL(sql + T_FATURACLIENTE);
+        db.execSQL(sql + T_LINHAFATURA);
         this.onCreate(db);
     }
 
@@ -207,7 +203,7 @@ import java.util.Date;
 
         ContentValues value = new ContentValues();
 
-        //value.put("numero_cartao", cliente.getNumero_cartao());
+        value.put("numero_cartao", cliente.getNumero_cartao());
         value.put("nome", cliente.getNome());
         value.put("email", cliente.getEmail());
         value.put("username", cliente.getUsername());
@@ -260,6 +256,22 @@ import java.util.Date;
         return null;
     }
 
+    public Fatura_Empresa adicionarFaturaEmpresaDB(Fatura_Empresa faturaEmpresa){
+        ContentValues value = new ContentValues();
+
+        value.put("id", faturaEmpresa.getId());
+        value.put("id_fatura", faturaEmpresa.getId_fatura());
+        value.put("id_empresa", faturaEmpresa.getId_empresa());
+        long id = this.database.insert("fatura_cliente", null, value);
+        if (id > -1){
+            System.out.println("--> INSERIU BD ID: " + id);
+            faturaEmpresa.setId(id);
+            return faturaEmpresa;
+        }
+
+        return null;
+    }
+
 
     public Custom_Fatura adicionarCustomFaturaDB(Custom_Fatura custom_fatura){
         ContentValues value = new ContentValues();
@@ -274,6 +286,24 @@ import java.util.Date;
             System.out.println("--> INSERIU BD ID: " + id);
             custom_fatura.setId(id);
             return custom_fatura;
+        }
+
+        return null;
+    }
+
+    public Empresa adicionarEmpresaDB(Empresa empresa){
+        ContentValues value = new ContentValues();
+
+        value.put("id", empresa.getId());
+        value.put("nome", empresa.getNome());
+        value.put("nif", empresa.getNif());
+        value.put("morada", empresa.getMorada());
+
+        long id = this.database.insert("empresa", null, value);
+        if (id > -1){
+            System.out.println("--> INSERIU BD ID: " + id);
+            empresa.setId(id);
+            return empresa;
         }
 
         return null;
@@ -362,7 +392,7 @@ import java.util.Date;
             do{
                 Empresa auxEmpresa = new Empresa(cursor.getInt(0),
                         cursor.getString(1),
-                        cursor.getInt(2),
+                        cursor.getString(2),
                         cursor.getString(3));
                 auxEmpresa.setId(cursor.getInt(0));
                 empresa.add(auxEmpresa);
