@@ -1,12 +1,9 @@
 package amsi.dei.estg.ipleiria.pt.faturasol.Classes;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
+import android.database.Cursor;
 import android.text.TextUtils;
-import android.text.method.DateTimeKeyListener;
 import android.util.Patterns;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -16,13 +13,11 @@ import com.android.volley.toolbox.JsonArrayRequest;
 
 import org.json.JSONArray;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import amsi.dei.estg.ipleiria.pt.faturasol.AdicionarFatura;
 import amsi.dei.estg.ipleiria.pt.faturasol.listeners.FaturasolListener;
 import amsi.dei.estg.ipleiria.pt.faturasol.utils.JsonParser;
 
@@ -49,7 +44,7 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
     private ArrayList<Custom_Fatura> custom_faturas;
 
     public Date currentTime = Calendar.getInstance().getTime();
-    public ArrayList<ListLojas>  ArrayListaLojas = new ArrayList<ListLojas>();
+    public ArrayList<ListLojas>  ArrayListaLojas = new ArrayList<>();
     public ArrayList<ListLojaTaloes> arrayListLojaTaloes = new ArrayList<ListLojaTaloes>();
     public long CurrentUser;
     public String CurrentUsername;
@@ -119,7 +114,7 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
     }
 
     public void adicionarFaturasDefinitivasBD(Fatura fatura){
-
+   //         faturaDBHelper.removerAllFaturasBD();
 
             faturaDBHelper.adicionarFaturaDB(fatura);
 
@@ -133,12 +128,15 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
         ArrayList<Fatura> faturas = new ArrayList<>();
         long id_fatura = fatura.getId();
 
+//        faturaDBHelper.removerAllFaturaClienteBD();
+
         faturas = getFatura();
         faturaDBHelper.adicionarFaturaClienteDB(new Fatura_Cliente(faturas.size()+1, (int) id_fatura,(int) CurrentUser));
     }
 
     public void adicionarFaturaEmpresa(long id, int id_fatura,int id_empresa){
         // TODO: 02/02/2018 foreach fatura get id --> set id_fatura = fatura.id e id_empresa = empresa.id; i++
+        //faturaDBHelper.removerAllFaturaEmpresa();
 
         faturaDBHelper.adicionarFaturaEmpresaDB(new Fatura_Empresa(id,id_fatura,id_empresa));
     }
@@ -213,8 +211,6 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
         {
             fatura.add(new Fatura(getTotalFaturas(), Integer.parseInt(numero), currentTime, Integer.parseInt(numero_cartao),0,0));
         }
-
-
     }*/
 
     /**public int GetNumeroFaturasPorLojaCurrentUser(int IdEmpresa){
@@ -400,6 +396,11 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
     }
 /** */
 
+   /* public ArrayList empresaclientecount(){
+        return faturaDBHelper.getEmpresa_ClienteNomeCount((int)CurrentUser);
+    }*/
+
+
     public void AlterarUser(String username, String email, String telemovel, String password) {
         int i = 0;
         do{
@@ -412,14 +413,19 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
         }while(i<clientes.size());
     }
 
-    /**public void FiltrarLojasUser(){
+/**
+    public void FiltrarLojasUser(){
         int i= 0;
         int ii=0;
         boolean check = false;
+
+        ArrayList<Empresa> empresas = new ArrayList<>();
+        empresas = getEmpresas();
+
         do {
             if(ArrayListaLojas.size() == 0)
             {
-                ArrayListaLojas.add(new ListLojas(fatura.get(i).getId_empresa(),empresa.get(fatura.get(i).getId_empresa()).getNome(), GetNumeroFaturasPorLojaCurrentUser(fatura.get(i).getId_empresa())));
+                ArrayListaLojas.add(new ListEmpresa_ClienteCount(empresa.get(i).getId(),empresa.get(fatura.get(i).getId_empresa()).getNome(), GetNumeroFaturasPorLojaCurrentUser(fatura.get(i).getId_empresa())));
                 i++;
             }
             while(ii<ArrayListaLojas.size() )
@@ -429,19 +435,24 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
                     check = true;
                 }
 
-
                 ii++;
             }
             if(check == false)
             {
-                ArrayListaLojas.add(new ListLojas(fatura.get(i).getId_empresa(),empresa.get(fatura.get(i).getId_empresa()).getNome(), GetNumeroFaturasPorLojaCurrentUser(fatura.get(i).getId_empresa())));
+                ArrayListaLojas.add(new ListEmpresa_ClienteCount(fatura.get(i).getId_empresa(),empresa.get(fatura.get(i).getId_empresa()).getNome(), GetNumeroFaturasPorLojaCurrentUser(fatura.get(i).getId_empresa())));
             }
             ii=0;
             check = false;
             i++;
-        }while(i<fatura.size());
 
+            for (Empresa empresa: empresas) {
+                ArrayListaLojas.add(new ListEmpresa_ClienteCount(empresa.getId(),empresa.getNome()));
+            }
+
+        }while(i<fatura.size());
     }
+
+/**
     public void FiltrarTaloesLoja(){
         int i = 0;
         int oke;
@@ -456,7 +467,8 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
             i++;
         }while(i<fatura.size());
 
-    }*/
+    }
+*/
 
     public int getClientePosition(){
         int i = 0;
@@ -537,7 +549,7 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
     }
 
 
-/** PORQUE E Q ESTA AQUI UMA CONFIRMAÇÃO !? */
+/** PORQUE E Q ESTA AQUI UMA CONFIRMAÇÃO !? É PARA O USER OPTIONS MENU PARA ALTERAR O EMAIL DO UTILIZADOR, SERVE PARA VALIDADE SE É UM EMAIL OU NAO*/
     public final static boolean isEmailValid(CharSequence target) {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
     }
