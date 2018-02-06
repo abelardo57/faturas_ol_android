@@ -46,7 +46,6 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
     public ArrayList<Cliente> clientes = new ArrayList<Cliente>();
     public ArrayList<Empresa> empresa = new ArrayList<Empresa>();
     public ArrayList<Fatura> fatura = new ArrayList<Fatura>();
-    public ArrayList<Fatura_Empresa> fatura_empresa = new ArrayList<Fatura_Empresa>();
     private ArrayList<Custom_Fatura> custom_faturas;
 
     public Date currentTime = Calendar.getInstance().getTime();
@@ -431,11 +430,16 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
             }
             if(check == false)
             {
-                ArrayListaLojas.add(new ListLojas(fatura.get(i).getId_empresa(),empresa.get(fatura.get(i).getId_empresa()).getNome(), GetNumeroFaturasPorLojaCurrentUser(fatura.get(i).getId_empresa())));
+                ArrayListaLojas.add(new ListEmpresa_ClienteCount(fatura.get(i).getId_empresa(),empresa.get(fatura.get(i).getId_empresa()).getNome(), GetNumeroFaturasPorLojaCurrentUser(fatura.get(i).getId_empresa())));
             }
             ii=0;
             check = false;
             i++;
+
+            for (Empresa empresa: empresas) {
+                ArrayListaLojas.add(new ListEmpresa_ClienteCount(empresa.getId(),empresa.getNome()));
+            }
+
         }while(i<fatura.size());
 
     }*/
