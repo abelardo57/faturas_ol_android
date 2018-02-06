@@ -44,8 +44,9 @@ public class Custom_Fatura_Cliente {
     @Override
     public String toString() {
         return "Custom_Fatura_Cliente{" +
-                "id_custom_faturas=" + id_custom_faturas +
-                ", numero_cartao_cliente=" + numero_cartao_cliente +
+                "id=" + id +
+                " ,id_custom_faturas=" + id_custom_faturas +
+                " ,numero_cartao_cliente=" + numero_cartao_cliente +
                 '}';
     }
 
