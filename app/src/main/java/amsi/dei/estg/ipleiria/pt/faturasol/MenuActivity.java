@@ -160,11 +160,11 @@ public class MenuActivity extends AppCompatActivity {
         empresas = SingletonF_OL.getInstance(getApplicationContext()).getEmpresas();
         SingletonF_OL.getInstance(getApplicationContext()).adicionarEmpresa(new Empresa(1,"Pingo Doce", "993344558", "Avenida dos Griolos"));
         empresas = SingletonF_OL.getInstance(getApplicationContext()).getEmpresas();
-        SingletonF_OL.getInstance(getApplicationContext()).adicionarEmpresa(new Empresa(1,"Pingo Doce", "993344558", "Avenida dos Griolos"));
+        SingletonF_OL.getInstance(getApplicationContext()).adicionarEmpresa(new Empresa(2,"Worten", "993344558", "Avenida dos Griolos"));
         empresas = SingletonF_OL.getInstance(getApplicationContext()).getEmpresas();
-        SingletonF_OL.getInstance(getApplicationContext()).adicionarEmpresa(new Empresa(1,"Pingo Doce", "993344558", "Avenida dos Griolos"));
+        SingletonF_OL.getInstance(getApplicationContext()).adicionarEmpresa(new Empresa(3,"Radio Popular", "993344558", "Avenida dos Griolos"));
         empresas = SingletonF_OL.getInstance(getApplicationContext()).getEmpresas();
-        SingletonF_OL.getInstance(getApplicationContext()).adicionarEmpresa(new Empresa(1,"Pingo Doce", "993344558", "Avenida dos Griolos"));
+        SingletonF_OL.getInstance(getApplicationContext()).adicionarEmpresa(new Empresa(4,"Modelo", "993344558", "Avenida dos Griolos"));
 
     }
     public void gerarFaturas(){

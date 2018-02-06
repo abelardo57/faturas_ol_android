@@ -5,6 +5,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.text.GetChars;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 
 import amsi.dei.estg.ipleiria.pt.faturasol.Adapters.ListLojaTaloesAdapter;
 import amsi.dei.estg.ipleiria.pt.faturasol.Adapters.ListLojasAdapter;
+import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Empresa;
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Fatura;
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.ListLojaTaloes;
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.SingletonF_OL;
@@ -27,6 +29,7 @@ public class LojaTaloesMenu extends AppCompatActivity {
 
     private TextView lojaView;
     public ListView listViewLojaTaloes;
+    private ArrayList<Empresa> empresa;
     private ArrayList<ListLojaTaloes> listaLojaTaloes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +42,9 @@ public class LojaTaloesMenu extends AppCompatActivity {
 
         //lojaView = (TextView) findViewById(R.id.lojaView);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-        setTitle(SingletonF_OL.getInstance(getApplicationContext()).empresa.get(Integer.parseInt(SingletonF_OL.getInstance(getApplicationContext()).LojaSelecionada)).getNome());
+        empresa = SingletonF_OL.getInstance(getApplicationContext()).getEmpresas();
+        SingletonF_OL.getInstance(getApplicationContext()).FiltrarTaloesLoja();
+        setTitle(empresa.get(Integer.parseInt(SingletonF_OL.getInstance(getApplicationContext()).LojaSelecionada)).getNome());
         listViewLojaTaloes = (ListView) findViewById(R.id.listLojaTaloes);
 
         listViewLojaTaloes.setAdapter(new ListLojaTaloesAdapter(this, SingletonF_OL.getInstance(getApplicationContext()).arrayListLojaTaloes));
