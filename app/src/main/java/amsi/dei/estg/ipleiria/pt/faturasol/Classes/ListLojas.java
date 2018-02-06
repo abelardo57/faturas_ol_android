@@ -6,9 +6,6 @@ package amsi.dei.estg.ipleiria.pt.faturasol.Classes;
 
 public class ListLojas {
 
-
-
-
     private int id_loja;
     private String nome;
     private int total;

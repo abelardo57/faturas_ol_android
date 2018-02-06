@@ -164,6 +164,10 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
         return faturaDBHelper.getAllFaturasClientesBD();
     }
 
+    public ArrayList<Custom_Fatura> getCustomfaturas(){
+        return faturaDBHelper.getAllCustomFaturasBD();
+    }
+
     public int getTotalFaturas()
     {
         ArrayList<Fatura> fatura = getFatura();
