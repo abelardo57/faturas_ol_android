@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 //import static java.time.format.FormatStyle.MEDIUM;
 
@@ -245,7 +246,7 @@ import java.util.Date;
 
         value.put("id", faturaCliente.getId());
         value.put("id_fatura", faturaCliente.getId_fatura());
-        value.put("numero_cartaocliente", faturaCliente.getNumero_cartao_cliente());
+        value.put("numero_cartao_cliente", faturaCliente.getNumero_cartao_cliente());
         long id = this.database.insert("fatura_cliente", null, value);
         if (id > -1){
             System.out.println("--> INSERIU BD ID: " + id);
@@ -527,6 +528,10 @@ import java.util.Date;
         return (this.database.delete("customfatura","id= ?", new String[]{"" + idCustomFatura}) > 0);
     }
 
+    public boolean removerFaturaCliente(long idFaturaCliente){
+        return (this.database.delete("fatura_cliente","id= ?", new String[]{"" + idFaturaCliente}) > 0);
+    }
+
     public void removerAllClientesBD() {
         this.database.delete("cliente", null,null);
     }
@@ -544,8 +549,47 @@ import java.util.Date;
     }
 
     public void removerAllLinhasFaturaBD() {
-        this.database.delete("linhafatura", null,null);
+        this.database.delete("linha_fatura", null,null);
     }
+
+    public void removerAllFaturaClienteBD() {
+        this.database.delete("fatura_cliente", null,null);
+    }
+
+    public void removerAllFaturaEmpresa() {
+        this.database.delete("fatura_empresa", null,null);
+    }
+
+
+
+   /** public ArrayList<ListEmpresa_ClienteCount> getEmpresa_ClienteNomeCount(int currentUser){
+        ArrayList<ListEmpresa_ClienteCount> listEmpresa_clienteCounts = new ArrayList<>();
+
+        String sql = "SELECT id,nome,COUNT(SELECT id,nome,COUNT() FROM empresa JOIN fatura_empresa ON empresa.id=fatura_empresa.id_empresa " +
+                "JOIN fatura ON fatura_empresa.id_fatura=fatura.id " +
+                "JOIN fatura_cliente on fatura.id=fatura_cliente.id_fatura " +
+                "WHERE fatura_cliente.numero_cartao_cliente = " + currentUser + ") FROM empresa JOIN fatura_empresa ON empresa.id=fatura_empresa.id_empresa " +
+                "JOIN fatura ON fatura_empresa.id_fatura=fatura.id " +
+                "JOIN fatura_cliente on fatura.id=fatura_cliente.id_fatura " +
+                "WHERE fatura_cliente.numero_cartao_cliente = " + currentUser;
+
+        Cursor cursor = this.database.rawQuery(sql,null);
+
+        if(cursor.moveToFirst()){
+            do{
+                ListEmpresa_ClienteCount auxlistEmpresa_clienteCount = new ListEmpresa_ClienteCount(
+                     cursor.getLong(0),
+                     cursor.getString(1),
+                     cursor.getInt(2));
+
+                listEmpresa_clienteCounts.add(auxlistEmpresa_clienteCount);
+            }while(cursor.moveToNext());
+        }
+        return listEmpresa_clienteCounts;
+
+    }*/
+
+
 }
 
 
