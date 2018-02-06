@@ -1,6 +1,7 @@
 package amsi.dei.estg.ipleiria.pt.faturasol.Adapters;
 
 import android.content.Context;
+import android.renderscript.Sampler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Empresa;
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Fatura;
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.ListLojas;
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.SingletonF_OL;
@@ -25,18 +27,18 @@ import amsi.dei.estg.ipleiria.pt.faturasol.R;
 public class ListLojasAdapter extends BaseAdapter{
     private Context context;
     private LayoutInflater inflater;
-    private ArrayList<ListLojas> listLojas;
+    private ArrayList<Empresa> listEmpresas;
     public TextView txtLoja;
     public Fatura fatura;
 
 
     public ListLojasAdapter(Context context, ArrayList listLojas){
         this.context = context;
-        this.listLojas = listLojas;
+        this.listEmpresas = listLojas;
     }
 
     @Override
-    public int getCount() { return listLojas.size(); }
+    public int getCount() { return listEmpresas.size(); }
 
     @Override
     public Object getItem(int position) {
@@ -62,12 +64,11 @@ public class ListLojasAdapter extends BaseAdapter{
 
 
         txtLoja = (TextView) convertView.findViewById(R.id.txtLoja);
-        ListLojas listloja = listLojas.get(position);
+        Empresa listempresa = listEmpresas.get(position);
 
-        String nome = listloja.getNome();
-        int total = listloja.getTotal();
-        txtLoja.setHint(Integer.toString(listloja.getId_loja()));
-        txtLoja.setText(nome + "( " + Integer.toString(total) + " )");
+        String nome = listempresa.getNome();
+        txtLoja.setHint(String.valueOf(listempresa.getId()));
+        txtLoja.setText(nome);
 
         return convertView;
 
@@ -78,8 +79,8 @@ public class ListLojasAdapter extends BaseAdapter{
 
 
     }
-    public void refresh(ArrayList<ListLojas> lojas){
-        this.listLojas = lojas;
+    public void refresh(ArrayList<Empresa> empresas){
+        this.listEmpresas = empresas;
         notifyDataSetChanged();
     }
 }
