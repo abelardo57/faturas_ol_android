@@ -545,7 +545,7 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
     }
 
 
-/** PORQUE E Q ESTA AQUI UMA CONFIRMAÇÃO !? */
+/** PORQUE E Q ESTA AQUI UMA CONFIRMAÇÃO !? É PARA O USER OPTIONS MENU PARA ALTERAR O EMAIL DO UTILIZADOR, SERVE PARA VALIDADE SE É UM EMAIL OU NAO*/
     public final static boolean isEmailValid(CharSequence target) {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
     }

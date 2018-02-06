@@ -59,6 +59,12 @@ public class MenuActivity extends AppCompatActivity {
 
         /** Gerar faturas ao utilizador presente */
         //gerarFaturas();
+        gerarEmpresas();
+        empresas = SingletonF_OL.getInstance(getApplicationContext()).getEmpresas();
+
+        for (Empresa empresa: empresas) {
+            System.out.println("-->"+empresa);
+        }
 
         faturas = SingletonF_OL.getInstance(getApplicationContext()).getFatura();
 
@@ -83,7 +89,7 @@ public class MenuActivity extends AppCompatActivity {
 
         listViewLojas = (ListView) findViewById(R.id.listLojass);
 
-        listViewLojas.setAdapter(new ListLojasAdapter(this, SingletonF_OL.getInstance(getApplicationContext()).ArrayListaLojas));
+        listViewLojas.setAdapter(new ListLojasAdapter(this, empresas/*SingletonF_OL.getInstance(getApplicationContext()).empresa*/));
 
         listViewLojas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -150,7 +156,17 @@ public class MenuActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    public void gerarEmpresas(){
+        empresas = SingletonF_OL.getInstance(getApplicationContext()).getEmpresas();
+        SingletonF_OL.getInstance(getApplicationContext()).adicionarEmpresa(new Empresa(1,"Pingo Doce", "993344558", "Avenida dos Griolos"));
+        empresas = SingletonF_OL.getInstance(getApplicationContext()).getEmpresas();
+        SingletonF_OL.getInstance(getApplicationContext()).adicionarEmpresa(new Empresa(1,"Pingo Doce", "993344558", "Avenida dos Griolos"));
+        empresas = SingletonF_OL.getInstance(getApplicationContext()).getEmpresas();
+        SingletonF_OL.getInstance(getApplicationContext()).adicionarEmpresa(new Empresa(1,"Pingo Doce", "993344558", "Avenida dos Griolos"));
+        empresas = SingletonF_OL.getInstance(getApplicationContext()).getEmpresas();
+        SingletonF_OL.getInstance(getApplicationContext()).adicionarEmpresa(new Empresa(1,"Pingo Doce", "993344558", "Avenida dos Griolos"));
 
+    }
     public void gerarFaturas(){
         Random random = new Random();
         int num1 = random.nextInt(999999999 - 100000000);
