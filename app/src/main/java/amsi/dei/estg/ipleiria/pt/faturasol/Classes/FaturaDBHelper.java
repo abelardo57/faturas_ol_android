@@ -359,8 +359,8 @@ import java.util.List;
 
                 auxCustomFatura.setId(cursor.getInt(0));
                 /*auxCustomFatura.setNumero(cursor.getInt(1));
-                auxCustomFatura.setData(2);
-                customfatura.add(auxCustomFatura);*/
+                auxCustomFatura.setData(2);*/
+                customfatura.add(auxCustomFatura);
             }while(cursor.moveToNext());
         }
         return customfatura;
