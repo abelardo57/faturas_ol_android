@@ -45,8 +45,8 @@ public class Custom_Fatura_Cliente {
     public String toString() {
         return "Custom_Fatura_Cliente{" +
                 "id=" + id +
-                " ,id_custom_faturas=" + id_custom_faturas +
-                " ,numero_cartao_cliente=" + numero_cartao_cliente +
+                ", id_custom_faturas=" + id_custom_faturas +
+                ", numero_cartao_cliente=" + numero_cartao_cliente +
                 '}';
     }
 
