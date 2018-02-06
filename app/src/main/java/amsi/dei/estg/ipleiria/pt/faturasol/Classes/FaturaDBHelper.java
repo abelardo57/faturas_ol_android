@@ -373,8 +373,9 @@ import java.util.List;
         Cursor cursor = this.database.rawQuery(sql, null);
         if(cursor.moveToFirst()){
             do{
-                Custom_Fatura_Cliente auxCustomFaturaCliente = new Custom_Fatura_Cliente(cursor.getInt(0),
-                        cursor.getInt(1));
+                Custom_Fatura_Cliente auxCustomFaturaCliente = new Custom_Fatura_Cliente(cursor.getLong(0),
+                        cursor.getInt(1),
+                        cursor.getInt(2));
 
                 auxCustomFaturaCliente.setId_custom_faturas(cursor.getInt(0));
                 auxCustomFaturaCliente.setNumero_cartao_cliente(cursor.getInt(1));
