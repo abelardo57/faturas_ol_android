@@ -18,38 +18,48 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import amsi.dei.estg.ipleiria.pt.faturasol.Adapters.ListaCustomFaturasAdapter;
+import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Cliente;
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Custom_Fatura;
+import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Empresa;
+import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Fatura;
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.SingletonF_OL;
+import amsi.dei.estg.ipleiria.pt.faturasol.listeners.FaturasolListener;
 
-public class FaturasUser extends AppCompatActivity {
+public class FaturasUser extends AppCompatActivity implements FaturasolListener {
 
-    private ListView listaCustomFaturas;
+    private ListView LVlistaCustomFaturas;
     private ListaCustomFaturasAdapter listaCustomFaturasAdapter;
     private ArrayList<Custom_Fatura> listacustomfaturas;
+    private ArrayList listacoisas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faturas_user);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //listacustomfaturas = SingletonF_OL.getInstance(getApplicationContext()).getAllCustomFaturasDB();
-
-        listaCustomFaturas=(ListView) findViewById(R.id.ListViewFaturasUser);
-        if (listacustomfaturas != null) {
-            listaCustomFaturas.setAdapter(new ListaCustomFaturasAdapter(this, listacustomfaturas));
-
-            listaCustomFaturas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                    Intent intent = new Intent(getApplicationContext(), FaturaSelecionada.class);
-                    intent.putExtra("FATURA_SELECIONADA", i);
-                    startActivity(intent);
 
 
-                }
-            });
-        }
+        SingletonF_OL.getInstance(getApplicationContext()).getAllCustomFaturasDB();
+        SingletonF_OL.getInstance(getApplicationContext()).setCustomFaturasListener(this);
+
+        LVlistaCustomFaturas=(ListView) findViewById(R.id.ListViewFaturasUser);
+
+
+        //SingletonLivros.getInstance(getApplicationContext()).getAllLivrosAPI(this, LivroJsonParser.isConnectionInternet(this));
+        //LVlistaCustomFaturas.setAdapter(new ListaCustomFaturasAdapter(this, listacoisas));
+
+        LVlistaCustomFaturas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Intent intent = new Intent(getApplicationContext(), FaturaSelecionada.class);
+                intent.putExtra("FATURA_SELECIONADA", i);
+                startActivity(intent);
+
+
+            }
+        });
+
 
     }
 
@@ -86,10 +96,10 @@ public class FaturasUser extends AppCompatActivity {
                         tempListaCustomFatura.add(temp);
                     }
                 }
-                listaCustomFaturas.setAdapter(new ListaCustomFaturasAdapter(FaturasUser.this, tempListaCustomFatura));
+                LVlistaCustomFaturas.setAdapter(new ListaCustomFaturasAdapter(FaturasUser.this, tempListaCustomFatura));
 
 
-                listaCustomFaturas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                LVlistaCustomFaturas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -124,4 +134,47 @@ public class FaturasUser extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onRefreshFaturas(ArrayList<Fatura> listaFaturas) {
+
+    }
+
+    @Override
+    public void onUpdateFaturas(Fatura fatura, int operação) {
+
+    }
+
+    @Override
+    public void onRefreshCliente(ArrayList<Cliente> listaClientes) {
+
+    }
+
+    @Override
+    public void onUpdateCliente(Cliente cliente, int operação) {
+
+    }
+
+    @Override
+    public void onRefreshEmpresas(ArrayList<Empresa> listaEmpresas) {
+
+    }
+
+    @Override
+    public void onUpdateEmpresas(Empresa empresa, int operação) {
+
+    }
+
+    @Override
+    public void onRefreshCustomFaturas(ArrayList<Custom_Fatura> listaCustomFaturas) {
+        listaCustomFaturasAdapter = new ListaCustomFaturasAdapter(getApplicationContext(), listaCustomFaturas);
+        LVlistaCustomFaturas.setAdapter(listaCustomFaturasAdapter);
+        listaCustomFaturasAdapter.refresh(listaCustomFaturas);
+    }
+
+    @Override
+    public void onUpdateCustomFaturas(Custom_Fatura custom_fatura, int operação) {
+
+    }
+
 }
