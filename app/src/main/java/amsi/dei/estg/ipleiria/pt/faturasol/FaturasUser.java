@@ -44,10 +44,6 @@ public class FaturasUser extends AppCompatActivity implements FaturasolListener 
 
         LVlistaCustomFaturas=(ListView) findViewById(R.id.ListViewFaturasUser);
 
-
-        //SingletonLivros.getInstance(getApplicationContext()).getAllLivrosAPI(this, LivroJsonParser.isConnectionInternet(this));
-        //LVlistaCustomFaturas.setAdapter(new ListaCustomFaturasAdapter(this, listacoisas));
-
         LVlistaCustomFaturas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
