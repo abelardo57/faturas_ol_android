@@ -561,6 +561,18 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
     }
 /** */
 
+    public void removerAllFaturasBD(){
+        faturaDBHelper.removerAllFaturasBD();
+    }
+
+    public void removerAllEmpresasBD(){
+        faturaDBHelper.removerAllEmpresasBD();
+    }
+
+    public void removerAllFaturasEmpresaBD(){
+        faturaDBHelper.removerAllFaturaEmpresa();
+    }
+
     public void setClientesListener(FaturasolListener listener){
         this.listener = listener;
     }

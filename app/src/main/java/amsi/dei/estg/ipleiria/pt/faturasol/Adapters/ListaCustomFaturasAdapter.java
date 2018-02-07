@@ -58,6 +58,7 @@ public class ListaCustomFaturasAdapter extends BaseAdapter {
         TextView customFatura = (TextView) convertView.findViewById(R.id.textViewItemFaturaUser);
         Custom_Fatura listaCustomFaturas = listCustomFaturas.get(position);
 
+        Custom_Fatura custom_fatura = listCustomFaturas.get(position);
         //String nome = listloja.getNome();
         //int total = listloja.getTotal();
         //txtLoja.setHint(Integer.toString(listloja.getId_loja()));
