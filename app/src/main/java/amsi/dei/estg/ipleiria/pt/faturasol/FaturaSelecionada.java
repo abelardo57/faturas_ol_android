@@ -12,11 +12,15 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
+import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Empresa;
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.SingletonF_OL;
 
 public class FaturaSelecionada extends AppCompatActivity {
 
     public int check;
+    private ArrayList<Empresa> empresa;
     private Menu menu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +28,9 @@ public class FaturaSelecionada extends AppCompatActivity {
         setContentView(R.layout.activity_fatura_selecionada);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.setTitle(SingletonF_OL.getInstance(getApplicationContext()).empresa.get(Integer.parseInt(SingletonF_OL.getInstance(getApplicationContext()).LojaSelecionada)).getNome());
+        empresa = SingletonF_OL.getInstance(getApplicationContext()).getEmpresas();
+
+        this.setTitle(empresa.get(Integer.parseInt(SingletonF_OL.getInstance(getApplicationContext()).LojaSelecionada)).getNome());
         TextView txtFatura = (TextView) findViewById(R.id.txtFatura);
         TextView txtTextoFatura = (TextView)findViewById(R.id.txtTextoFatura);
 
