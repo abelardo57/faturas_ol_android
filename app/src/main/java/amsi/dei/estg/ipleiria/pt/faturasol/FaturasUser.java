@@ -40,22 +40,23 @@ public class FaturasUser extends AppCompatActivity implements FaturasolListener 
 
         listacustomfaturas = SingletonF_OL.getInstance(getApplicationContext()).getAllCustomFaturasDB();
 
-        SingletonF_OL.getInstance(getApplicationContext()).setCustomFaturasListener(this);
+        //SingletonF_OL.getInstance(getApplicationContext()).setCustomFaturasListener(this);
 
+        LVlistaCustomFaturas.setAdapter(new ListaCustomFaturasAdapter(this, listacustomfaturas));
         for (Custom_Fatura fatura: listacustomfaturas) {
             System.out.println("-->"+fatura);
         }
 
         LVlistaCustomFaturas=(ListView) findViewById(R.id.ListViewFaturasUser);
-        LVlistaCustomFaturas.setAdapter(new ListaCustomFaturasAdapter(this, listacustomfaturas));
-
+        //LVlistaCustomFaturas.setAdapter(new ListaCustomFaturasAdapter(this, listacustomfaturas));
 
         LVlistaCustomFaturas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Intent intent = new Intent(getApplicationContext(), FaturaSelecionada.class);
                 Custom_Fatura tempFatura = (Custom_Fatura) adapterView.getItemAtPosition(i);
+
+                Intent intent = new Intent(getApplicationContext(), FaturaSelecionada.class);
                 intent.putExtra("FATURA_SELECIONADA", tempFatura.getId() -1);
                 startActivity(intent);
 
@@ -63,14 +64,6 @@ public class FaturasUser extends AppCompatActivity implements FaturasolListener 
             }
         });
 
-
-    }
-
-    @Override
-    public void onResume(){
-        super.onResume();
-
-        LVlistaCustomFaturas.setAdapter(new ListaCustomFaturasAdapter(this, listacustomfaturas));
 
     }
 
