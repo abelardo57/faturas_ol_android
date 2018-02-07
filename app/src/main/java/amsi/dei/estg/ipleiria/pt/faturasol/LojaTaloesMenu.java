@@ -22,6 +22,7 @@ import amsi.dei.estg.ipleiria.pt.faturasol.Adapters.ListLojaTaloesAdapter;
 import amsi.dei.estg.ipleiria.pt.faturasol.Adapters.ListLojasAdapter;
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Empresa;
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Fatura;
+import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Fatura_Empresa;
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.ListLojaTaloes;
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.SingletonF_OL;
 
@@ -30,6 +31,7 @@ public class LojaTaloesMenu extends AppCompatActivity {
     private TextView lojaView;
     public ListView listViewLojaTaloes;
     private ArrayList<Empresa> empresa;
+    private ArrayList<Fatura_Empresa> fatura_empresa;
     private ArrayList<ListLojaTaloes> listaLojaTaloes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class LojaTaloesMenu extends AppCompatActivity {
             setTitle(empresa.get(Integer.parseInt(SingletonF_OL.getInstance(getApplicationContext()).LojaSelecionada)).getNome());
             listViewLojaTaloes = (ListView) findViewById(R.id.listLojaTaloes);
 
+            fatura_empresa = SingletonF_OL.getInstance(getApplicationContext()).getFaturasEmpresa();
             listViewLojaTaloes.setAdapter(new ListLojaTaloesAdapter(this, SingletonF_OL.getInstance(getApplicationContext()).arrayListLojaTaloes));
 
         listViewLojaTaloes.setOnItemClickListener(new AdapterView.OnItemClickListener() {

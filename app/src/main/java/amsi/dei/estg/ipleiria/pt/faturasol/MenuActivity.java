@@ -60,8 +60,12 @@ public class MenuActivity extends AppCompatActivity {
         SingletonF_OL.getInstance(getApplicationContext()).getAllCustomFaturasBD();*/
 
         /** Gerar faturas ao utilizador presente */
-        //gerarFaturas();
-        gerarEmpresas();
+        /*
+        SingletonF_OL.getInstance(getApplicationContext()).removerAllEmpresasBD();
+        SingletonF_OL.getInstance(getApplicationContext()).removerAllFaturasBD();
+        SingletonF_OL.getInstance(getApplicationContext()).removerAllFaturasEmpresaBD();
+        gerarFaturas();
+        gerarEmpresas();*/
         empresas = SingletonF_OL.getInstance(getApplicationContext()).getEmpresas();
 
         for (Empresa empresa: empresas) {
@@ -88,7 +92,7 @@ public class MenuActivity extends AppCompatActivity {
         for (Fatura_Cliente fatura: faturaClientes) {
             System.out.println("-->"+fatura);
         }
-        associarLinhaFatura();
+        //associarLinhaFatura();
         listViewLojas = (ListView) findViewById(R.id.listLojass);
 
         listViewLojas.setAdapter(new ListLojasAdapter(this, empresas/*SingletonF_OL.getInstance(getApplicationContext()).empresa*/));
@@ -192,27 +196,28 @@ public class MenuActivity extends AppCompatActivity {
         SingletonF_OL.getInstance(getApplicationContext()).adicionarFaturasDefinitivasBD(new Fatura (faturas.size()+1, random.nextInt(999999999-100000000), currentTime,"",1));
 
     }
-    public void cirarTextoFaturas(){
-
-    }
     public void associarFaturaEmpresa(){
         Random random = new Random();
         faturas = SingletonF_OL.getInstance(getApplicationContext()).getFatura();
         empresas = SingletonF_OL.getInstance(getApplicationContext()).getEmpresas();
 
-        for (int i = 1; i == faturas.size(); i++) {
+        for (int i = 0; i == faturas.size(); i++) {
             faturaEmpresas = SingletonF_OL.getInstance(getApplicationContext()).getFaturasEmpresa();
             SingletonF_OL.getInstance(getApplicationContext()).adicionarFaturaEmpresa(faturaEmpresas.size() + 1, i, random.nextInt(empresas.size()));
         }
     }
     public void associarLinhaFatura(){
-        Random random = new Random();
         faturas = SingletonF_OL.getInstance(getApplicationContext()).getFatura();
+        int i = 0;
+        do{
 
-        for (int i = 1; i == faturas.size(); i++) {
             linhaFaturas = SingletonF_OL.getInstance(getApplicationContext()).getAllLinhaFaturasDB();
-            SingletonF_OL.getInstance(getApplicationContext()).adicionarLinhaFatura(i+1,1,"produto","descricao",(int) faturas.get(i).getId(),0,1);
-        }
+
+            SingletonF_OL.getInstance(getApplicationContext()).adicionarLinhaFatura(i+1,1,"produto","descricao",(int) faturas.get(i).getId(), 0 ,1);
+            linhaFaturas = SingletonF_OL.getInstance(getApplicationContext()).getAllLinhaFaturasDB();
+            System.out.println("-->"+linhaFaturas.get(i+1).getId_fatura());
+            i++;
+        }while( i < faturas.size());
     }
 
 }

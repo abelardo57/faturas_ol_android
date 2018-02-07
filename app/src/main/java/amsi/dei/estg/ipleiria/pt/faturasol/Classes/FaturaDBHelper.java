@@ -446,7 +446,7 @@ import java.util.List;
         Cursor cursor = this.database.rawQuery(sql,null);
         if(cursor.moveToFirst()){
             do{
-                Linha_Fatura auxLinhaFatura = new Linha_Fatura(cursor.getInt(0),
+                Linha_Fatura auxLinhaFatura = new Linha_Fatura(cursor.getLong(0),
                         cursor.getFloat(1),
                         cursor.getString(2),
                         cursor.getString( 3),

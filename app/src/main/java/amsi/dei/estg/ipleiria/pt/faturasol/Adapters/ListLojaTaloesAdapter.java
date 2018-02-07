@@ -12,6 +12,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Fatura;
+import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Fatura_Empresa;
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.ListLojaTaloes;
 import amsi.dei.estg.ipleiria.pt.faturasol.R;
 
@@ -23,20 +24,20 @@ public class ListLojaTaloesAdapter extends BaseAdapter{
 
     private Context context;
     private LayoutInflater inflater;
-    private ArrayList<ListLojaTaloes> listLojaTaloes;
+    private ArrayList<ListLojaTaloes> fatura_empresas;
     public TextView txtFatura;
     public Fatura fatura;
 
-    public ListLojaTaloesAdapter(Context context, ArrayList listLojaTaloes)
+    public ListLojaTaloesAdapter(Context context, ArrayList fatura_empresas)
     {
         this.context = context;
-        this.listLojaTaloes = listLojaTaloes;
+        this.fatura_empresas = fatura_empresas;
     }
 
 
     @Override
     public int getCount() {
-        return listLojaTaloes.size();
+        return fatura_empresas.size();
     }
 
     @Override
@@ -64,9 +65,9 @@ public class ListLojaTaloesAdapter extends BaseAdapter{
         }
 
         txtFatura = (TextView) convertView.findViewById(R.id.txtLoja);
-        ListLojaTaloes listlojataloes = listLojaTaloes.get(position);
+        ListLojaTaloes fatura_empresa = fatura_empresas.get(position);
 
-        int numero_fatura = listlojataloes.getNumero_fatura();
+        int numero_fatura = fatura_empresa.getNumero_fatura();
         txtFatura.setText(Integer.toString(numero_fatura));
 
 
@@ -75,10 +76,10 @@ public class ListLojaTaloesAdapter extends BaseAdapter{
 
     public void clearData() {
         // clear the data
-        listLojaTaloes.clear();
+        fatura_empresas.clear();
     }
     public void refresh(ArrayList<ListLojaTaloes> listLojaTaloes){
-        this.listLojaTaloes = listLojaTaloes;
+        this.fatura_empresas = fatura_empresas;
         notifyDataSetChanged();
     }
 }
