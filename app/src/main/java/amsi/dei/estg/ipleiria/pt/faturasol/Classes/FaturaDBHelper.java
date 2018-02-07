@@ -295,6 +295,7 @@ import java.util.List;
     public Custom_Fatura adicionarCustomFaturaDB(Custom_Fatura custom_fatura){
         ContentValues value = new ContentValues();
 
+        value.put("id", custom_fatura.getId());
         value.put("numero", custom_fatura.getNumero());
         value.put("data", String.valueOf(custom_fatura.getData()));
         value.put("nome_empresa", custom_fatura.getNome_empresa());

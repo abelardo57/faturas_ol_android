@@ -39,10 +39,15 @@ public class FaturasUser extends AppCompatActivity implements FaturasolListener 
 
 
         listacustomfaturas = SingletonF_OL.getInstance(getApplicationContext()).getAllCustomFaturasDB();
+
         SingletonF_OL.getInstance(getApplicationContext()).setCustomFaturasListener(this);
 
+        for (Custom_Fatura fatura: listacustomfaturas) {
+            System.out.println("-->"+fatura);
+        }
+
         LVlistaCustomFaturas=(ListView) findViewById(R.id.ListViewFaturasUser);
-        //LVlistaCustomFaturas.setAdapter(new ListaCustomFaturasAdapter(this, SingletonF_OL.getInstance(getApplicationContext()).getAllCustomFaturasDB()));
+        LVlistaCustomFaturas.setAdapter(new ListaCustomFaturasAdapter(this, listacustomfaturas));
 
 
         LVlistaCustomFaturas.setOnItemClickListener(new AdapterView.OnItemClickListener() {

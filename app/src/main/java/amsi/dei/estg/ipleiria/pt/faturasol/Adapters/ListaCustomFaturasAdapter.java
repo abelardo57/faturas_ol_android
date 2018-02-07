@@ -24,7 +24,7 @@ public class ListaCustomFaturasAdapter extends BaseAdapter {
     private ArrayList<Custom_Fatura> listCustomFaturas;
 
 
-    public ListaCustomFaturasAdapter(Context context, ArrayList listCustomFaturas){
+    public ListaCustomFaturasAdapter(Context context, ArrayList<Custom_Fatura> listCustomFaturas){
         this.context = context;
         this.listCustomFaturas = listCustomFaturas;
     }
@@ -39,7 +39,7 @@ public class ListaCustomFaturasAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
