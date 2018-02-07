@@ -188,6 +188,7 @@ public class MenuActivity extends AppCompatActivity {
         SingletonF_OL.getInstance(getApplicationContext()).adicionarFaturasDefinitivasBD(new Fatura (faturas.size()+1, random.nextInt(999999999-100000000), currentTime,"",1));
         faturas = SingletonF_OL.getInstance(getApplicationContext()).getFatura();
         SingletonF_OL.getInstance(getApplicationContext()).adicionarFaturasDefinitivasBD(new Fatura (faturas.size()+1, random.nextInt(999999999-100000000), currentTime,"",1));
+
     }
 
     public void associarFaturaEmpresa(){

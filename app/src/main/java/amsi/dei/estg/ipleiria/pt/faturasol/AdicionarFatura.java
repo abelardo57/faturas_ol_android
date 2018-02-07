@@ -26,6 +26,7 @@ public class AdicionarFatura extends AppCompatActivity {
     EditText txtNFatura;
     Date convertedDate = new Date();
 
+    ArrayList<Custom_Fatura> customFaturas = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +34,13 @@ public class AdicionarFatura extends AppCompatActivity {
         setContentView(R.layout.activity_adicionar_fatura);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        customFaturas = SingletonF_OL.getInstance(getApplicationContext()).getAllCustomFaturasDB();
 
         value = getIntent().getIntExtra("ADICIONAR_FATURA", -1);
+
+        for (Custom_Fatura fatura: customFaturas) {
+            System.out.println("-->"+fatura);
+        }
 
         txtNFatura = (EditText) findViewById(R.id.txtNFatura);
         txtNIFEmpresa = (EditText) findViewById(R.id.txtNifEmpresa);
@@ -53,8 +59,10 @@ public class AdicionarFatura extends AppCompatActivity {
         if (tentaRegisto() == true){
             //nova fatura
             try {
+                long id = customFaturas.size()+1;
+
                 convertedDate = formatdate.parse(txtData.getText().toString());
-                    SingletonF_OL.getInstance(getApplicationContext()).adicionarCustomFaturaDB(new Custom_Fatura(0,Integer.parseInt(txtNFatura.getText().toString()), convertedDate, Integer.parseInt(txtNIFEmpresa.getText().toString()), txtNomeEmpresa.getText().toString(), txtMoradaEmpresa.getText().toString()));
+                    SingletonF_OL.getInstance(getApplicationContext()).adicionarCustomFaturaDB(new Custom_Fatura(id,Integer.parseInt(txtNFatura.getText().toString()), convertedDate, Integer.parseInt(txtNIFEmpresa.getText().toString()), txtNomeEmpresa.getText().toString(), txtMoradaEmpresa.getText().toString()));
 
                 } catch (ParseException e) {
                     e.printStackTrace();
