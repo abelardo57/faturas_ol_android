@@ -422,9 +422,9 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
         empresas = SingletonF_OL.getInstance(getApplicationContext()).getEmpresas();
         SingletonF_OL.getInstance(getApplicationContext()).adicionarEmpresa(new Empresa( empresas.size()+1, "Verten", "504786321", "Praça do Mandarim"));
         empresas = SingletonF_OL.getInstance(getApplicationContext()).getEmpresas();
-        SingletonF_OL.getInstance(getApplicationContext()).adicionarEmpresa(new Empresa( empresas.size()+2, "Pinga Douce", "504853178", "Rua dos Prados Brancos"));
+        SingletonF_OL.getInstance(getApplicationContext()).adicionarEmpresa(new Empresa( empresas.size()+1, "Pinga Douce", "504853178", "Rua dos Prados Brancos"));
         empresas = SingletonF_OL.getInstance(getApplicationContext()).getEmpresas();
-        SingletonF_OL.getInstance(getApplicationContext()).adicionarEmpresa(new Empresa( empresas.size()+3, "Zumbo", "504368159", "Praça D'ouro"));
+        SingletonF_OL.getInstance(getApplicationContext()).adicionarEmpresa(new Empresa( empresas.size()+1, "Zumbo", "504368159", "Praça D'ouro"));
     }
 
 
