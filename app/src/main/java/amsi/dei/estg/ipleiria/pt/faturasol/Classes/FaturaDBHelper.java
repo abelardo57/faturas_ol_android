@@ -223,6 +223,23 @@ import java.util.List;
         return null;
     }
 
+    public Linha_Fatura adicionarLinhaFaturaBD(Linha_Fatura linhafatura){
+     ContentValues value = new ContentValues();
+     value.put("id", linhafatura.getId());
+     value.put("valor_unitario", linhafatura.getValor_unitario());
+     value.put("nome_produto", linhafatura.getNome_produto());
+     value.put("descricao", linhafatura.getDescricao());
+     value.put("id_fatura", linhafatura.getId_fatura());
+     value.put("id_custom_fatura", linhafatura.getId_custom_fatura());
+     long id = this.database.insert("linha_fatura",null,value);
+     if(id >-1){
+         System.out.println("--> INSERIU BD ID: "+id);
+         linhafatura.setId(id);
+         return linhafatura;
+     }
+     return null;
+    }
+
     public Fatura adicionarFaturaDB(Fatura fatura){
         ContentValues value = new ContentValues();
 
@@ -424,7 +441,7 @@ import java.util.List;
 
     public ArrayList<Linha_Fatura> getAllLinhaFaturasBD(){
         ArrayList<Linha_Fatura> linhafatura = new ArrayList<>();
-        String sql = "SELECT * FROM fatura";
+        String sql = "SELECT * FROM linha_fatura";
         Cursor cursor = this.database.rawQuery(sql,null);
         if(cursor.moveToFirst()){
             do{
@@ -441,6 +458,8 @@ import java.util.List;
         }
         return linhafatura;
     }
+
+
 
     public ArrayList<Fatura_Empresa> getAllFaturasEmpresaBD(){
 
@@ -533,6 +552,7 @@ import java.util.List;
     public boolean removerFaturaCliente(long idFaturaCliente){
         return (this.database.delete("fatura_cliente","id= ?", new String[]{"" + idFaturaCliente}) > 0);
     }
+
 
     public void removerAllClientesBD() {
         this.database.delete("cliente", null,null);

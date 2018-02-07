@@ -42,12 +42,13 @@ public class LojaTaloesMenu extends AppCompatActivity {
 
         //lojaView = (TextView) findViewById(R.id.lojaView);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        empresa = SingletonF_OL.getInstance(getApplicationContext()).getEmpresas();
-        SingletonF_OL.getInstance(getApplicationContext()).FiltrarTaloesLoja();
-        setTitle(empresa.get(Integer.parseInt(SingletonF_OL.getInstance(getApplicationContext()).LojaSelecionada)).getNome());
-        listViewLojaTaloes = (ListView) findViewById(R.id.listLojaTaloes);
+        try {
+            empresa = SingletonF_OL.getInstance(getApplicationContext()).getEmpresas();
+            SingletonF_OL.getInstance(getApplicationContext()).FiltrarTaloesLoja();
+            setTitle(empresa.get(Integer.parseInt(SingletonF_OL.getInstance(getApplicationContext()).LojaSelecionada)).getNome());
+            listViewLojaTaloes = (ListView) findViewById(R.id.listLojaTaloes);
 
-        listViewLojaTaloes.setAdapter(new ListLojaTaloesAdapter(this, SingletonF_OL.getInstance(getApplicationContext()).arrayListLojaTaloes));
+            listViewLojaTaloes.setAdapter(new ListLojaTaloesAdapter(this, SingletonF_OL.getInstance(getApplicationContext()).arrayListLojaTaloes));
 
         listViewLojaTaloes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -68,7 +69,9 @@ public class LojaTaloesMenu extends AppCompatActivity {
 
             }
         });
-
+        }catch(Exception e) {
+            System.out.println("Error"+ e.getMessage());
+        }
     }
 
 
@@ -137,16 +140,22 @@ public class LojaTaloesMenu extends AppCompatActivity {
                 return true;
             case android.R.id.home:
             {
-                ListLojaTaloesAdapter adapt = (ListLojaTaloesAdapter)listViewLojaTaloes.getAdapter();
-                adapt.clearData();
-                adapt.notifyDataSetChanged();
-                Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
+                try {
+                        ListLojaTaloesAdapter adapt = (ListLojaTaloesAdapter) listViewLojaTaloes.getAdapter();
+                        adapt.clearData();
+                        adapt.notifyDataSetChanged();
+                        Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
 
-                startActivity(intent);
+                        startActivity(intent);
+                        }catch(Exception e) {
+                        System.out.println("Error"+ e.getMessage());
+                        }
+                        return true;
 
-                return true;
+
+                }
             }
-        }
+
 
         return super.onOptionsItemSelected(item);
     }

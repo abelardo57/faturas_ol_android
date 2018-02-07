@@ -6,7 +6,8 @@ package amsi.dei.estg.ipleiria.pt.faturasol.Classes;
 
 public class Linha_Fatura {
 
-    private int id;
+
+    private long id;
     private float valor_unitario;
     private String nome_produto;
     private String descricao;
@@ -14,7 +15,7 @@ public class Linha_Fatura {
     private int id_custom_fatura;
     private float valor_total;
 
-    public Linha_Fatura(int id, float valor_unitario, String nome_produto, String descricao, int id_fatura, int id_custom_fatura, float valor_total) {
+    public Linha_Fatura(long id, float valor_unitario, String nome_produto, String descricao, int id_fatura, int id_custom_fatura, float valor_total) {
         this.id = id;
         this.valor_unitario = valor_unitario;
         this.nome_produto = nome_produto;
@@ -24,11 +25,11 @@ public class Linha_Fatura {
         this.valor_total = valor_total;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -92,6 +93,7 @@ public class Linha_Fatura {
                 ", valor_total=" + valor_total +
                 '}';
     }
+
 
 
 }

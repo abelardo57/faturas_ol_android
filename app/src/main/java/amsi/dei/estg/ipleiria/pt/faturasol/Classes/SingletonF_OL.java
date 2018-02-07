@@ -47,6 +47,7 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
     public ArrayList<Empresa> empresa = new ArrayList<Empresa>();
     public ArrayList<Fatura> fatura = new ArrayList<Fatura>();
     private ArrayList<Custom_Fatura> custom_faturas;
+    public ArrayList<Linha_Fatura> linha_faturas = new ArrayList<Linha_Fatura>();
 
     public Date currentTime = Calendar.getInstance().getTime();
     public ArrayList<ListLojas>  ArrayListaLojas = new ArrayList<ListLojas>();
@@ -118,6 +119,7 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
         faturaDBHelper.adicionarEmpresaDB(empresas);
     }
 
+
     public void adicionarFaturasDefinitivasBD(Fatura fatura){
 
 
@@ -142,6 +144,11 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
 
         faturaDBHelper.adicionarFaturaEmpresaDB(new Fatura_Empresa(id,id_fatura,id_empresa));
     }
+    public void adicionarLinhaFatura(long id, float valor_unitario, String nome_produto, String descricao, int id_fatura, int id_custom_fatura, float valor_total){
+
+        faturaDBHelper.adicionarLinhaFaturaBD(new Linha_Fatura( id,  valor_unitario,  nome_produto,  descricao, id_fatura,  id_custom_fatura, valor_total));
+    }
+
 
 
 
@@ -504,6 +511,11 @@ public class SingletonF_OL implements amsi.dei.estg.ipleiria.pt.faturasol.listen
         custom_faturas = faturaDBHelper.getAllCustomFaturasBD();
 
         return custom_faturas;
+    }
+    public ArrayList getAllLinhaFaturasDB(){
+        linha_faturas = faturaDBHelper.getAllLinhaFaturasBD();
+
+        return linha_faturas;
     }
 
     public void adicionarClienteBD(Cliente cliente){

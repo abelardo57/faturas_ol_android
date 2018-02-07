@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,12 +16,15 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Empresa;
+import amsi.dei.estg.ipleiria.pt.faturasol.Classes.FaturaDBHelper;
+import amsi.dei.estg.ipleiria.pt.faturasol.Classes.Linha_Fatura;
 import amsi.dei.estg.ipleiria.pt.faturasol.Classes.SingletonF_OL;
 
 public class FaturaSelecionada extends AppCompatActivity {
 
     public int check;
     private ArrayList<Empresa> empresa;
+    private ArrayList<Linha_Fatura> linha_faturas;
     private Menu menu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +33,7 @@ public class FaturaSelecionada extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         empresa = SingletonF_OL.getInstance(getApplicationContext()).getEmpresas();
-
+        linha_faturas = SingletonF_OL.getInstance(getApplicationContext()).getAllLinhaFaturasDB();
         this.setTitle(empresa.get(Integer.parseInt(SingletonF_OL.getInstance(getApplicationContext()).LojaSelecionada)).getNome());
         TextView txtFatura = (TextView) findViewById(R.id.txtFatura);
         TextView txtTextoFatura = (TextView)findViewById(R.id.txtTextoFatura);
@@ -37,7 +41,11 @@ public class FaturaSelecionada extends AppCompatActivity {
 
 
         txtFatura.setText(SingletonF_OL.getInstance(getApplicationContext()).TalaoSelecionado);
-        txtTextoFatura.setText("Buscar texto da fatura a DB");
+        for (Linha_Fatura fatura:linha_faturas) {
+            //if(fatura.getId_fatura() == Integer.parseInt(SingletonF_OL.getInstance(getApplicationContext()).TalaoSelecionado)) {
+            txtTextoFatura.setText("\n" + txtFatura.getText() + "\n" + fatura.getNome_produto() + " " + Float.toString(fatura.getValor_total()));
+        }
+
         check = SingletonF_OL.getInstance(getApplicationContext()).CheckFav(txtFatura.getText().toString());
 
 
@@ -61,12 +69,13 @@ public class FaturaSelecionada extends AppCompatActivity {
                 TextView txtfatura = (TextView) findViewById(R.id.txtFatura);
                 if(check == 0)
                 {
+
                     SingletonF_OL.getInstance(getApplicationContext()).IsFav(txtfatura.getText().toString());
                     menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_action_isfav));
                 }
                 else if(check == 1)
                 {
-                    SingletonF_OL.getInstance(getApplicationContext()).NoFav(txtfatura.getText().toString());
+                    //SingletonF_OL.getInstance(getApplicationContext()).NoFav(txtfatura.getText().toString());
                     menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_action_notfav));
                 }
 
